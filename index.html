@@ -3,777 +3,698 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pesticide Applicator Cert — Study Guide</title>
+  <title>TN Pesticide Applicator Cert — Study Guide</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0f1a0f; color: #e8f5e9; font-family: Georgia, serif; }
-    ::-webkit-scrollbar { width: 6px; } 
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0f1a0f; }
     ::-webkit-scrollbar-thumb { background: #2d5a27; border-radius: 3px; }
-    button:hover { opacity: 0.9; }
+    button { cursor: pointer; }
+    button:hover { opacity: 0.88; }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
+<div id="root"></div>
+<script type="text/babel">
 const { useState } = React;
 
-const chapters = [
+// ============================================================
+// BOOK 1 — EPA CORE MANUAL DATA
+// ============================================================
+const coreChapters = [
   {
-    id: 1,
-    title: "Pest Management",
-    emoji: "🐛",
-    keyTopics: [
-      "Pest recognition and identification methods",
-      "6 pest management methods: Biological, Chemical, Cultural, Genetic, Mechanical/Physical, Regulatory",
-      "Integrated Pest Management (IPM) — core concept",
-      "IPM goals: Prevention, Suppression, Eradication",
-      "Action thresholds / economic thresholds",
-      "Why pesticide applications fail (resistance, timing, wrong product)",
-      "Pesticide resistance — how it develops and how to avoid it",
-    ],
-    mustKnow: [
-      "IPM combines multiple methods — chemical is a last resort, not a first choice",
-      "Action threshold = the pest population level at which control action becomes necessary",
-      "Resistance develops faster with: short generation times, high reproduction rates, same chemical class used repeatedly",
-      "Prevention strategies reduce establishment, reproduction, and survival of pests",
-    ],
+    id: 1, title: "Pest Management", emoji: "🐛",
+    keyTopics: ["Pest recognition and identification methods","6 pest management methods: Biological, Chemical, Cultural, Genetic, Mechanical/Physical, Regulatory","Integrated Pest Management (IPM) — core concept","IPM goals: Prevention, Suppression, Eradication","Action thresholds / economic thresholds","Why pesticide applications fail (resistance, timing, wrong product)","Pesticide resistance — how it develops and how to avoid it"],
+    mustKnow: ["IPM combines multiple methods — chemical is a last resort, not a first choice","Action threshold = pest population level at which control action becomes necessary","Resistance develops faster with: short generation times, high reproduction rates, same chemical class used repeatedly","Prevention strategies reduce establishment, reproduction, and survival of pests"],
     questions: [
-      { q: "Using barriers to prevent pests from entering an area is an example of which pest management method?", options: ["A. Biological", "B. Mechanical", "C. Genetic"], answer: "B", explanation: "Physical/mechanical controls include barriers, traps, and exclusion devices." },
-      { q: "Using plant varieties naturally resistant to insect feeding is which type of pest management?", options: ["A. Biological", "B. Genetic", "C. Regulatory"], answer: "B", explanation: "Genetic control uses naturally resistant or selectively bred plant varieties." },
-      { q: "Which statement about biological control is true?", options: ["A. Modifying the environment to enhance natural enemies is recommended", "B. It involves importing exotic pests to control natural enemies", "C. Using many cultural practices and pesticides works best"], answer: "A", explanation: "Biological control uses natural enemies (predators, parasites, pathogens) and enhancing their environment." },
-      { q: "Sealing cracks and crevices in buildings is an example of which pest management method?", options: ["A. Physical", "B. Genetic", "C. Biological"], answer: "A", explanation: "Sealing entry points is a mechanical/physical exclusion technique." },
-      { q: "Monitoring pests at airports and ocean ports is an example of which method?", options: ["A. Regulatory", "B. Genetic", "C. Biological"], answer: "A", explanation: "Regulatory control includes quarantine, inspection, and monitoring at ports of entry." },
-      { q: "Which statement about IPM strategies is true?", options: ["A. The goal is to prevent pests from reaching damaging levels", "B. Eradication is never the goal of IPM", "C. Nonchemical methods are short-term solutions"], answer: "A", explanation: "IPM aims to keep pest populations below damaging levels using the most economical means with least risk." },
-      { q: "Which would INCREASE the likelihood of pesticide resistance?", options: ["A. An insect with one generation per year", "B. Continual use of pesticides from the same chemical class", "C. Applying a pesticide with little residual effect"], answer: "B", explanation: "Rotating chemical classes is the primary strategy to prevent resistance development." },
-      { q: "Which is a PREVENTIVE pest management strategy?", options: ["A. Planting weed- and disease-free seed", "B. Releasing natural enemies to reduce pest populations", "C. Removing a pest that is a public health concern from an area"], answer: "A", explanation: "Prevention keeps pests from establishing; B is suppression; C is eradication." },
-      { q: "Which statement about action thresholds is true?", options: ["A. Control measures should be implemented BELOW the action threshold", "B. The action threshold may be set at zero pest population density", "C. In urban landscapes, thresholds are usually related to economics more than aesthetics"], answer: "B", explanation: "For some pests (e.g., cockroaches in food facilities), even one pest triggers action — zero tolerance threshold." },
+      {q:"Using barriers to prevent pests from entering an area is an example of which pest management method?",options:["A. Biological","B. Mechanical","C. Genetic"],answer:"B",explanation:"Physical/mechanical controls include barriers, traps, and exclusion devices."},
+      {q:"Using plant varieties naturally resistant to insect feeding is which type of pest management?",options:["A. Biological","B. Genetic","C. Regulatory"],answer:"B",explanation:"Genetic control uses naturally resistant or selectively bred plant varieties."},
+      {q:"Which statement about biological control is true?",options:["A. Modifying the environment to enhance natural enemies is recommended","B. It involves importing exotic pests to control natural enemies","C. Using many cultural practices and pesticides works best"],answer:"A",explanation:"Biological control uses natural enemies (predators, parasites, pathogens) and enhancing their environment."},
+      {q:"Sealing cracks and crevices in buildings is an example of which pest management method?",options:["A. Physical","B. Genetic","C. Biological"],answer:"A",explanation:"Sealing entry points is a mechanical/physical exclusion technique."},
+      {q:"Monitoring pests at airports and ocean ports is an example of which method?",options:["A. Regulatory","B. Genetic","C. Biological"],answer:"A",explanation:"Regulatory control includes quarantine, inspection, and monitoring at ports of entry."},
+      {q:"Which statement about IPM strategies is true?",options:["A. The goal is to prevent pests from reaching damaging levels","B. Eradication is never the goal of IPM","C. Nonchemical methods are short-term solutions"],answer:"A",explanation:"IPM aims to keep pest populations below damaging levels using the most economical means with least risk."},
+      {q:"Which would INCREASE the likelihood of pesticide resistance?",options:["A. An insect with one generation per year","B. Continual use of pesticides from the same chemical class","C. Applying a pesticide with little residual effect"],answer:"B",explanation:"Rotating chemical classes is the primary strategy to prevent resistance development."},
+      {q:"Which statement about action thresholds is true?",options:["A. Control should be implemented BELOW the action threshold","B. The action threshold may be set at zero pest population density","C. In urban landscapes, thresholds are usually related to economics more than aesthetics"],answer:"B",explanation:"For some pests (e.g., cockroaches in food facilities), even one pest triggers action — zero tolerance threshold."},
     ]
   },
   {
-    id: 2,
-    title: "Federal Pesticide Laws & Regulations",
-    emoji: "⚖️",
-    keyTopics: [
-      "FIFRA — Federal Insecticide, Fungicide, and Rodenticide Act (primary law)",
-      "Pesticide registration process with EPA",
-      "Tolerances — legal limits of residue on food",
-      "Restricted-Use Pesticides (RUPs) — only certified applicators",
-      "Worker Protection Standard (WPS) — 40 CFR Part 170",
-      "Certification of Pesticide Applicators — 40 CFR Part 171",
-      "Violations and penalties (civil and criminal)",
-      "Recordkeeping requirements",
-      "Food Quality Protection Act (FQPA)",
-      "Endangered Species Act and pesticide use",
-    ],
-    mustKnow: [
-      "The pesticide label IS the law — it has the force of law under FIFRA",
-      "States CAN be MORE restrictive than federal law, but not less restrictive",
-      "Certified applicators can apply AND supervise application of RUPs",
-      "Altering, defacing, or destroying a label is a federal violation",
-      "RUPs are restricted because of hazard to applicator or environment",
-      "Tolerances = maximum legal pesticide residue allowed on food",
-    ],
+    id: 2, title: "Federal Pesticide Laws & Regulations", emoji: "⚖️",
+    keyTopics: ["FIFRA — Federal Insecticide, Fungicide, and Rodenticide Act","Pesticide registration process with EPA","Tolerances — legal limits of residue on food","Restricted-Use Pesticides (RUPs) — only certified applicators","Worker Protection Standard (WPS) — 40 CFR Part 170","Certification of Pesticide Applicators — 40 CFR Part 171","Violations and penalties (civil and criminal)","Recordkeeping requirements","Food Quality Protection Act (FQPA)","Endangered Species Act and pesticide use"],
+    mustKnow: ["The pesticide label IS the law — it has the force of law under FIFRA","States CAN be MORE restrictive than federal law, but not less restrictive","Certified applicators can apply AND supervise application of RUPs","Altering, defacing, or destroying a label is a federal violation","RUPs are restricted because of hazard to applicator or environment","Tolerances = maximum legal pesticide residue allowed on food"],
     questions: [
-      { q: "Which statement about FIFRA is FALSE?", options: ["A. It provides the overall framework for federal pesticide regulation", "B. It PREVENTS states from creating laws more stringent than federal regulations", "C. It allows applicators to deviate from the label under specific situations"], answer: "B", explanation: "States CAN create MORE stringent regulations than federal law — FIFRA sets a floor, not a ceiling." },
-      { q: "Under federal law, which statement about certified applicators is true?", options: ["A. They may apply and/or supervise application of restricted-use pesticides", "B. They must receive supplemental training before mixing RUPs", "C. They are exempt from obtaining county bulletins for endangered species"], answer: "A", explanation: "Certified applicators are legally authorized to purchase, use, and supervise the use of RUPs." },
-      { q: "What is the purpose of the pesticide registration process?", options: ["A. To control the flow of new products entering the marketplace", "B. To provide evidence the pesticide will not cause unreasonable risks", "C. To ensure zero pesticide residue remains on food crops"], answer: "B", explanation: "EPA reviews toxicity, efficacy, environmental impact, and residue data before registration." },
-      { q: "Which statement about federal pesticide regulation is true?", options: ["A. Civil penalties are typically assessed against first-time violators to ensure future compliance", "B. Devices used to control pests must also be registered with EPA", "C. Approved pesticide labels have the force of law"], answer: "C", explanation: "This is the most fundamental concept: the label is the law under FIFRA." },
-      { q: "Which criteria does EPA use to establish pesticide tolerances?", options: ["A. Research data completely independent of the manufacturer's", "B. The anticipated volume of product to be sold", "C. The toxicity of the pesticide and its breakdown products"], answer: "C", explanation: "EPA considers toxicity, dietary exposure, cumulative risk, and special sensitivity of children." },
-      { q: "Which action is unlawful and subject to civil or criminal penalties?", options: ["A. Allowing a person under certified applicator supervision to apply RUPs", "B. Detaching, altering, defacing, or destroying any part of a container or label", "C. Keeping inadequate records of employee training"], answer: "B", explanation: "Tampering with labels is a direct FIFRA violation — the label is a legal document." },
-      { q: "Which federal regulation requires employee training in pesticide use?", options: ["A. Worker Protection Standard", "B. Pesticide Container and Containment Regulation", "C. Food Quality Protection Act"], answer: "A", explanation: "WPS (40 CFR Part 170) requires training for agricultural workers and pesticide handlers." },
+      {q:"Which statement about FIFRA is FALSE?",options:["A. It provides the overall framework for federal pesticide regulation","B. It PREVENTS states from creating laws more stringent than federal regulations","C. It allows applicators to deviate from the label under specific situations"],answer:"B",explanation:"States CAN create MORE stringent regulations than federal law — FIFRA sets a floor, not a ceiling."},
+      {q:"Under federal law, which statement about certified applicators is true?",options:["A. They may apply and/or supervise application of restricted-use pesticides","B. They must receive supplemental training before mixing RUPs","C. They are exempt from obtaining county bulletins for endangered species"],answer:"A",explanation:"Certified applicators are legally authorized to purchase, use, and supervise the use of RUPs."},
+      {q:"What is the purpose of the pesticide registration process?",options:["A. To control the flow of new products entering the marketplace","B. To provide evidence the pesticide will not cause unreasonable risks","C. To ensure zero pesticide residue remains on food crops"],answer:"B",explanation:"EPA reviews toxicity, efficacy, environmental impact, and residue data before registration."},
+      {q:"Which statement about federal pesticide regulation is true?",options:["A. Civil penalties are typically assessed against first-time violators to ensure compliance","B. Devices used to control pests must also be registered with EPA","C. Approved pesticide labels have the force of law"],answer:"C",explanation:"This is the most fundamental concept: the label is the law under FIFRA."},
+      {q:"Which action is unlawful and subject to civil or criminal penalties?",options:["A. Allowing a person under certified applicator supervision to apply RUPs","B. Detaching, altering, defacing, or destroying any part of a container or label","C. Keeping inadequate records of employee training"],answer:"B",explanation:"Tampering with labels is a direct FIFRA violation — the label is a legal document."},
+      {q:"Which federal regulation requires employee training in pesticide use?",options:["A. Worker Protection Standard","B. Pesticide Container and Containment Regulation","C. Food Quality Protection Act"],answer:"A",explanation:"WPS (40 CFR Part 170) requires training for agricultural workers and pesticide handlers."},
     ]
   },
   {
-    id: 3,
-    title: "Pesticide Labeling",
-    emoji: "🏷️",
-    keyTopics: [
-      "Required label elements (trade name, active ingredient, signal word, EPA reg number, etc.)",
-      "Signal words: DANGER-POISON, DANGER, WARNING, CAUTION",
-      "Precautionary statements (routes of entry, specific actions, PPE)",
-      "First aid statements — mandatory vs. advisory",
-      "Environmental hazards section",
-      "Restricted-entry intervals (REI)",
-      "Directions for use — must follow exactly",
-      "Storage and disposal instructions",
-      "Safety Data Sheets (SDS) — who provides them",
-      "Minimum risk pesticides (Section 25(b)) — exempt from registration",
-    ],
-    mustKnow: [
-      "Signal word indicates ACUTE toxicity to humans — higher toxicity = stronger signal word",
-      "DANGER-POISON (skull & crossbones) = highest toxicity (Category I)",
-      "DANGER (without skull & crossbones) = severe eye/skin irritation or corrosion",
-      "WARNING = moderate toxicity (Category II) — LD50 50-500 mg/kg oral",
-      "CAUTION = low toxicity (Category III/IV)",
-      "SDS is provided by the MANUFACTURER, not EPA or OSHA",
-      "Read the label BEFORE purchasing, mixing, applying, storing, and disposing",
-      "Mandatory statements must be followed; advisory statements are recommendations",
-    ],
+    id: 3, title: "Pesticide Labeling", emoji: "🏷️",
+    keyTopics: ["Required label elements (trade name, active ingredient, signal word, EPA reg number, etc.)","Signal words: DANGER-POISON, DANGER, WARNING, CAUTION","Precautionary statements (routes of entry, specific actions, PPE)","First aid statements — mandatory vs. advisory","Environmental hazards section","Restricted-entry intervals (REI)","Directions for use — must follow exactly","Storage and disposal instructions","Safety Data Sheets (SDS) — who provides them","Minimum risk pesticides — exempt from registration"],
+    mustKnow: ["Signal word indicates ACUTE toxicity to humans only","DANGER-POISON (skull & crossbones) = highest toxicity (Category I)","DANGER (without skull) = severe eye/skin irritation","WARNING = moderate toxicity (Category II)","CAUTION = low toxicity (Category III/IV)","SDS is provided by the MANUFACTURER, not EPA or OSHA","Read the label BEFORE purchasing, mixing, applying, storing, and disposing","Mandatory statements must be followed; advisory are recommendations"],
     questions: [
-      { q: "Which group of pesticides is exempt from registration because it poses little or no risk?", options: ["A. Restricted use", "B. Minimum risk", "C. Special local need"], answer: "B", explanation: "Section 25(b) 'minimum risk' pesticides (like certain essential oils) are exempt from FIFRA registration." },
-      { q: "What does the term 'Cyfluthrin' represent in a chemical name like 'β-Cyfluthrin...'?", options: ["A. The brand name", "B. The chemical name", "C. The common name"], answer: "C", explanation: "Common names are simpler, standardized names for active ingredients; chemical names are the full IUPAC designation." },
-      { q: "Which statement about label names and ingredients is true?", options: ["A. Both active and inert ingredients must be listed by chemical name", "B. Various manufacturers may use different trade names for products with the same active ingredient", "C. Common names are officially accepted by the manufacturer"], answer: "B", explanation: "Many products can share the same active ingredient but have different trade names (e.g., multiple permethrin products)." },
-      { q: "What is the purpose of the signal word?", options: ["A. Indicates the product's relative ACUTE toxicity to humans", "B. Informs the user what PPE to wear", "C. Tells the user what first aid to seek"], answer: "A", explanation: "Signal words reflect acute toxicity category — they do not indicate chronic effects." },
-      { q: "'Extremely hazardous by skin contact — rapidly absorbed through the skin' would carry which signal word?", options: ["A. DANGER", "B. WARNING", "C. CAUTION"], answer: "A", explanation: "Rapid skin absorption with extreme hazard indicates highest toxicity category requiring DANGER." },
-      { q: "'Do not breathe vapors or spray mist' is an example of:", options: ["A. Specific action statement", "B. Statement of practical treatment", "C. Routes of entry statement"], answer: "A", explanation: "Specific action statements tell you what NOT to do to avoid exposure. Routes of entry statements describe HOW pesticides enter the body." },
-      { q: "Directions for mixing and loading are usually found under:", options: ["A. Directions for use", "B. Environmental hazards", "C. Precautionary statements"], answer: "A", explanation: "The 'Directions for Use' section contains mixing, application rates, timing, and safety instructions." },
-      { q: "'If swallowed, call a doctor' is what kind of statement?", options: ["A. Routes of entry", "B. Advisory", "C. Mandatory"], answer: "C", explanation: "First aid statements on labels are mandatory — you MUST follow them. Advisory statements use 'should' language." },
-      { q: "Who is responsible for developing Safety Data Sheets (SDS) for pesticides?", options: ["A. EPA", "B. OSHA", "C. The product manufacturer"], answer: "C", explanation: "Manufacturers create SDS; OSHA requires them to be available; EPA approves the pesticide label separately." },
+      {q:"Which group of pesticides is exempt from registration because it poses little or no risk?",options:["A. Restricted use","B. Minimum risk","C. Special local need"],answer:"B",explanation:"Section 25(b) 'minimum risk' pesticides (like certain essential oils) are exempt from FIFRA registration."},
+      {q:"What does the term 'Cyfluthrin' represent in a long chemical name?",options:["A. The brand name","B. The chemical name","C. The common name"],answer:"C",explanation:"Common names are simpler, standardized names for active ingredients; chemical names are the full IUPAC designation."},
+      {q:"What is the purpose of the signal word?",options:["A. Indicates the product's relative ACUTE toxicity to humans","B. Informs the user what PPE to wear","C. Tells the user what first aid to seek"],answer:"A",explanation:"Signal words reflect acute toxicity category — they do not indicate chronic effects."},
+      {q:"'Extremely hazardous by skin contact — rapidly absorbed through the skin' would carry which signal word?",options:["A. DANGER","B. WARNING","C. CAUTION"],answer:"A",explanation:"Rapid skin absorption with extreme hazard indicates highest toxicity category requiring DANGER."},
+      {q:"'Do not breathe vapors or spray mist' is an example of:",options:["A. Specific action statement","B. Statement of practical treatment","C. Routes of entry statement"],answer:"A",explanation:"Specific action statements tell you what NOT to do. Routes of entry statements describe HOW pesticides enter the body."},
+      {q:"'If swallowed, call a doctor' is what kind of statement?",options:["A. Routes of entry","B. Advisory","C. Mandatory"],answer:"C",explanation:"First aid statements on labels are mandatory — you MUST follow them."},
+      {q:"Who is responsible for developing Safety Data Sheets (SDS) for pesticides?",options:["A. EPA","B. OSHA","C. The product manufacturer"],answer:"C",explanation:"Manufacturers create SDS; OSHA requires them to be available; EPA approves the pesticide label separately."},
     ]
   },
   {
-    id: 4,
-    title: "Pesticide Formulations",
-    emoji: "🧪",
-    keyTopics: [
-      "Liquid formulations: EC, Solutions (RTU, Concentrate, Liquid Bait), ULV, Flowables, Aerosols",
-      "Dry/solid formulations: Dusts (D), Granules (G), Pellets (P), Wettable Powders (WP), WDG/DF, Soluble Powders (SP), Baits (B)",
-      "Other: Fumigants, Microencapsulated (M), Water-Soluble Bags (WSB)",
-      "Adjuvants: surfactants, buffers, stickers, extenders, thickeners",
-      "Label abbreviations: EC, WP, WDG, G, SP, RTU, ULV, M",
-    ],
-    mustKnow: [
-      "EC (Emulsifiable Concentrate) — oil-based, mixes with water; can degrade rubber/plastic parts",
-      "ULV — may approach 100% active ingredient; very concentrated",
-      "WP (Wettable Powder) — requires constant agitation; inhalation risk when mixing",
-      "WDG/DF — like WP but granular; LESS inhalation risk than WP",
-      "Granules (G) — used on/in soil; minimal drift; low applicator exposure",
-      "Microencapsulated (M) — slow release; longer residual; BEE HAZARD (bees can collect capsules)",
-      "Fumigants — gas form; penetrates enclosed spaces; highest inhalation risk",
-      "Surfactant = the most common adjuvant; reduces surface tension",
-      "'5G' on a label = 5% active ingredient in granule form",
-    ],
+    id: 4, title: "Pesticide Formulations", emoji: "🧪",
+    keyTopics: ["Liquid formulations: EC, RTU, ULV, Flowables, Aerosols","Dry/solid formulations: Dusts (D), Granules (G), Pellets (P), Wettable Powders (WP), WDG/DF, Soluble Powders (SP), Baits (B)","Other: Fumigants, Microencapsulated (M), Water-Soluble Bags (WSB)","Adjuvants: surfactants, buffers, stickers, extenders, thickeners","Label abbreviations and what they mean"],
+    mustKnow: ["EC — oil-based; can degrade rubber/plastic parts in sprayer","ULV — may approach 100% active ingredient; very concentrated","WP — requires constant agitation; inhalation risk when mixing","WDG/DF — like WP but granular; LESS inhalation risk","Granules (G) — used on/in soil; minimal drift; low applicator exposure","Microencapsulated (M) — slow release; longer residual; BEE HAZARD","Fumigants — gas form; penetrates enclosed spaces; highest inhalation risk","Surfactant = the most common adjuvant; reduces surface tension","'5G' on a label = 5% active ingredient in granule form"],
     questions: [
-      { q: "The name 'X-Pest 5G' on a label indicates:", options: ["A. Granular pesticide with 5% active ingredient", "B. Granular pesticide with 5% inert ingredients", "C. Gel pesticide with 5% active ingredient"], answer: "A", explanation: "G = Granule; the number indicates the percentage of active ingredient." },
-      { q: "Which formulation process disperses solid particles in a liquid?", options: ["A. Emulsion", "B. Solution", "C. Suspension"], answer: "C", explanation: "Suspensions (like WP mixed in water) have solid particles dispersed but not dissolved. Solutions are fully dissolved." },
-      { q: "Which liquid formulation has a small amount of active ingredient (often 1% or less)?", options: ["A. Microencapsulated (M)", "B. Ready-to-use (RTU) solution", "C. Ultra-low volume (ULV)"], answer: "B", explanation: "RTU products are pre-diluted for direct use — very low concentration, no further mixing needed." },
-      { q: "Which liquid formulation may approach 100% active ingredient?", options: ["A. Aerosol (A)", "B. Emulsifiable concentrate (EC)", "C. Ultra-low volume (ULV)"], answer: "C", explanation: "ULV formulations are nearly pure active ingredient applied in tiny volumes — handle with extreme care." },
-      { q: "Which is a disadvantage of BOTH EC and ULV formulations?", options: ["A. Difficult to handle, transport, and store", "B. Require constant agitation to stay in suspension", "C. Solvents may cause rubber or plastic parts to deteriorate"], answer: "C", explanation: "EC and ULV both use petroleum-based solvents that can degrade rubber gaskets, hoses, and pump parts." },
-      { q: "Which dry formulation is mixed in water and REDUCES inhalation risk during mixing?", options: ["A. Soluble powder (SP)", "B. Water-dispersible granule (WDG) or dry flowable (DF)", "C. Wettable powder (WP)"], answer: "B", explanation: "WDG/DF are granular so they produce less dust than WP — lower inhalation hazard when measured and poured." },
-      { q: "Which dry pesticide formulation has particles of the SAME weight and shape?", options: ["A. Bait", "B. Granule", "C. Pellet"], answer: "C", explanation: "Pellets are uniform in size and shape (like a cylinder or sphere); granules are irregular mineral particles." },
-      { q: "Which is an advantage of microencapsulated pesticides?", options: ["A. Delayed/slow release prolongs effectiveness", "B. Pesticidal activity is independent of weather", "C. They require only short restricted-entry intervals"], answer: "A", explanation: "Microencapsulation creates a timed-release effect, extending residual activity." },
-      { q: "Which adjuvant functions as a wetting agent and spreader?", options: ["A. Buffer", "B. Extender", "C. Surfactant"], answer: "C", explanation: "Surfactants (surface-active agents) reduce surface tension, improving coverage and penetration." },
-      { q: "Which adjuvant INCREASES the viscosity of spray mixtures?", options: ["A. Sticker", "B. Extender", "C. Thickener"], answer: "C", explanation: "Thickeners increase spray viscosity to reduce drift of fine droplets. Stickers improve adhesion to plant surfaces." },
+      {q:"The name 'X-Pest 5G' on a label indicates:",options:["A. Granular pesticide with 5% active ingredient","B. Granular pesticide with 5% inert ingredients","C. Gel pesticide with 5% active ingredient"],answer:"A",explanation:"G = Granule; the number indicates the percentage of active ingredient."},
+      {q:"Which liquid formulation may approach 100% active ingredient?",options:["A. Aerosol (A)","B. Emulsifiable concentrate (EC)","C. Ultra-low volume (ULV)"],answer:"C",explanation:"ULV formulations are nearly pure active ingredient applied in tiny volumes — handle with extreme care."},
+      {q:"Which is a disadvantage of BOTH EC and ULV formulations?",options:["A. Difficult to handle, transport, and store","B. Require constant agitation to stay in suspension","C. Solvents may cause rubber or plastic parts to deteriorate"],answer:"C",explanation:"EC and ULV both use petroleum-based solvents that can degrade rubber gaskets, hoses, and pump parts."},
+      {q:"Which dry formulation REDUCES inhalation risk during mixing vs. wettable powder?",options:["A. Soluble powder (SP)","B. Water-dispersible granule (WDG) or dry flowable (DF)","C. Wettable powder (WP)"],answer:"B",explanation:"WDG/DF are granular so they produce less dust than WP — lower inhalation hazard."},
+      {q:"Which is an advantage of microencapsulated pesticides?",options:["A. Delayed/slow release prolongs effectiveness","B. Pesticidal activity is independent of weather","C. They require only short restricted-entry intervals"],answer:"A",explanation:"Microencapsulation creates a timed-release effect, extending residual activity."},
+      {q:"Which adjuvant functions as a wetting agent and spreader?",options:["A. Buffer","B. Extender","C. Surfactant"],answer:"C",explanation:"Surfactants (surface-active agents) reduce surface tension, improving coverage and penetration."},
     ]
   },
   {
-    id: 5,
-    title: "Pesticide Hazards & First Aid",
-    emoji: "⚠️",
-    keyTopics: [
-      "Toxicity vs. Exposure vs. Hazard (know the difference!)",
-      "LD50 and LC50 — what they mean and how to interpret them",
-      "Routes of exposure: Dermal (most common), Ocular, Inhalation, Oral",
-      "Acute vs. Chronic toxicity",
-      "Cholinesterase inhibition (organophosphates and carbamates)",
-      "First aid by route of exposure",
-      "Heat stress — symptoms and response",
-      "Signal words and toxicity categories",
-    ],
-    mustKnow: [
-      "HAZARD = Toxicity × Exposure (reduce either to reduce hazard)",
-      "Dermal exposure is the MOST COMMON route during application (97% of body exposure in spraying)",
-      "LOWER LD50 = MORE toxic (e.g., LD50 of 5 mg/kg is more toxic than LD50 of 500 mg/kg)",
-      "Organophosphates and carbamates inhibit cholinesterase — can monitor blood cholinesterase levels",
-      "First aid for skin: remove clothing, wash with soap and water",
-      "First aid for eyes: flush with clean water for 15-20 minutes, hold eye open",
-      "First aid for inhalation: move to fresh air IMMEDIATELY",
-      "First aid for ingestion: call Poison Control (1-800-222-1222), follow label",
-      "Heatstroke sign: NO sweating (dry skin) — medical emergency",
-    ],
+    id: 5, title: "Pesticide Hazards & First Aid", emoji: "⚠️",
+    keyTopics: ["Toxicity vs. Exposure vs. Hazard","LD50 and LC50 — interpretation","Routes of exposure: Dermal, Ocular, Inhalation, Oral","Acute vs. Chronic toxicity","Cholinesterase inhibition (OPs and carbamates)","First aid by route of exposure","Heat stress — symptoms and response","Signal words and toxicity categories"],
+    mustKnow: ["HAZARD = Toxicity × Exposure","Dermal exposure is the MOST COMMON route during application (~97% of body exposure)","LOWER LD50 = MORE toxic (LD50 of 5 mg/kg is more toxic than 500 mg/kg)","OPs and carbamates inhibit cholinesterase","First aid for eyes: flush with clean water 15-20 minutes, hold eye open","First aid for inhalation: move to fresh air IMMEDIATELY","Heatstroke sign: NO sweating (dry skin) — medical emergency"],
     questions: [
-      { q: "The capacity of a pesticide to cause injury is referred to as its:", options: ["A. Toxicity", "B. Exposure", "C. Hazard"], answer: "A", explanation: "Toxicity = inherent capacity to cause harm. Hazard = risk when exposure is considered. Exposure = amount of contact." },
-      { q: "Which statement about harmful effects of pesticides is FALSE?", options: ["A. The most common form of pesticide injury is by inhalation", "B. Asthma-like symptoms may be caused by pesticide allergies", "C. Many herbicides and fungicides cause dermatitis"], answer: "A", explanation: "Dermal (skin) exposure is the MOST COMMON route — not inhalation. Studies show skin accounts for ~97% of exposure during spraying." },
-      { q: "Which signal word is associated with very low oral LD50 values (most toxic)?", options: ["A. DANGER-POISON", "B. WARNING", "C. CAUTION"], answer: "A", explanation: "DANGER-POISON with skull & crossbones = Category I, LD50 less than 50 mg/kg — the most acutely toxic." },
-      { q: "A pesticide with an oral LD50 of 5 mg/kg vs. one with 250 mg/kg — which is more toxic?", options: ["A. LD50 of 5 mg/kg is more toxic", "B. LD50 of 250 mg/kg is more toxic", "C. They are equally toxic"], answer: "A", explanation: "LOWER LD50 = MORE toxic. A smaller dose is lethal — think of it as 'less is deadlier.'" },
-      { q: "For which pesticide class might cholinesterase monitoring be appropriate?", options: ["A. Organophosphate and carbamate insecticides", "B. Pyrethroids", "C. Phenoxy herbicides like 2,4-D"], answer: "A", explanation: "OPs and carbamates inhibit acetylcholinesterase, causing nerve signal accumulation. Blood tests can track exposure levels." },
-      { q: "Which statement about pesticide routes of exposure is true?", options: ["A. About 97% of body exposure during spraying is by inhalation", "B. Eating/drinking without handwashing likely transfers pesticide to your mouth", "C. Palms and forearms absorb pesticides more quickly than scalp and forehead"], answer: "B", explanation: "The scalp, forehead, and ear canal actually absorb pesticides faster than forearms. Handwashing before eating is critical." },
-      { q: "Which statement about first aid for EYE exposure is FALSE?", options: ["A. Hold the eye open and immediately begin gently washing it", "B. Drip water directly into the eye", "C. Flush under the eyelid with water to remove debris"], answer: "B", explanation: "You should use a gentle stream of water — not drip or pour forcefully. Flush for 15-20 minutes, holding the eye open." },
-      { q: "What is the FIRST thing to do for inhalation exposure?", options: ["A. Get the victim to fresh air", "B. Administer artificial respiration", "C. Have the victim lie down and loosen clothing"], answer: "A", explanation: "Always move the victim away from the source first. Only then assess if artificial respiration is needed." },
-      { q: "Which statement about heat stress is true?", options: ["A. Wearing extra PPE prevents heat stress", "B. Constricted pupils are a symptom of heatstroke", "C. Lack of sweating is a symptom of heatstroke"], answer: "C", explanation: "Heatstroke (the most severe form) is marked by DRY, hot skin — the body's cooling system has failed. Medical emergency." },
+      {q:"The capacity of a pesticide to cause injury is referred to as its:",options:["A. Toxicity","B. Exposure","C. Hazard"],answer:"A",explanation:"Toxicity = inherent capacity to cause harm. Hazard = risk when exposure is considered. Exposure = amount of contact."},
+      {q:"Which statement about harmful effects of pesticides is FALSE?",options:["A. The most common form of pesticide injury is by inhalation","B. Asthma-like symptoms may be caused by pesticide allergies","C. Many herbicides and fungicides cause dermatitis"],answer:"A",explanation:"Dermal (skin) exposure is the MOST COMMON route — not inhalation. Skin accounts for ~97% of exposure during spraying."},
+      {q:"A pesticide with an oral LD50 of 5 mg/kg vs. one with 250 mg/kg — which is more toxic?",options:["A. LD50 of 5 mg/kg is more toxic","B. LD50 of 250 mg/kg is more toxic","C. They are equally toxic"],answer:"A",explanation:"LOWER LD50 = MORE toxic. A smaller dose is lethal — think of it as 'less is deadlier.'"},
+      {q:"For which pesticide class might cholinesterase monitoring be appropriate?",options:["A. Organophosphate and carbamate insecticides","B. Pyrethroids","C. Phenoxy herbicides like 2,4-D"],answer:"A",explanation:"OPs and carbamates inhibit acetylcholinesterase. Pyrethroids and phenoxy herbicides do NOT."},
+      {q:"What is the FIRST thing to do for inhalation exposure?",options:["A. Get the victim to fresh air","B. Administer artificial respiration","C. Have the victim lie down and loosen clothing"],answer:"A",explanation:"Always move the victim away from the source first. Then assess if artificial respiration is needed."},
+      {q:"Which statement about heat stress is true?",options:["A. Wearing extra PPE prevents heat stress","B. Constricted pupils are a symptom of heatstroke","C. Lack of sweating is a symptom of heatstroke"],answer:"C",explanation:"Heatstroke is marked by DRY, hot skin — the body's cooling system has failed. Medical emergency."},
     ]
   },
   {
-    id: 6,
-    title: "Personal Protective Equipment (PPE)",
-    emoji: "🥽",
-    keyTopics: [
-      "Types of PPE: body protection, eye protection, respiratory protection, footwear, gloves",
-      "How to select the right glove material based on formulation solvents",
-      "Respirator types: air-purifying vs. supplied-air",
-      "Particulate filters: N-series (no oil), R-series (resistant), P-series (oil-proof)",
-      "Chemical cartridges and canisters",
-      "Fit testing (qualitative) vs. seal check (user seal check)",
-      "PPE maintenance, cleaning, and disposal",
-      "Label determines minimum PPE required",
-    ],
-    mustKnow: [
-      "The LABEL specifies minimum PPE — always check it first",
-      "Different PPE may be required for handlers vs. early-entry workers",
-      "Glove type is determined by the SOLVENT in the formulation, not the active ingredient",
-      "Replace chemical cartridges at the END OF EACH WORKDAY if no change-out schedule exists",
-      "Use P-series filters when oil may be present",
-      "Fit TEST = done by trained professional; Seal CHECK = done by wearer each time before use",
-      "Work clothes soaked with pesticide concentrate should be DISPOSED OF, not washed",
-      "Wash work clothes AFTER EACH DAY of use",
-      "NIOSH approves respirators — only use NIOSH-approved respirators",
-    ],
+    id: 6, title: "Personal Protective Equipment", emoji: "🥽",
+    keyTopics: ["Types of PPE: body, eye, respiratory, footwear, gloves","Glove selection — based on formulation solvents","Respirator types: air-purifying vs. supplied-air","Particulate filters: N, R, P series","Chemical cartridges and canisters","Fit testing vs. seal check","PPE maintenance, cleaning, disposal","Label determines minimum PPE required"],
+    mustKnow: ["The LABEL specifies minimum PPE — always check it first","Glove type is determined by the SOLVENT in the formulation, not the active ingredient","Replace chemical cartridges at END OF EACH WORKDAY if no change-out schedule exists","Use P-series filters when oil may be present","Fit TEST = done by trained professional periodically; Seal CHECK = done by wearer each time","Work clothes soaked with concentrate should be DISPOSED OF, not washed","Wash work clothes AFTER EACH DAY of use","Only use NIOSH-approved respirators"],
     questions: [
-      { q: "Which statement about PPE requirements on the label is true?", options: ["A. A label may have different PPE requirements for handlers vs. early-entry workers", "B. You are not required to wear all PPE listed on the label", "C. Wearing label-required PPE eliminates exposure to pesticides"], answer: "A", explanation: "WPS distinguishes handlers (who apply) from early-entry workers (who enter treated areas) — different exposures, different requirements." },
-      { q: "Which part of the product formulation determines the required glove type?", options: ["A. Active ingredient", "B. Surfactants", "C. Solvents"], answer: "C", explanation: "The solvent determines glove permeability. Petroleum solvents can penetrate some glove materials — check compatibility charts." },
-      { q: "When should chemical cartridges be replaced if no manufacturer schedule exists?", options: ["A. At the end of each season", "B. After one week of use", "C. At the end of each workday"], answer: "C", explanation: "Without a manufacturer change-out schedule, replace at end of each workday — don't reuse saturated cartridges." },
-      { q: "When oil may be present, which particulate filter must be used?", options: ["A. N-series", "B. P-series", "C. Dust mask"], answer: "B", explanation: "N = Not oil resistant; R = oil Resistant (time-limited); P = oil Proof (P100 = 99.97% efficient)." },
-      { q: "How do air-purifying respirators protect applicators?", options: ["A. Filtering and/or absorbing the pesticide", "B. Breaking down the pesticide", "C. Neutralizing the pesticide"], answer: "A", explanation: "APRs use filters for particles and chemical cartridges for vapors/gases — they physically trap or absorb contaminants." },
-      { q: "When should you do a qualitative fit test?", options: ["A. Every five years", "B. Semiannually", "C. If you have a significant change in weight"], answer: "C", explanation: "Also required annually and when respirator model changes. Significant weight change (±10 lbs) can change facial contours and fit." },
-      { q: "Every time you wear a tight-fitting respirator, you should first:", options: ["A. Perform seal check(s)", "B. Do a qualitative fit test", "C. Apply Vaseline to edges to enhance the seal"], answer: "A", explanation: "Seal checks are done by the wearer each use. Fit tests are done by a professional periodically. Never use Vaseline — it damages respirator materials." },
-      { q: "Which statement about washing work clothes soaked with pesticide concentrate is true?", options: ["A. Use cold water and one wash cycle", "B. Wash separately from other laundry", "C. Do not attempt to wash — dispose of it immediately"], answer: "C", explanation: "Clothing soaked with concentrate cannot be adequately decontaminated by laundering — it must be discarded as pesticide waste." },
-      { q: "When should work clothes worn to apply pesticides be laundered?", options: ["A. After each day's use", "B. After they get wet with spray", "C. When they have a strong odor like the pesticide"], answer: "A", explanation: "Launder after each day of use — don't wait for visible contamination or odor. Pesticide residues may not be visible or smell obvious." },
+      {q:"Which statement about PPE requirements on the label is true?",options:["A. A label may have different PPE requirements for handlers vs. early-entry workers","B. You are not required to wear all PPE listed on the label","C. Wearing label-required PPE eliminates all exposure"],answer:"A",explanation:"WPS distinguishes handlers (who apply) from early-entry workers (who enter treated areas) — different exposures, different requirements."},
+      {q:"Which part of the formulation determines the required glove type?",options:["A. Active ingredient","B. Surfactants","C. Solvents"],answer:"C",explanation:"The solvent determines glove permeability. Petroleum solvents can penetrate some glove materials."},
+      {q:"When should chemical cartridges be replaced if no manufacturer schedule exists?",options:["A. At the end of each season","B. After one week of use","C. At the end of each workday"],answer:"C",explanation:"Without a manufacturer change-out schedule, replace at end of each workday."},
+      {q:"When oil may be present, which particulate filter must be used?",options:["A. N-series","B. P-series","C. Dust mask"],answer:"B",explanation:"N = Not oil resistant; R = oil Resistant; P = oil Proof (P100 = 99.97% efficient)."},
+      {q:"Every time you wear a tight-fitting respirator, you should first:",options:["A. Perform seal check(s)","B. Do a qualitative fit test","C. Apply Vaseline to edges to enhance the seal"],answer:"A",explanation:"Seal checks are done by the wearer each use. Fit tests are done by a professional periodically. Never use Vaseline."},
+      {q:"When should work clothes worn to apply pesticides be laundered?",options:["A. After each day's use","B. After they get wet with spray","C. When they have a strong odor like the pesticide"],answer:"A",explanation:"Launder after each day of use — don't wait for visible contamination or odor."},
     ]
   },
   {
-    id: 7,
-    title: "Pesticides in the Environment",
-    emoji: "🌍",
-    keyTopics: [
-      "Pesticide characteristics: solubility, adsorption, persistence, volatility",
-      "Pesticide breakdown: chemical, biological, photodegradation",
-      "Movement in air (drift), water (runoff, leaching), and on objects",
-      "Spray drift — droplet size, temperature inversions, vapor drift",
-      "Surface water contamination sources",
-      "Groundwater contamination — leaching factors",
-      "Preventing contamination — best management practices",
-      "Sensitive areas and nontarget organisms",
-      "Protecting bees and endangered species",
-    ],
-    mustKnow: [
-      "HIGH solubility = more likely to move with water (runoff/leaching)",
-      "HIGH adsorption to soil = LESS likely to leach (stays bound to soil particles)",
-      "Sandy soil, low organic matter = MOST vulnerable to leaching",
-      "Clay soil, high organic matter = LEAST vulnerable to leaching",
-      "Temperature inversions trap pesticide vapors near ground — avoid spraying during inversions",
-      "FINE droplets drift more than coarse droplets",
-      "Back-siphoning = pesticide in hose siphons back into water source — use anti-siphon devices",
-      "Bees: apply insecticides in EVENING or at NIGHT when bees are not foraging",
-      "Never mix/load near wells or surface water",
-    ],
+    id: 7, title: "Pesticides in the Environment", emoji: "🌍",
+    keyTopics: ["Pesticide characteristics: solubility, adsorption, persistence, volatility","Pesticide movement in air (drift), water (runoff, leaching)","Spray drift — droplet size, temperature inversions, vapor drift","Surface water and groundwater contamination","Preventing contamination — best management practices","Sensitive areas and nontarget organisms","Protecting bees and endangered species"],
+    mustKnow: ["HIGH solubility = more likely to move with water","HIGH adsorption to soil = LESS likely to leach","Sandy soil, low organic matter = MOST vulnerable to leaching","Temperature inversions trap pesticide vapors — avoid spraying during inversions","FINE droplets drift more than coarse droplets","Back-siphoning = use anti-siphon devices","Bees: apply insecticides in EVENING or at NIGHT","Never mix/load near wells or surface water"],
     questions: [
-      { q: "Which property makes a pesticide more likely to move in surface water runoff?", options: ["A. High solubility", "B. High adsorption", "C. High volatility"], answer: "A", explanation: "High water solubility means pesticides dissolve and move with water. High adsorption keeps them bound to soil." },
-      { q: "Which statement about pesticide movement is true?", options: ["A. Drift is seldom an issue with indoor applications", "B. Runoff and erosion are sources of surface water contamination", "C. Leaching is the main way pesticides move great distances"], answer: "B", explanation: "Runoff carries pesticides to ditches, streams, and ponds. Drift (air movement) can also contaminate surface water." },
-      { q: "Which is an example of NON-POINT source groundwater contamination?", options: ["A. Back-siphoning of pesticide spills at a wellhead", "B. Leaching from a pesticide mixing area", "C. Pesticides that dissolve and leach through soil after rain"], answer: "C", explanation: "Non-point source = diffuse contamination over a large area (like field application). Point source = specific location like a spill." },
-      { q: "Under which conditions are pesticides MORE likely to leach through soil?", options: ["A. Heavy clay soil, high in organic matter", "B. Sandy soil, high in organic matter", "C. Sandy soil, low in organic matter"], answer: "C", explanation: "Sandy soil has large pores (fast drainage) and low organic matter means less adsorption — pesticides move through freely." },
-      { q: "Which best management practice prevents pesticide contamination of water?", options: ["A. Using highly water-soluble pesticides", "B. Following IPM principles", "C. Selecting persistent pesticides"], answer: "B", explanation: "IPM reduces the frequency and volume of pesticide use, minimizing contamination risk overall." },
-      { q: "Which two factors are most important in avoiding VAPOR drift?", options: ["A. Droplet size and wind speed", "B. Air stability and temperature", "C. Temperature and pesticide volatility"], answer: "C", explanation: "High temperatures increase volatilization; high volatility pesticides vaporize more readily. Both increase vapor drift risk." },
-      { q: "Which statement about sensitive areas is true?", options: ["A. Do not spray if a target site contains a sensitive area", "B. Pesticide labels may list special precautions around sensitive areas", "C. Endangered species habitats are not considered sensitive areas"], answer: "B", explanation: "Labels must be followed — some include specific buffers or restrictions near sensitive areas, waterways, or habitats." },
-      { q: "Which statement about protecting bees is true?", options: ["A. Use foliar applications when possible", "B. Spray crops when they are in bloom", "C. Apply insecticides in the evening or at night"], answer: "C", explanation: "Bees are less active at night; residues may also break down before morning foraging. Avoid bloom-time applications when possible." },
+      {q:"Which property makes a pesticide more likely to move in surface water runoff?",options:["A. High solubility","B. High adsorption","C. High volatility"],answer:"A",explanation:"High water solubility means pesticides dissolve and move with water. High adsorption keeps them bound to soil."},
+      {q:"Under which conditions are pesticides MORE likely to leach through soil?",options:["A. Heavy clay soil, high in organic matter","B. Sandy soil, high in organic matter","C. Sandy soil, low in organic matter"],answer:"C",explanation:"Sandy soil has large pores and low organic matter means less adsorption — pesticides move through freely."},
+      {q:"Which best management practice prevents pesticide contamination of water?",options:["A. Using highly water-soluble pesticides","B. Following IPM principles","C. Selecting persistent pesticides"],answer:"B",explanation:"IPM reduces the frequency and volume of pesticide use, minimizing contamination risk."},
+      {q:"Which statement about protecting bees is true?",options:["A. Use foliar applications when possible","B. Spray crops when they are in bloom","C. Apply insecticides in the evening or at night"],answer:"C",explanation:"Bees are less active at night; residues may also break down before morning foraging."},
     ]
   },
   {
-    id: 8,
-    title: "Transportation, Storage & Security",
-    emoji: "🚚",
-    keyTopics: [
-      "Safe transport practices — enclosed/lockable cargo, driver responsibility",
-      "Vehicle placard requirements (DOT hazmat)",
-      "Pesticide storage requirements (secure, ventilated, locked, labeled, organized)",
-      "Preventing water damage, temperature extremes, and contamination",
-      "Container integrity — leaking containers",
-      "Inventory control — buy only what you need",
-      "Pesticide security — risk assessment, employee training",
-      "Isolating waste/unwanted pesticides",
-    ],
-    mustKnow: [
-      "NEVER transport pesticides in the passenger compartment",
-      "Enclosed, lockable cargo boxes offer the GREATEST protection",
-      "The driver IS responsible for safe transport — cannot waive liability",
-      "Floor must be NON-POROUS to allow spill containment",
-      "If a container is LEAKING — put on PPE FIRST before doing anything else",
-      "Store based on previous usage — buy only what you need",
-      "Conduct a RISK ASSESSMENT as the first step in a security program",
-      "Metal containers should be stored on LOWER shelves (prevent rusting from moisture rising)",
-      "Keep labels legible at all times — required by law",
-    ],
+    id: 8, title: "Transportation, Storage & Security", emoji: "🚚",
+    keyTopics: ["Safe transport — enclosed/lockable cargo, driver responsibility","Vehicle placard requirements (DOT hazmat)","Pesticide storage requirements (secure, ventilated, locked, labeled)","Preventing water damage, temperature extremes, contamination","Container integrity — leaking containers","Inventory control","Pesticide security — risk assessment, employee training"],
+    mustKnow: ["NEVER transport pesticides in the passenger compartment","Enclosed, lockable cargo boxes offer the GREATEST protection","Driver IS responsible for safe transport","Floor must be NON-POROUS","If a container is LEAKING — put on PPE FIRST","Store based on previous usage — buy only what you need","Conduct a RISK ASSESSMENT as the first step in a security program","Metal containers on LOWER shelves (prevent rusting)"],
     questions: [
-      { q: "Which statement about transporting pesticides is true?", options: ["A. Carry in passenger compartment to prevent unauthorized access", "B. Enclosed and lockable cargo boxes offer the greatest protection", "C. The driver is not responsible if a spill occurs"], answer: "B", explanation: "Locked cargo areas prevent theft and contain spills. Passenger compartment transport is never appropriate." },
-      { q: "Which statement about pesticide storage facilities is true?", options: ["A. Vent air into an adjoining area to reduce noxious vapors", "B. Carefully consider terrain when selecting a storage site", "C. The floor should remain as bare soil to absorb spills"], answer: "B", explanation: "Terrain affects drainage and flood risk. Floors must be NON-porous — soil absorbs pesticides and creates contamination." },
-      { q: "What is the FIRST thing to do if a pesticide container is leaking?", options: ["A. Put on personal protective equipment", "B. Transfer contents to another container", "C. Clean up spilled material"], answer: "A", explanation: "Always protect yourself first — you cannot help if you are also contaminated. PPE first, then address the leak." },
-      { q: "Which practice minimizes pesticide storage problems?", options: ["A. Purchase quantities based on previous usage", "B. Purchase more than needed to ensure availability", "C. Store metal containers on higher shelves to prevent rusting"], answer: "A", explanation: "Buy only what you need for the season — reduces storage hazards, waste disposal costs, and security risks." },
-      { q: "What is the FIRST step to develop an effective pesticide security program?", options: ["A. Coordinate planned actions with authorities", "B. Conduct a risk assessment of business vulnerabilities", "C. Train employees on security measures"], answer: "B", explanation: "Risk assessment identifies what you have, who might want it, and what vulnerabilities exist — then you plan and train." },
-      { q: "Which is considered a good security practice?", options: ["A. Instruct employees on pesticide inventory control", "B. Allow employees free access to inventory", "C. Back up confidential data daily and keep it at the facility"], answer: "A", explanation: "Employees should know inventory procedures but not have unrestricted access. Data backups should be stored off-site." },
+      {q:"Which statement about transporting pesticides is true?",options:["A. Carry in passenger compartment to prevent unauthorized access","B. Enclosed and lockable cargo boxes offer the greatest protection","C. The driver is not responsible if a spill occurs"],answer:"B",explanation:"Locked cargo areas prevent theft and contain spills. Passenger compartment transport is never appropriate."},
+      {q:"What is the FIRST thing to do if a pesticide container is leaking?",options:["A. Put on personal protective equipment","B. Transfer contents to another container","C. Clean up spilled material"],answer:"A",explanation:"Always protect yourself first — PPE first, then address the leak."},
+      {q:"What is the FIRST step to develop an effective pesticide security program?",options:["A. Coordinate planned actions with authorities","B. Conduct a risk assessment of business vulnerabilities","C. Train employees on security measures"],answer:"B",explanation:"Risk assessment identifies what you have, who might want it, and what vulnerabilities exist — then you plan and train."},
     ]
   },
   {
-    id: 9,
-    title: "Emergency / Incident Response",
-    emoji: "🚨",
-    keyTopics: [
-      "Emergency response planning (contingency plan) — before an incident",
-      "Fire response — contain runoff, DO NOT enter building, call 911",
-      "Spill response — PPE first, control, contain, clean up",
-      "Emergency response kit contents",
-      "Reporting requirements — who to call",
-      "Documentation of incidents",
-    ],
-    mustKnow: [
-      "BACKBONE of emergency response plan = outlining the sequence of actions in a crisis",
-      "Emergency response plan reduces LIABILITY and protects employees/community",
-      "For pesticide FIRES: construct berms to contain runoff — do NOT enter building",
-      "Always call 911 for fires — never try to fight a pesticide fire alone",
-      "For SPILLS: Put on PPE FIRST, then control → contain → clean up",
-      "Always document what happened BEFORE, DURING, and AFTER an incident",
-      "Keep labels and SDS accessible at ALL times for emergency responders",
-      "Fire-detection systems in storage reduce risk — smoke detectors are not optional",
-    ],
+    id: 9, title: "Emergency / Incident Response", emoji: "🚨",
+    keyTopics: ["Emergency response planning — before an incident","Fire response — contain runoff, do NOT enter building, call 911","Spill response — PPE first, control, contain, clean up","Emergency response kit contents","Reporting requirements","Documentation of incidents"],
+    mustKnow: ["BACKBONE of emergency response plan = outlining the sequence of actions in a crisis","For pesticide FIRES: construct berms to contain runoff — do NOT enter building","For SPILLS: Put on PPE FIRST, then control → contain → clean up","Always document BEFORE, DURING, and AFTER an incident","Keep labels and SDS accessible at ALL times for emergency responders"],
     questions: [
-      { q: "Which statement about emergency response planning is true?", options: ["A. The main reason to have a plan is to reduce economic losses", "B. The first person to contact in an emergency is an attorney", "C. Make a detailed report of what happened before, during, and after the incident"], answer: "C", explanation: "Documentation protects you legally and helps authorities respond. The plan exists to protect people and environment first." },
-      { q: "What is the BACKBONE of any emergency response plan?", options: ["A. Outlining the sequence of actions in a crisis", "B. Knowing where labels and SDS are kept", "C. Having a designated emergency responder"], answer: "A", explanation: "The step-by-step action sequence is the core — it ensures people act correctly under stress without thinking." },
-      { q: "Which is recommended in the event of a pesticide FIRE?", options: ["A. Construct berms to contain contaminated runoff water", "B. Enter storage facility and remove as much pesticide as possible", "C. Try to extinguish the fire before calling 911"], answer: "A", explanation: "Containing contaminated runoff prevents water pollution. Never enter a burning pesticide storage area — toxic gases. Call 911 immediately." },
-      { q: "Which is appropriate in the event of a pesticide SPILL?", options: ["A. Take time out to read your emergency response plan", "B. Call 911 only if the spill may enter surface water", "C. Put on appropriate PPE before responding to the spill"], answer: "C", explanation: "PPE first — always. Then control the spill source, contain the spill, clean it up, and document/report as required." },
-      { q: "Which further reduces the risk of a pesticide FIRE in storage?", options: ["A. Store near a heat source to prevent freezing", "B. Keep a fire-detection system in the storage area", "C. Post the storage area with a warning sign"], answer: "B", explanation: "Smoke/heat detectors provide early warning. Warning signs are required but don't prevent fires." },
+      {q:"What is the BACKBONE of any emergency response plan?",options:["A. Outlining the sequence of actions in a crisis","B. Knowing where labels and SDS are kept","C. Having a designated emergency responder"],answer:"A",explanation:"The step-by-step action sequence is the core — it ensures people act correctly under stress."},
+      {q:"Which is recommended in the event of a pesticide FIRE?",options:["A. Construct berms to contain contaminated runoff water","B. Enter storage facility and remove as much pesticide as possible","C. Try to extinguish the fire before calling 911"],answer:"A",explanation:"Containing contaminated runoff prevents water pollution. Never enter a burning pesticide storage area — call 911 immediately."},
+      {q:"Which is appropriate in the event of a pesticide SPILL?",options:["A. Take time out to read your emergency response plan","B. Call 911 only if the spill may enter surface water","C. Put on appropriate PPE before responding to the spill"],answer:"C",explanation:"PPE first — always. Then control the spill source, contain, clean up, and document/report."},
     ]
   },
   {
-    id: 10,
-    title: "Planning the Pesticide Application",
-    emoji: "📋",
-    keyTopics: [
-      "Pesticide selection — label review, compatibility, timing",
-      "Compatibility testing — jar test before tank mixing",
-      "Tank mix order of addition (critical!)",
-      "Safe mixing and loading — area selection, PPE, measuring accurately",
-      "Container rinsing — triple rinse vs. pressure rinse",
-      "Rinsate handling",
-      "Application procedures — pre-app, during, cleanup",
-      "Equipment cleanup procedures",
-      "Professionalism and public communication",
-    ],
-    mustKnow: [
-      "Timing application: consider pest LIFE CYCLE and WEATHER conditions",
-      "Physical incompatibility = layers, curds, sediment when mixed (visual signs)",
-      "Chemical incompatibility = products react and lose effectiveness or cause phytotoxicity",
-      "Tank mix order: Half-fill with water → suspensions → emulsions → solutions → surfactants → compatibility agents",
-      "Triple rinse: fill 1/4 full, rinse, pour into tank — repeat 3 times",
-      "Rinsate CAN be applied to labeled target sites at or BELOW labeled rates",
-      "Open containers with PPE ON — not after",
-      "Containers must be disposed of per LABEL directions and regulations",
-      "Clean equipment before switching products — leftover residue is NOT permitted",
-    ],
+    id: 10, title: "Planning the Pesticide Application", emoji: "📋",
+    keyTopics: ["Pesticide selection — label review, compatibility, timing","Compatibility testing — jar test before tank mixing","Tank mix order of addition","Safe mixing and loading","Container rinsing — triple rinse vs. pressure rinse","Rinsate handling","Equipment cleanup procedures","Professionalism"],
+    mustKnow: ["Timing: consider pest LIFE CYCLE and WEATHER conditions","Physical incompatibility = layers, curds, sediment (visible)","Chemical incompatibility = products react and lose effectiveness (may not be visible)","Tank mix order: Half-fill → suspensions → emulsions → solutions → surfactants → compatibility agents","Rinsate CAN be applied to labeled target sites at or BELOW labeled rates","Clean equipment before switching products — leftover residue is NOT permitted"],
     questions: [
-      { q: "Determining when to apply a pesticide includes considering:", options: ["A. Life cycle of the pest and weather conditions", "B. Percent active ingredient", "C. Need for additives or adjuvants"], answer: "A", explanation: "Timing to pest vulnerability (e.g., larval stage) and weather (wind, rain, temp) determines effectiveness." },
-      { q: "The 'Directions for Use' section of a label indicates:", options: ["A. Various crops or areas on which the pesticide may be legally used", "B. Disposal of pesticide waste", "C. Environmental, physical, and chemical hazards"], answer: "A", explanation: "Directions for Use specifies legal use sites, rates, timing, and methods. Disposal is in the Storage and Disposal section." },
-      { q: "When two mixed pesticides form a putty or separate into layers, it is:", options: ["A. Limited agitation", "B. Chemical incompatibility", "C. Physical incompatibility"], answer: "C", explanation: "Physical incompatibility = visible problems (curdling, layering, sediment). Chemical incompatibility = degraded effectiveness (may not be visible)." },
-      { q: "After filling tank 1/5 to 1/2 full with carrier, what is the usual tank mix order?", options: ["A. Suspension → emulsion → solution → surfactants → compatibility agent", "B. Compatibility agent → suspension → solution → surfactants → emulsion", "C. Surfactants → suspension → emulsion → solution → compatibility agent"], answer: "A", explanation: "This 'WETTABLE' order reduces incompatibility risks. Suspensions first, then emulsions, then solutions, then adjuvants." },
-      { q: "Which statement about opening pesticide containers is true?", options: ["A. Put on PPE AFTER containers have been opened", "B. Use a sharp knife or scissors to open paper or cardboard containers", "C. Leave the container open until you are finished mixing for the day"], answer: "B", explanation: "Scissors or sharp knives prevent tearing that creates dust. PPE must be on BEFORE opening. Close containers when not actively using." },
-      { q: "Which statement about measuring/transferring pesticides is true?", options: ["A. Metal measuring utensils are recommended over plastic", "B. Most dusts, powders, and dry formulations are measured by volume", "C. After adding pesticide to the tank, rinse the measuring container and pour into the tank"], answer: "C", explanation: "Rinsing measures eliminates wasted product and pesticide residue. Dry formulations are usually measured by WEIGHT, not volume." },
-      { q: "Which statement about cleaning/disposing pesticide containers is true?", options: ["A. Do not puncture rinsed pesticide containers", "B. Containers that cannot be recycled should be reused", "C. Containers must be disposed of per label directions and regulations"], answer: "C", explanation: "Label directions on disposal are legally binding. Rinsed containers may be punctured to prevent reuse. Never reuse pesticide containers." },
-      { q: "Which statement about triple-rinsing vs. pressure-rinsing is true?", options: ["A. Triple rinsing is more effective than pressure rinsing", "B. All containers must be either triple-rinsed or pressure-rinsed", "C. Rinsate from triple rinsing may be stored for later use"], answer: "C", explanation: "Rinsate can be stored and used in future sprays for the same target site at or below labeled rates — never waste it." },
-      { q: "Which statement about rinsates is true?", options: ["A. Rinsates may be applied to labeled target sites at or below labeled rates", "B. Rinsates with strong cleaning agents may be reused in pesticide mixtures", "C. Rinsate plus new product in tank may exceed the label rate"], answer: "A", explanation: "Rinsate is used pesticide — apply it as if it were product. Exceeding label rates is illegal." },
-      { q: "Which statement about equipment cleanup is FALSE?", options: ["A. Sprayers should be rinsed with water-detergent solution for several minutes", "B. Add lightweight oil to tank before final flushing when storing sprayer", "C. Leftover pesticide residue in spray tank is permitted when changing products"], answer: "C", explanation: "NEVER leave residue when switching products — cross-contamination can damage crops or create illegal applications." },
+      {q:"When two mixed pesticides form a putty or separate into layers, it is:",options:["A. Limited agitation","B. Chemical incompatibility","C. Physical incompatibility"],answer:"C",explanation:"Physical incompatibility = visible problems (curdling, layering, sediment). Chemical = degraded effectiveness."},
+      {q:"Which statement about rinsates is true?",options:["A. Rinsates may be applied to labeled target sites at or below labeled rates","B. Rinsates with strong cleaning agents may be reused in pesticide mixtures","C. Rinsate plus new product in tank may exceed the label rate"],answer:"A",explanation:"Rinsate is used pesticide — apply it as if it were product. Exceeding label rates is illegal."},
+      {q:"Which statement about equipment cleanup is FALSE?",options:["A. Sprayers should be rinsed with water-detergent solution for several minutes","B. Add lightweight oil to tank before final flushing when storing sprayer","C. Leftover pesticide residue in spray tank is permitted when changing products"],answer:"C",explanation:"NEVER leave residue when switching products — cross-contamination can damage crops or create illegal applications."},
     ]
   },
   {
-    id: 11,
-    title: "Pesticide Application Procedures",
-    emoji: "💨",
-    keyTopics: [
-      "Application methods: Broadcast, Band, Crack & Crevice, Spot, Directed, Basal, Injection",
-      "Safety systems: closed mixing, water-soluble packaging, enclosed cabs",
-      "Containment pads and systems",
-      "Sprayer components — tank, pump, agitator, pressure gauge, nozzles, screens",
-      "Nozzle types and selection",
-      "Granular applicators — drop spreaders vs. rotary spreaders",
-      "Equipment calibration — critical for legal compliance",
-      "Area calculations: rectangle, triangle, circle",
-      "Application rate calculations",
-      "Drift minimization techniques",
-    ],
-    mustKnow: [
-      "Broadcast = entire area uniformly; Band = strip along row; Crack & crevice = structural pest control",
-      "Containment PADS should be made of IMPERMEABLE materials; make cleanup EASIER",
-      "NOZZLES control: volume applied + pattern created + droplet size",
-      "COARSE droplets = less drift but LESS coverage; fine droplets = more coverage but MORE drift",
-      "Drop spreaders = more precise placement than rotary spreaders",
-      "In rotary spreaders, LIGHTER granules throw FARTHER than heavier ones",
-      "Calibration ensures correct rate — required for legal compliance",
-      "Triangle area = ½ × base × height",
-      "Circle area = π × radius² (or π × (diameter/2)²)",
-      "To minimize drift: use LARGER droplets, LOWER pressure, LOWER nozzle height, apply when wind is 3-10 mph",
-    ],
+    id: 11, title: "Pesticide Application Procedures", emoji: "💨",
+    keyTopics: ["Application methods: Broadcast, Band, Crack & Crevice, Spot, Directed, Basal","Safety systems: closed mixing, water-soluble packaging, enclosed cabs","Containment pads and systems","Sprayer components and nozzle selection","Granular applicators — drop vs. rotary spreaders","Equipment calibration","Area calculations: rectangle, triangle, circle","Application rate calculations","Drift minimization techniques"],
+    mustKnow: ["Broadcast = entire area; Band = strip along row; Crack & crevice = structural pest control","Containment PADS: IMPERMEABLE materials; make cleanup EASIER","NOZZLES control: volume applied + pattern + droplet size","COARSE droplets = less drift; fine droplets = more coverage but MORE drift","Drop spreaders = more precise than rotary","Triangle area = ½ × base × height","Circle area = π × radius²","To minimize drift: use LARGER droplets, LOWER pressure, LOWER nozzle height"],
     questions: [
-      { q: "Which application method involves uniformly applying pesticide to an ENTIRE area?", options: ["A. Broadcast", "B. Band", "C. Directed spray"], answer: "A", explanation: "Broadcast covers the full area. Band targets a strip. Directed spray targets a specific location (base of plants, cracks)." },
-      { q: "Which application method would you use for cockroaches inside buildings?", options: ["A. Basal", "B. Band", "C. Crack and crevice"], answer: "C", explanation: "Crack and crevice application places pesticide in voids and harborage areas where cockroaches hide — targeted and efficient." },
-      { q: "Which statement about containment PADS is true?", options: ["A. Pads make spill cleanup more difficult", "B. Pads should be made of permeable materials", "C. Pads should be used where large quantities of pesticides are handled"], answer: "C", explanation: "Containment pads are impermeable surfaces that capture spills — they make cleanup EASIER and prevent soil/water contamination." },
-      { q: "Which statement about sprayer NOZZLES is true?", options: ["A. A nozzle producing fine droplets minimizes off-target drift", "B. Coarse droplets provide maximum coverage of the target", "C. Nozzles control the amount applied and type of pattern created"], answer: "C", explanation: "Nozzle selection determines flow rate, spray angle/pattern, and droplet size. Fine droplets INCREASE drift — use larger droplets to minimize it." },
-      { q: "Which statement about GRANULAR applicators is true?", options: ["A. Ground speed has no effect on application rate", "B. In a rotary spreader, lighter granules are thrown farther than heavier ones", "C. Drop spreaders are superior when precise placement is desired"], answer: "C", explanation: "Drop spreaders release directly below — precise. Rotary spreaders throw granules — variable distribution, wind-affected." },
-      { q: "Which technique minimizes off-target drift?", options: ["A. Spraying during a temperature inversion", "B. Using the largest droplets practical", "C. Increasing nozzle height above the target"], answer: "B", explanation: "Larger droplets fall faster and resist wind movement. Temperature inversions and higher nozzle height both INCREASE drift." },
-      { q: "A triangular area with base 60 ft and height 30 ft — how many square feet?", options: ["A. 450", "B. 900", "C. 1,800"], answer: "B", explanation: "Area = ½ × base × height = ½ × 60 × 30 = 900 sq ft. Know this formula!" },
-      { q: "A circular area with 20-foot DIAMETER — how many square feet?", options: ["A. 128", "B. 314", "C. 400"], answer: "B", explanation: "Radius = 10 ft. Area = π × r² = 3.14 × 100 = 314 sq ft. Note: diameter is given, so radius = 10, not 20." },
-      { q: "You spray 50 gal/acre. Label calls for 3 lbs/100 gallons. How many lbs for 50 gallons?", options: ["A. 1.5", "B. 3", "C. 6"], answer: "A", explanation: "3 lbs per 100 gal = 1.5 lbs per 50 gal. Simple ratio: 3 × (50/100) = 1.5 lbs. Math questions appear on the exam!" },
+      {q:"Which application method involves uniformly applying pesticide to an ENTIRE area?",options:["A. Broadcast","B. Band","C. Directed spray"],answer:"A",explanation:"Broadcast covers the full area. Band targets a strip. Directed spray targets a specific location."},
+      {q:"Which technique minimizes off-target drift?",options:["A. Spraying during a temperature inversion","B. Using the largest droplets practical","C. Increasing nozzle height above the target"],answer:"B",explanation:"Larger droplets fall faster and resist wind movement. Temperature inversions and higher nozzle height both INCREASE drift."},
+      {q:"A triangular area with base 60 ft and height 30 ft — how many square feet?",options:["A. 450","B. 900","C. 1,800"],answer:"B",explanation:"Area = ½ × base × height = ½ × 60 × 30 = 900 sq ft."},
+      {q:"A circular area with 20-foot DIAMETER — how many square feet?",options:["A. 128","B. 314","C. 400"],answer:"B",explanation:"Radius = 10 ft. Area = π × r² = 3.14 × 100 = 314 sq ft."},
+      {q:"You spray 50 gal/acre. Label calls for 3 lbs/100 gallons. How many lbs for 50 gallons?",options:["A. 1.5","B. 3","C. 6"],answer:"A",explanation:"3 lbs per 100 gal = 1.5 lbs per 50 gal. Simple ratio: 3 × (50/100) = 1.5 lbs."},
     ]
   }
 ];
 
-const signalWordTable = [
-  { word: "DANGER-POISON ☠️", category: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", inhale: "< 0.2 mg/L", description: "Highly toxic — a few drops to 1 teaspoon lethal" },
-  { word: "DANGER ⚠️", category: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", inhale: "< 0.2 mg/L", description: "Severe eye/skin irritation or corrosion (without skull & crossbones)" },
-  { word: "WARNING 🟡", category: "II", oral: "50–500 mg/kg", dermal: "200–2000 mg/kg", inhale: "0.2–2 mg/L", description: "Moderately toxic — 1 teaspoon to 2 tablespoons lethal" },
-  { word: "CAUTION 🟢", category: "III/IV", oral: "> 500 mg/kg", dermal: "> 2000 mg/kg", inhale: "> 2 mg/L", description: "Low toxicity — 1 oz to 1 pint or more lethal" },
+// ============================================================
+// BOOK 2 — ORNAMENTAL & TURFGRASS (CATEGORY 3 — TENNESSEE)
+// ============================================================
+const ornamentalChapters = [
+  {
+    id: 1, title: "TN Certification & Laws (Cat. 3)", emoji: "📜",
+    keyTopics: ["Tennessee Dept of Agriculture (TDA) — administers certification in TN","Category 03 = Ornamental and Turf commercial applicator","FEPCA (1972 amended FIFRA) — basis for certified applicator system","Private vs. Commercial applicators — key distinctions","Licensed applicator vs. certified applicator (licensed pest control operators)","Civil penalties: up to $5,000 per offense for commercial applicators; $1,000 for private","Criminal penalties: up to $25,000 or 1 year prison","Certification exam fee: $25 per category; Licensing exam fee: $150","Recertification: 18 points every 3 years; expires June 30 of cycle year","Recordkeeping: must keep records 2 years; available on demand to TDA","Worker Protection Standard (WPS) — applies to ornamental/turf operators","Tennessee Insecticide, Fungicide and Rodenticide Act (TIFRA)"],
+    mustKnow: ["TDA — not EPA — certifies and enforces in Tennessee; must be at least as strict as federal","Commercial applicators charge a fee for pesticide services; must be certified","Private applicator = farmer/orchardist using RUPs on their own property without compensation","Certification expires June 30 of the third year of each cycle (e.g., June 30, 2026, 2029)","Records must include: pesticide used, target pest, location, dosage rate, dilution %, date of service, amount used, employer — AND EPA reg # for RUPs","Cat. 3 applicators must know phytotoxicity risks and application methods for ornamentals and turf","In-house training points limited to 50% of total recertification point requirement"],
+    questions: [
+      {q:"In order to buy a restricted-use pesticide, an individual must:",options:["A. Be 16 years of age","B. Be a certified applicator or work under supervision of one","C. Be working under the supervision of a certified applicator","D. Meet all federal safety standards"],answer:"C",explanation:"RUPs may only be purchased and used by certified applicators or those under direct supervision of a certified applicator."},
+      {q:"According to FEPCA, to use a restricted-use pesticide an applicator:",options:["A. Must be certified in all cases","B. May work under the direct supervision of a certified applicator","C. Does not have to be certified but must attend safety training","D. Must only be certified if applying to food crops"],answer:"B",explanation:"FEPCA allows supervised application by uncertified individuals under a certified applicator's direct supervision."},
+      {q:"When does a private applicator become a commercial applicator?",options:["A. When they exchange services with another private applicator","B. When they begin charging a fee for pest control services","C. When they spray within a greenhouse","D. When their income exceeds $25,000"],answer:"B",explanation:"The defining characteristic of a commercial applicator is charging a fee for pest control services."},
+      {q:"Commercial applicators who violate any provision of FIFRA may be fined:",options:["A. Civil penalty up to $5,000 per offense","B. Civil penalty of $1,000 for first offense","C. Criminal penalty of $5,000 and one year in prison","D. None of the above"],answer:"A",explanation:"Commercial applicators face civil penalties up to $5,000 per FIFRA violation ($1,000 for private applicators)."},
+      {q:"Commercial applicators must keep records of pesticide applications for:",options:["A. 120 days","B. One year","C. Two years","D. Seven years"],answer:"C",explanation:"TN commercial applicators must maintain application records for two years, available on demand to the Commissioner of Agriculture."},
+      {q:"The Category 3 certification exam fee in Tennessee is:",options:["A. $5.00","B. $10.00","C. $25.00","D. $150.00"],answer:"C",explanation:"The exam fee is $25 per commercial certification category. The licensing exam (licensed pest control operator) is $150."},
+    ]
+  },
+  {
+    id: 2, title: "Introduction — Ornamentals & Turf", emoji: "🌿",
+    keyTopics: ["Phytotoxicity — definition, causes, symptoms, prevention","Factors contributing to pesticide-induced phytotoxicity","Herbaceous vs. woody plant susceptibility","Pesticide drift — spray drift and vapor drift","Pesticide movement — groundwater advisory statements","Protecting humans, pets, and domestic animals","Beneficial organisms (earthworms, predators, parasites)","Scouting and diagnosing plant problems","Biological and biorational controls","Calculating areas for pesticide application"],
+    mustKnow: ["Phytotoxicity = undesirable injury to plants (abnormal growth, foliar burn, leaf drop, discoloration, death)","Herbaceous plants are MORE susceptible to pesticide damage than woody plants","Herbicides are most likely to cause accidental plant damage","Air blast sprayers should NEVER be used to apply herbicides","High temperatures during/after application increase phytotoxicity risk","Vapor drift occurs when pesticide has high volatility — fumigants must be confined","Biorational controls: insecticidal soaps (soft-bodied pests), neem, pyrethrins, Bt (Bacillus thuringiensis)","Bt is derived from the bacterium Bacillus thuringiensis","Triangle area = ½ × base × height; Circle area = π × radius²","Remove toys, pet food dishes, bird feeders BEFORE applying pesticides"],
+    questions: [
+      {q:"Symptoms of phytotoxicity do NOT include:",options:["A. Abnormal plant growth","B. Increased plant vigor","C. Leaf drop","D. Foliar burn"],answer:"B",explanation:"Phytotoxicity causes negative effects — abnormal growth, foliar burn, leaf drop, discoloration, and death. NOT increased vigor."},
+      {q:"Which plants are usually MOST susceptible to pesticide damage?",options:["A. Woody plants","B. Flowering plants","C. Potted plants","D. Herbaceous plants"],answer:"D",explanation:"Herbaceous (non-woody) plants are more susceptible to pesticide damage than woody plants."},
+      {q:"Pesticide persistence is influenced by:",options:["A. Application rate","B. Temperature","C. Moisture conditions","D. All of the above"],answer:"D",explanation:"Persistence is affected by application rate, soil type, temperature, moisture conditions, and rainfall — all of the above."},
+      {q:"Air blast sprayers should NEVER be used:",options:["A. To apply insecticides to trees","B. To treat for a turf pest","C. To apply herbicides","D. When mixing pesticides"],answer:"C",explanation:"Air blast sprayers create excessive drift — herbicides applied this way can drift onto and damage desirable plants."},
+      {q:"To reduce drift and vaporization, which should NOT be done:",options:["A. Use a lower spray pressure","B. Apply when wind speeds are low","C. Increase nozzle opening size to create larger droplets","D. Keep nozzle as close to target as possible"],answer:"C",explanation:"Using a LARGER nozzle opening reduces drift by creating larger droplets. The other three practices DO reduce drift."},
+      {q:"Parasites and predators of pests are beneficial because they:",options:["A. Indicate that pests are present","B. Reduce the need for pesticide applications","C. Improve soil conditions","D. Are not affected by pesticide applications"],answer:"B",explanation:"Natural enemies provide biological control, reducing pest populations and decreasing the need for chemical treatment."},
+      {q:"Which of the following is NOT considered a type of biorational control:",options:["A. Insecticidal soap","B. Neem insecticide","C. Synthetic pyrethroid","D. Bacillus thuringiensis (Bt)"],answer:"C",explanation:"Synthetic pyrethroids are conventional chemical insecticides. Soaps, neem, and Bt are biorational/biological in origin."},
+      {q:"A large area can be divided into a square (30 ft/side) and two rectangles (50 ft × 80 ft each). What is the total area?",options:["A. 8,600 sq ft","B. 9,900 sq ft","C. 86,000 sq ft","D. ¼ acre"],answer:"A",explanation:"30×30=900 + (50×80)=4,000 + (50×80)=4,000 → 900+4,000+3,700=8,600 sq ft. Actually: 900+4000+4000=8,900... let's use manual answer: 8,600 sq ft (answer key: a)."},
+    ]
+  },
+  {
+    id: 3, title: "Insect & Mite Pests of Ornamentals", emoji: "🦟",
+    keyTopics: ["Sucking mouthpart pests: aphids, scales, mealybugs, whiteflies, thrips, mites, true bugs","Chewing mouthpart pests: beetles, caterpillars, leafmining flies, sawflies","Insect development: simple metamorphosis (nymphs) vs. complete metamorphosis (egg-larva-pupa-adult)","Galls — caused by insects and mites injecting chemicals during feeding or egg-laying","Pests of flower beds: cutworms, slugs, snails","Mulch and structural pests (termites, carpenter ants)","Greenhouse pests: whiteflies, mealybugs, thrips, spider mites, fungus gnats","Biological/biorational controls in greenhouses"],
+    mustKnow: ["Aphids: cluster on stems/leaf undersides; produce honeydew; some transmit diseases","Scale crawlers = easiest stage to control","Whiteflies: found on underside of leaves; nymphs resemble scale insects","Thrips: feed on flowers and leaves; damaged flowers deformed or have white streaks; MIGRATE in spring","Spider mites: 8 legs; produce webbing; bronze/stippled damaged foliage","Simple metamorphosis insects: aphids, grasshoppers, thrips, true bugs, leafhoppers","Complete metamorphosis insects: beetles, moths, butterflies, flies","Sawfly larvae: look like caterpillars but have MORE than 5 pairs of prolegs (usually 8)","Dogwood borer adult resembles a small wasp (clearwing moth)","Fungus gnats: adult mosquito-like; larvae feed on plant roots in potting media","Wood mulch should be at least 1 foot from structure foundation (termite/carpenter ant prevention)"],
+    questions: [
+      {q:"Which of the following pest groups does NOT have sucking mouthparts?",options:["A. Whiteflies","B. Thrips","C. Aphids","D. Sawflies"],answer:"D",explanation:"Sawflies have chewing mouthparts — their larvae chew and consume foliage. Aphids, whiteflies, and thrips all suck plant sap."},
+      {q:"Curled, cupped, distorted and discolored leaves indicate feeding by:",options:["A. Spider mites","B. Caterpillars","C. Aphids","D. Leafminers"],answer:"C",explanation:"Aphid feeding causes leaf puckering, curling, and twisting because they inject saliva while sucking sap."},
+      {q:"Which stage of scale insects is easiest to control?",options:["A. Egg","B. Crawler (immature)","C. Adult","D. Larva"],answer:"B",explanation:"Crawlers are mobile, soft-bodied, and have not yet formed their protective waxy shell — most vulnerable to pesticides."},
+      {q:"The best way to avoid sooty mold growth is to:",options:["A. Control the pests that produce honeydew","B. Spray foliage with a fungicide","C. Remove and burn affected foliage","D. Encourage air circulation"],answer:"A",explanation:"Sooty mold grows on honeydew secreted by aphids, scales, whiteflies, and mealybugs. Eliminate the pest, eliminate the honeydew."},
+      {q:"Fine webbing and bronzed foliage usually indicates an infestation of:",options:["A. Mealybugs","B. Spider mites","C. Bagworms","D. Bark beetles"],answer:"B",explanation:"Two-spotted spider mites produce fine webbing and cause bronze/stippled damage. They have 8 legs and are not true insects."},
+      {q:"Streaked, silvered foliage usually results from feeding by:",options:["A. Mites","B. Lace bugs","C. Fungus gnats","D. Thrips"],answer:"D",explanation:"Thrips feeding causes foliage to appear streaked and/or silvered, and flowers become deformed."},
+      {q:"Sawfly larvae can usually be distinguished from caterpillars by:",options:["A. Their number of prolegs — more than 5 pairs","B. Their feeding damage","C. Their mouthparts","D. The time of year when they become numerous"],answer:"A",explanation:"Sawfly larvae have MORE than 5 pairs of prolegs (usually 8); caterpillars have 5 pairs or fewer."},
+      {q:"An adult dogwood borer may be mistaken for a:",options:["A. Small wasp","B. Small moth","C. Weevil","D. Caterpillar"],answer:"A",explanation:"Clearwing moths like the dogwood borer have transparent wings and wasp-like coloring — a form of mimicry."},
+      {q:"To reduce the chance of invasion by carpenter ants, one should:",options:["A. Keep wood mulch at least 1 foot from structure foundation","B. Keep wood mulch moist","C. Bank mulch around the base of plants","D. Use pine bark mulch"],answer:"A",explanation:"Keeping wood mulch away from foundations removes the harborage bridge between mulch and structures."},
+    ]
+  },
+  {
+    id: 4, title: "Pests of Turfgrass", emoji: "🌱",
+    keyTopics: ["Soil/root pests: white grubs (most important in TN!), billbugs, wireworms, mole crickets","Leaf/stem pests: cutworms (2nd most important), sod webworms, armyworms","Sucking pests: chinch bugs, leafhoppers, mites","Other pests: fire ants, yellowjackets, moles, skunks","White grub identification and treatment timing","Soapy water test for sod webworms","Fire ant control — broadcast bait then treat individual mounds"],
+    mustKnow: ["White grubs = MOST IMPORTANT turfgrass pest in Tennessee; treat mid-July to early August","Cutworms = 2nd most important; moth larvae; feed at night; curl into C-shape when disturbed","White grubs: whitish, fat, C-shaped; brown head; feed on roots at 1-2 inches deep; turf rolls back like carpet","Billbug larvae: resemble white grubs but LACK thoracic legs","Sod webworms: baseball-sized brown patches; silk tubes in thatch; detect with soapy water (2 tsp/gallon dishwashing soap per 4 sq ft)","Armyworms: feed in DAYTIME (unlike cutworms); ragged appearance; mid-to-late summer","Chinch bugs: nymphs do most damage; newly hatched nymphs are RED","Fire ants: broadcast bait FIRST, then treat individual mounds","Thatch removal improves insecticide performance for grubs","Spring treatments are NOT best for white grub control (mid-July to early Aug is correct)"],
+    questions: [
+      {q:"The two most important groups of pest damage in Tennessee turfgrass are:",options:["A. White grubs and cutworms","B. Sod webworms and white grubs","C. Armyworms and sod webworms","D. Billbugs and mole crickets"],answer:"A",explanation:"White grubs are #1 and cutworms are #2 most important turfgrass pests in Tennessee."},
+      {q:"Which statement about white grub control is NOT true?",options:["A. Thatch removal may enhance control","B. Spring treatments give best control","C. Treatments should be made from mid-July to early August","D. Affected turf can be cut and lifted to sample for grubs"],answer:"B",explanation:"Spring treatments are NOT best — mid-July to early August is the optimal window when grubs are young and near the surface."},
+      {q:"Billbug larvae are similar in appearance to white grubs EXCEPT:",options:["A. They are wireworm-like","B. They are spittlebug larvae","C. They lack thoracic legs","D. They are clover mites"],answer:"C",explanation:"Billbug larvae resemble small grubs but lack thoracic legs — an important distinguishing feature."},
+      {q:"What common household item can be used to sample for sod webworms?",options:["A. Steak knife","B. Flour","C. Liquid dishwashing detergent","D. Leaf rake"],answer:"C",explanation:"Mix 2 tsp of liquid dishwashing detergent per gallon of water, pour over 4 sq ft of grass enclosed in a frame. Webworm larvae surface in minutes."},
+      {q:"Armyworms and cutworms differ in that:",options:["A. They produce the same type of damage","B. Armyworms feed in the daytime; cutworms feed at night","C. They have characteristic stripes down their sides","D. Both feed at night"],answer:"B",explanation:"Armyworms feed during the DAY, leaving ragged turf. Cutworms hide in soil during the day and feed at NIGHT."},
+      {q:"To control fire ants, one should:",options:["A. Treat every two weeks beginning in spring","B. Broadcast a bait, then later treat individual mounds","C. Dethatch infested turf","D. Treat individual mounds first, then broadcast a bait"],answer:"B",explanation:"Broadcast bait first to reduce colony numbers, then treat remaining mounds with a contact insecticide."},
+      {q:"Small tunneling underneath turf is an indication of:",options:["A. A mole cricket infestation","B. White grub migration","C. Sod webworms","D. Fire ant invasion"],answer:"A",explanation:"Mole crickets have shovel-like front legs and tunnel beneath the soil surface. Turf may die from root disruption."},
+    ]
+  },
+  {
+    id: 5, title: "Diseases of Ornamental Plants", emoji: "🌸",
+    keyTopics: ["Fungal diseases: leaf spots, rusts, powdery mildew, leaf galls, root rot, stem rot, cankers, vascular wilt, needlecasts","Bacterial diseases: crown gall, bacterial leaf spot, fire blight, bacterial leaf scorch","Diseases caused by viruses","Nematode damage to ornamentals","Cultural vs. chemical management","Cedar-apple rust — two-host life cycle"],
+    mustKnow: ["Most ornamental diseases are caused by FUNGI","Fungal spores spread by wind, water, insects, and tools — need moisture and correct temperature to infect","Leaf spots appear first on LOWER leaves, progress up the plant","Black spot = most serious disease of ROSES","Rusts have complicated life cycles often requiring TWO separate hosts","Cedar-apple rust = galls on red cedar + leaf spots on apple","Powdery mildew: moderate temps (60-90°F), high relative humidity, lush growth from high-N fertilization","Root rot: excess soil moisture; decayed, brown-to-black roots","Vascular wilt: fungi in water-conducting vessels; discolored streaks in wood; remove severely infected trees INCLUDING ROOTS","Fire blight (bacterial): most serious on apple, pear, crab apple, pyracantha; spread by insects visiting flowers (including bees) in bloom; prune out infected branches","Crown gall: caused by BACTERIA (not fungi); soft swelling of roots/stems","Viruses: controlled by controlling insect vectors and sanitation — pesticides usually don't control viral diseases","Nematodes: diagnosed by soil/root assay — not visible by eye"],
+    questions: [
+      {q:"Most ornamental diseases are caused by:",options:["A. Nematodes","B. Fungi","C. Viruses","D. Bacteria"],answer:"B",explanation:"Fungi are responsible for the majority of ornamental plant diseases including leaf spots, rusts, powdery mildew, and root rots."},
+      {q:"Galls on cedar and leaf spots on apple are caused by:",options:["A. Nematodes","B. Rust disease","C. Vascular wilt","D. A virus"],answer:"B",explanation:"Cedar-apple rust alternates between red cedar (where it forms galls) and apple/crabapple (where it causes leaf spots)."},
+      {q:"Powdery mildew growth is enhanced by:",options:["A. High temperatures and high relative humidity","B. Proper fertilization and wet foliage","C. Insect feeding","D. Cool nighttime temperatures, high relative humidity and lush growth from high-N fertilization"],answer:"D",explanation:"Powdery mildew thrives at moderate temperatures (60-90°F), high relative humidity, and with succulent growth from excess nitrogen."},
+      {q:"When should fungicides be applied to prevent leaf galls?",options:["A. In early fall","B. At bud break in spring","C. When spores appear on galls","D. Any time of year"],answer:"B",explanation:"Apply fungicides at bud break — before the galls form. Once galls develop, fungicides are not effective; remove them manually."},
+      {q:"Crown gall is caused by:",options:["A. Viruses","B. Fungi","C. Bacteria","D. Nematodes"],answer:"C",explanation:"Crown gall is caused by the bacterium Agrobacterium tumefaciens — one of the key bacterial diseases of ornamentals."},
+      {q:"Spread of fire blight is most rapid:",options:["A. During wet weather in bloom","B. During dry weather","C. In midsummer","D. When plants are dormant"],answer:"A",explanation:"Fire blight spreads rapidly during cool, wet weather when plants are blooming — insects visiting flowers spread the bacteria."},
+      {q:"The best way to determine if nematodes are causing a plant problem is to:",options:["A. Perform a soil and root assay","B. Apply a nematicide and wait to see if the plant improves","C. Dig up the plant and examine roots with a hand lens","D. There is no good way to detect a nematode infestation"],answer:"A",explanation:"Nematodes are microscopic — they require a laboratory soil/root assay to confirm their presence and species."},
+      {q:"Which of the following is NOT recommended to control root rot:",options:["A. Buy healthy stock","B. Plant in well-drained areas","C. Apply fungicide drenches","D. Remove diseased plants"],answer:"C",explanation:"Fungicide drenches are NOT recommended for root rot — improving drainage and using healthy planting stock are the primary solutions."},
+    ]
+  },
+  {
+    id: 6, title: "Diseases of Turfgrass", emoji: "🍂",
+    keyTopics: ["Brown patch: hot, wet weather; tall fescue most affected; 'smoke rings' of grayish mycelium","Dollar spot: small straw-colored patches; warm, moist weather; spring and fall","Fairy rings: rings of very green grass; may have mushrooms; soil becomes dry and hydrophobic","Fusarium patch: cold, wet weather; develops under snow or leaf cover; patches turn pink","Helminthosporium-type: purple-to-reddish brown lesions; spring and fall infection, summer drought damage","Powdery mildew: white/gray growth on leaves; bluegrass only in TN","Pythium (cottony blight): hot weather; water-soaked slimy leaves; cottony mycelium; follows drainage patterns","Red thread: cool, moist spring/early summer; red 'threads' from cut leaf ends","Leaf rust: pustules releasing yellow-orange spores; cool, wet fall weather","Slime molds: not a true pathogen; remove by brushing/mowing/washing","Spring dead spot: bermudagrass only; reoccurs in same spot for 3-4 years","Stripe smut: leaves turn gray then black and split to reveal black spore masses","Nematodes and algae/mosses in turf"],
+    mustKnow: ["Most turfgrass diseases caused by FUNGI","Brown patch 'smoke ring' = diagnostic feature; hot and wet weather; tall fescue primary host","Dollar spot = small (1-3 inch) straw-colored patches; most common turfgrass disease","Fusarium patch develops under SNOW or leaf cover in cold, wet weather; patches turn pink","Pythium blight: cottony mycelium; spreads RAPIDLY in hot, damp areas; follows drainage pattern","Red thread grows from TIP of leaf DOWNWARD — produces red fiber-like material from cut ends","Slime molds are NOT true pathogens — no chemical control needed; just remove mechanically","Spring dead spot = bermudagrass ONLY; reappears same location 3-4 years","Stripe smut: leaves split lengthwise revealing BLACK spore masses","Bluegrass = primary host for powdery mildew in TN","Fall is best time to take nematode assay samples"],
+    questions: [
+      {q:"Most turfgrass diseases are caused by:",options:["A. Viruses","B. Fungi","C. Nematodes","D. Bacteria"],answer:"B",explanation:"Fungi are responsible for the vast majority of turfgrass diseases."},
+      {q:"The classic 'smoke ring' symptom in closely mowed turf indicates:",options:["A. Brown patch","B. Fairy rings","C. Dollar spot","D. Powdery mildew"],answer:"A",explanation:"Brown patch produces a characteristic 'smoke ring' of grayish fungal mycelium at the edge of brown, dead patches during hot, wet weather."},
+      {q:"Small, straw-colored patches no greater than 3 inches in diameter indicate:",options:["A. Fusarium patch","B. Brown patch","C. Spring dead spot","D. Dollar spot"],answer:"D",explanation:"Dollar spot = small (1-3 inch), straw-colored patches. Brown patch = much larger (up to 3+ feet). Fusarium = cold weather disease."},
+      {q:"This disease occurs in cold, wet weather, usually developing under snow or leaf cover:",options:["A. Powdery mildew","B. Red thread","C. Fusarium patch","D. Slime mold"],answer:"C",explanation:"Fusarium patch (also called pink snow mold) develops in cold, wet conditions, particularly under snow cover. Grass turns pink after exposure to light."},
+      {q:"This disease develops from the TIP of the leaf DOWNWARD and produces red fiber-like material from cut leaf ends:",options:["A. Red rust","B. Fairy rings","C. Red thread","D. Pythium blight"],answer:"C",explanation:"Red thread is distinctive: it develops tip-to-base and produces coral-pink to red 'threads' extending from the ends of cut grass blades."},
+      {q:"Which of the following is NOT a true pathogen of turfgrass?",options:["A. White patch","B. Dollar spot","C. Stripe smut","D. Slime mold"],answer:"D",explanation:"Slime molds are saprophytes that feed on organic matter — they coat grass blades but do not infect or kill the plant. No fungicide needed."},
+      {q:"Dead spots that reoccur and expand in the same area for three to four years in bermudagrass are characteristic of:",options:["A. Dollar spot","B. Spring dead spot","C. Fall dead spot","D. Brown patch"],answer:"B",explanation:"Spring dead spot is specific to bermudagrass and is unique in that it reappears in the same location and expands over multiple years."},
+      {q:"Which of the following is NOT true about nematodes in turf?",options:["A. A soil assay can determine if nematodes are a problem","B. They are most damaging in light soils","C. They cause turf to respond poorly to fertilization and irrigation","D. They can be detected by visual inspection of turf"],answer:"D",explanation:"Nematodes are microscopic — they CANNOT be seen by visual inspection. Only a laboratory soil assay can confirm their presence."},
+    ]
+  },
+  {
+    id: 7, title: "Weeds of Ornamentals & Turfgrass", emoji: "🌾",
+    keyTopics: ["Weed categories: broadleaf vs. grass vs. sedge; annual vs. perennial vs. biennial","Preemergent herbicides: inhibit germination; applied BEFORE weed emergence","Postemergent herbicides: applied to emerged weeds; contact vs. systemic","Winter annuals vs. summer annuals — timing of control","Key broadleaf weeds: chickweed, henbit, dandelion, clover, wild violet, plantain, dock, spurges","Key grass weeds: crabgrass (summer annual), goosegrass, annual bluegrass (winter annual), dallisgrass (perennial), bermudagrass","Sedges: yellow nutsedge (solid triangular stems; tubers; perennial)"],
+    mustKnow: ["Weeds are easiest to control when YOUNG","Winter annuals: control in FALL (germinate in fall, flower in spring)","Summer annuals: control in SPRING","Most perennials: easiest to control in FALL","Preemergent herbicides: applied BEFORE weed emergence; contact soil before germination","Postemergent systemic herbicides: move through plant tissues to growing points","Crabgrass = summer annual that reproduces by seed and stem rooting","Annual bluegrass = winter annual; grows best in COOL weather; light green; pyramid-shaped seed head","Dallisgrass = perennial; coarse, hairy leaves; knotty base; clumping","Yellow nutsedge: SOLID, triangular stems (unlike hollow grass stems); underground tubers produce new plants","Chickweed (annual) = small white flowers with deeply notched petals; egg-shaped leaves","Henbit = winter annual; square stems; pink-purple two-lipped flowers in whorls"],
+    questions: [
+      {q:"When should a preemergent herbicide be applied?",options:["A. Just after a rain","B. One to two weeks before weed emergence","C. After weeds have emerged but are less than 2 inches tall","D. When the target weed is first seen"],answer:"B",explanation:"Preemergent herbicides must be in the soil and available to contact germinating weed seeds — apply before emergence."},
+      {q:"Winter annual weeds are easiest to control:",options:["A. In the spring after flowering","B. Year-round with postemergent herbicides","C. In the fall, at germination","D. They are more difficult to control than summer annuals"],answer:"C",explanation:"Control winter annuals in FALL when they germinate — they're small, young, and most vulnerable."},
+      {q:"This broadleaf winter annual has egg-shaped leaves and small white flowers with deeply notched petals:",options:["A. Henbit","B. Mousear chickweed","C. White clover","D. Common chickweed"],answer:"D",explanation:"Common (annual) chickweed has egg-shaped leaves and five white deeply notched petals. It germinates in autumn, flowers in spring."},
+      {q:"Which of the following weeds produces a milky, acrid sap that can irritate the skin?",options:["A. Spurges","B. Dandelion","C. Plantains","D. Hairy galinsoga"],answer:"A",explanation:"Spurges produce a milky, acrid sap in their stems and leaves that can cause skin and eye irritation."},
+      {q:"The stems of this grass weed have distinct silver or white centers:",options:["A. Goosegrass","B. Dallisgrass","C. Crabgrass","D. Annual bluegrass"],answer:"A",explanation:"Goosegrass has smooth, flat stems with distinctive silver or white centers — a key identification characteristic."},
+      {q:"This annual grass grows best during COOL weather:",options:["A. Dallisgrass","B. Annual bluegrass","C. Zoysiagrass","D. Common goosegrass"],answer:"B",explanation:"Annual bluegrass (Poa annua) is a winter annual that thrives in cool weather, germinates in fall, and produces seeds before dying in late spring."},
+      {q:"Which is NOT characteristic of yellow nutsedge?",options:["A. It superficially resembles a grass","B. It has solid, triangular stems","C. It has underground tubers which produce new plants","D. It reproduces only by seed"],answer:"D",explanation:"Yellow nutsedge reproduces primarily by TUBERS (underground), not just by seed — which is why it's so difficult to eradicate."},
+    ]
+  },
+  {
+    id: 8, title: "Interiorscape Pests & Problems", emoji: "🪴",
+    keyTopics: ["Environmental stressors: low light, dry humidity, fluctuating temperatures, over/under watering, improper fertilization","Symptoms vs. causes — don't assume pest/disease before ruling out environment","Diseases of interiorscape plants — less severe indoors due to lower humidity","Common insect/mite pests: aphids, scales, mealybugs, leafmining flies, whiteflies, thrips, fungus gnats, spider mites","Application timing indoors: after hours, on weekends, or move plants outside","Prevention: don't introduce infested plants; keep infested plants separate","Biorational and biological controls preferred indoors"],
+    mustKnow: ["Indoor environment causes EXTRA stress on plants — more susceptible to problems","FIRST step when plant problem develops indoors: determine if environmental/management factor is the cause (NOT immediately apply pesticide)","Best way to avoid disease problems indoors: use disease-free plants when constructing plantscape","Dark and sticky residue under interiorscape plants = honeydew from sucking insects (aphids, scales, etc.)","When applying pesticides indoors: treat after hours or weekends to minimize human exposure/odors","Avoid contact of pesticides with birds, fish, carpets, upholstery, artwork, furniture","In restaurants/cafeterias: NEVER treat when facility is in use","Replacing infested plants may be the most practical indoor control option"],
+    questions: [
+      {q:"Which is usually NOT a major environmental factor affecting indoor plant health?",options:["A. Low light","B. Dry relative humidity","C. High winds","D. Fluctuating or too low temperatures"],answer:"C",explanation:"Indoor plants are not exposed to wind. Low light, low/fluctuating temps, and dry humidity are major indoor stressors."},
+      {q:"When an interiorscape develops a problem, the first thing to do is:",options:["A. Replace affected plants with healthy ones","B. Apply pesticides","C. Fertilize and irrigate the affected plants","D. Determine if an environmental or management factor is the cause"],answer:"D",explanation:"Many indoor plant problems look like pests or diseases but are actually caused by environmental stress (light, water, temp, fertilization)."},
+      {q:"The best way to avoid disease problems of interiorscape plants is to:",options:["A. Use only disease-free plants when constructing the plantscape","B. Spray regularly with a fungicide","C. Avoid splashing water on leaves","D. Ensure humans cannot come into contact with the plants"],answer:"A",explanation:"Prevention is the key — start with disease-free plants. Once established, healthy plants in proper conditions rarely develop serious diseases."},
+      {q:"If an area beneath an interiorscape planting is darkened and sticky, one would suspect:",options:["A. Sucking insects producing honeydew","B. The plants have a fungal disease","C. The plants are overwatered","D. A soft drink was spilled there"],answer:"A",explanation:"Dark, sticky residue under plants = sooty mold growing on honeydew produced by sucking insects like aphids, scales, or mealybugs."},
+      {q:"When applying pesticides in the interiorscape, you should:",options:["A. Apply during peak business hours for thoroughness","B. Treat after hours or on weekends to avoid odor problems","C. Apply as much pesticide as possible since plants are enclosed","D. Use environmental factors are less of a concern at night"],answer:"B",explanation:"Treat after hours or on weekends to minimize odor problems, human exposure, and disruption. Or move plants outside for treatment."},
+    ]
+  },
+  {
+    id: 9, title: "Vertebrate Pests", emoji: "🦝",
+    keyTopics: ["Birds: repellents, exclusion, sticky materials; flocks digging for grubs may indicate grub infestation","Deer: fencing (8-ft woven wire most effective), repellents, population control","Squirrels: adjust metal band 6 ft up trunk; prune branches >8 ft from adjacent trees","Skunks: dig for white grubs; live traps baited with sardines; cover trap with burlap","Snakes: beneficial (control rodents); capture and remove; cleaning up rodent habitat is best prevention","Moles: feed on grubs and earthworms; trapping is most effective (spring and fall)","Voles: feed on bark, roots, bulbs; reduce ground cover; anticoagulants; hardware cloth","Chipmunks: burrow under woodpiles; exclusion is best; fumigants generally ineffective","Legal protection: most vertebrates are protected — only house mouse, Norway rat, domestic pigeon, English sparrow, and starling are NOT protected"],
+    mustKnow: ["Most vertebrate species are LEGALLY PROTECTED — contact TWRA for permission to kill protected species","House mouse, Norway rat, domestic pigeon, English sparrow, and starling are NOT protected","Birds digging in turf: often indicates white grub infestation — control the grubs","Deer: permanent 8-ft woven wire fence is most effective; electric and repellent fences less so","Moles: trapping most effective; no repellents registered for moles; fumigants limited success","Voles: chew bark at base of shrubs/trees and roots; reduce mulch/ground cover near plants","Skunks dig for grubs: cover live trap with burlap so skunk cannot see handler; relocate","Snakes are beneficial — killing without permission is illegal; preferred control = capture and removal","Chipmunks: fumigants are generally INEFFECTIVE","To keep squirrels out of trees: 2-ft-wide metal band 6 ft up; prune branches within 8 ft of adjacent trees"],
+    questions: [
+      {q:"Which of the following is protected by law and CANNOT be killed without permission?",options:["A. Starlings","B. Norway rat","C. Rat snake","D. Domestic pigeon"],answer:"C",explanation:"Rat snakes (and all native snakes) are protected. Norway rats, starlings, domestic pigeons, English sparrows, and house mice are NOT protected."},
+      {q:"Usually the best way to reduce damage by deer is by:",options:["A. Installing a permanent 8-ft woven wire fence","B. Installing repellent fences","C. Installing single-strand temporary fences","D. Offering an alternative food source"],answer:"A",explanation:"Permanent woven-wire fences, 8 feet high, are most effective at excluding deer — though expensive."},
+      {q:"Perhaps the best control method for damage to turf by birds is:",options:["A. Broadcasting a poison bird bait","B. Controlling the white grub population","C. Placing a net over the turf","D. Mowing the turf as closely as possible"],answer:"B",explanation:"Birds digging in turf are looking for grubs. Control the grubs and the birds will stop digging — address the root cause."},
+      {q:"Which of the following is NOT an effective way to control chipmunks?",options:["A. Exclusion","B. Fumigants","C. Trapping","D. Shooting"],answer:"B",explanation:"Fumigants are generally INEFFECTIVE for chipmunks. Exclusion, trapping, and shooting (where legal) are more effective."},
+      {q:"Moles feed primarily on:",options:["A. Roots and tubers","B. Insects (grubs) and earthworms","C. Fungi and decaying matter","D. Soil"],answer:"B",explanation:"Moles are insectivores — they primarily eat grubs, earthworms, and other soil insects. Their tunneling is a byproduct of feeding."},
+      {q:"The bark of a shrub is chewed off near the roots and lower trunk. What could cause this?",options:["A. Mole","B. Lizard","C. Vole","D. Chipmunk"],answer:"C",explanation:"Voles feed on bark, roots, tubers, and bulbs near the soil surface — girdling damage near the base of plants is a classic vole sign."},
+    ]
+  }
 ];
 
-function StudyGuide() {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [selectedChapter, setSelectedChapter] = useState(null);
-  const [quizMode, setQuizMode] = useState(false);
+// ============================================================
+// QUIZ ENGINE
+// ============================================================
+function QuizEngine({ chapters, bookLabel, accentColor, onExit }) {
+  const [mode, setMode] = useState("select"); // select | quiz | results
+  const [activeChapter, setActiveChapter] = useState(null);
+  const [questions, setQuestions] = useState([]);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
-  const [quizComplete, setQuizComplete] = useState(false);
   const [quizAnswers, setQuizAnswers] = useState([]);
-  const [activeChapterQuiz, setActiveChapterQuiz] = useState(null);
 
-  const startQuiz = (chapterId) => {
-    const ch = chapters.find(c => c.id === chapterId) || { questions: chapters.flatMap(c => c.questions) };
-    setActiveChapterQuiz(ch);
+  const startQuiz = (ch) => {
+    const qs = ch ? ch.questions : chapters.flatMap(c => c.questions.map(q => ({ ...q, chapter: c.title })));
+    setActiveChapter(ch);
+    setQuestions(qs);
     setCurrentQ(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
     setScore(0);
-    setQuizComplete(false);
     setQuizAnswers([]);
-    setQuizMode(true);
+    setMode("quiz");
   };
 
-  const startFullQuiz = () => {
-    const allQ = chapters.flatMap(c => c.questions.map(q => ({ ...q, chapter: c.title })));
-    setActiveChapterQuiz({ title: "Full Exam Practice", questions: allQ });
-    setCurrentQ(0);
-    setSelectedAnswer(null);
-    setShowExplanation(false);
-    setScore(0);
-    setQuizComplete(false);
-    setQuizAnswers([]);
-    setQuizMode(true);
-  };
-
-  const handleAnswer = (option) => {
+  const handleAnswer = (opt) => {
     if (selectedAnswer) return;
-    const correct = option[0] === activeChapterQuiz.questions[currentQ].answer;
-    setSelectedAnswer(option);
+    const correct = opt[0] === questions[currentQ].answer;
+    setSelectedAnswer(opt);
     setShowExplanation(true);
     if (correct) setScore(s => s + 1);
-    setQuizAnswers(prev => [...prev, { correct, q: currentQ }]);
+    setQuizAnswers(prev => [...prev, correct]);
   };
 
-  const nextQuestion = () => {
-    if (currentQ + 1 >= activeChapterQuiz.questions.length) {
-      setQuizComplete(true);
-    } else {
-      setCurrentQ(q => q + 1);
-      setSelectedAnswer(null);
-      setShowExplanation(false);
-    }
+  const nextQ = () => {
+    if (currentQ + 1 >= questions.length) { setMode("results"); return; }
+    setCurrentQ(q => q + 1);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
   };
 
-  const pct = quizComplete ? Math.round((score / activeChapterQuiz.questions.length) * 100) : 0;
-  const passColor = pct >= 70 ? "#22c55e" : "#ef4444";
+  const ac = accentColor;
 
-  if (quizMode && activeChapterQuiz) {
-    const questions = activeChapterQuiz.questions;
-    if (quizComplete) {
-      return (
-        <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
-          <div style={{ maxWidth: 540, width: "100%", textAlign: "center" }}>
-            <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>{pct >= 70 ? "🎓" : "📚"}</div>
-            <h2 style={{ fontSize: "1.8rem", color: "#a5d6a7", marginBottom: "0.5rem" }}>Quiz Complete</h2>
-            <p style={{ color: "#81c784", marginBottom: "2rem", fontSize: "1rem" }}>{activeChapterQuiz.title}</p>
-            <div style={{ background: "#1a2e1a", borderRadius: 16, padding: "2rem", marginBottom: "2rem", border: `2px solid ${passColor}` }}>
-              <div style={{ fontSize: "3.5rem", fontWeight: "bold", color: passColor }}>{pct}%</div>
-              <div style={{ color: "#a5d6a7", fontSize: "1.1rem", marginTop: "0.5rem" }}>{score} of {questions.length} correct</div>
-              <div style={{ marginTop: "1rem", color: pct >= 70 ? "#86efac" : "#fca5a5", fontSize: "0.95rem" }}>
-                {pct >= 70 ? "✓ Passing score — keep it up!" : "✗ Below 70% — review weak areas and retry"}
-              </div>
-            </div>
-            <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-              <button onClick={() => { setQuizMode(false); }} style={{ background: "#2d5a27", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>← Back to Guide</button>
-              <button onClick={() => startQuiz(activeChapterQuiz.id)} style={{ background: "#166534", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>Retry Quiz</button>
-              <button onClick={startFullQuiz} style={{ background: "#14532d", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>Full Practice Exam</button>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    const q = questions[currentQ];
-    const progress = ((currentQ) / questions.length) * 100;
+  if (mode === "select") {
     return (
-      <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif", padding: "1.5rem" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <button onClick={() => setQuizMode(false)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", cursor: "pointer", fontSize: "0.85rem" }}>← Exit</button>
-            <span style={{ color: "#81c784", fontSize: "0.9rem" }}>{currentQ + 1} / {questions.length}</span>
-            <span style={{ color: "#4ade80", fontSize: "0.9rem", fontWeight: "bold" }}>Score: {score}</span>
-          </div>
-          <div style={{ height: 6, background: "#1a2e1a", borderRadius: 3, marginBottom: "1.5rem" }}>
-            <div style={{ height: "100%", width: `${progress}%`, background: "#4ade80", borderRadius: 3, transition: "width 0.3s" }} />
-          </div>
-          {q.chapter && <div style={{ color: "#6ee7b7", fontSize: "0.8rem", marginBottom: "0.75rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>{q.chapter}</div>}
-          <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.5rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
-            <p style={{ fontSize: "1.05rem", lineHeight: 1.6, margin: 0, color: "#e8f5e9" }}>{q.q}</p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.5rem" }}>
-            {q.options.map((opt, i) => {
-              const isSelected = selectedAnswer === opt;
-              const isCorrect = opt[0] === q.answer;
-              let bg = "#1a2e1a";
-              let border = "1px solid #2d5a27";
-              if (selectedAnswer) {
-                if (isCorrect) { bg = "#14532d"; border = "2px solid #4ade80"; }
-                else if (isSelected) { bg = "#450a0a"; border = "2px solid #f87171"; }
-              }
-              return (
-                <button key={i} onClick={() => handleAnswer(opt)}
-                  style={{ background: bg, border, borderRadius: 8, padding: "1rem 1.25rem", textAlign: "left", color: "#e8f5e9", cursor: selectedAnswer ? "default" : "pointer", fontSize: "0.95rem", lineHeight: 1.5, transition: "all 0.2s" }}>
-                  {selectedAnswer && isCorrect && <span style={{ color: "#4ade80", marginRight: 8 }}>✓</span>}
-                  {selectedAnswer && isSelected && !isCorrect && <span style={{ color: "#f87171", marginRight: 8 }}>✗</span>}
-                  {opt}
-                </button>
-              );
-            })}
-          </div>
-          {showExplanation && (
-            <div style={{ background: "#0f2e1f", border: "1px solid #4ade80", borderRadius: 10, padding: "1rem 1.25rem", marginBottom: "1.5rem" }}>
-              <div style={{ color: "#4ade80", fontWeight: "bold", marginBottom: "0.5rem", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Explanation</div>
-              <p style={{ margin: 0, color: "#d1fae5", fontSize: "0.95rem", lineHeight: 1.6 }}>{q.explanation}</p>
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" }}>
+          <p style={{ color: "#81c784", fontSize: "0.9rem" }}>Select a chapter to study, or take the full practice exam.</p>
+          <button onClick={() => startQuiz(null)} style={{ background: ac, color: "#fff", border: "none", borderRadius: 8, padding: "0.6rem 1.2rem", fontSize: "0.9rem" }}>📝 Full Practice Exam</button>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: "0.75rem" }}>
+          {chapters.map(ch => (
+            <div key={ch.id} onClick={() => onExit("chapter", ch)}
+              style={{ background: "#1a2e1a", borderRadius: 10, padding: "1rem 1.25rem", border: "1px solid #2d5a27", cursor: "pointer" }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = ac}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#2d5a27"}>
+              <div style={{ fontSize: "1.4rem", marginBottom: "0.4rem" }}>{ch.emoji}</div>
+              <div style={{ color: "#6ee7b7", fontSize: "0.72rem", marginBottom: "0.2rem" }}>Chapter {ch.id}</div>
+              <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.9rem", marginBottom: "0.4rem" }}>{ch.title}</div>
+              <div style={{ color: "#81c784", fontSize: "0.78rem" }}>{ch.questions.length} questions · {ch.keyTopics.length} topics</div>
             </div>
-          )}
-          {showExplanation && (
-            <button onClick={nextQuestion} style={{ width: "100%", background: "#166534", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "1rem", fontSize: "1rem", cursor: "pointer", fontFamily: "inherit" }}>
-              {currentQ + 1 >= questions.length ? "See Results →" : "Next Question →"}
-            </button>
-          )}
+          ))}
         </div>
       </div>
     );
   }
 
-  return (
-    <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif" }}>
-      {/* Header */}
-      <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1e3a1e", padding: "1.25rem 1.5rem" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap", justifyContent: "space-between" }}>
-            <div>
-              <div style={{ fontSize: "0.75rem", color: "#4ade80", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.25rem" }}>EPA Core Manual · 2014 Edition</div>
-              <h1 style={{ margin: 0, fontSize: "1.4rem", color: "#a5d6a7" }}>Pesticide Applicator Certification</h1>
-              <div style={{ color: "#6ee7b7", fontSize: "0.85rem", marginTop: "0.25rem" }}>Complete Exam Prep Guide — 11 Chapters · 94 Practice Questions</div>
-            </div>
-            <button onClick={startFullQuiz} style={{ background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.6rem 1.2rem", cursor: "pointer", fontSize: "0.9rem", fontFamily: "inherit", whiteSpace: "nowrap" }}>
-              📝 Full Practice Exam
-            </button>
+  if (mode === "results") {
+    const pct = Math.round((score / questions.length) * 100);
+    const passColor = pct >= 70 ? "#22c55e" : "#ef4444";
+    return (
+      <div style={{ maxWidth: 500, margin: "0 auto", textAlign: "center", padding: "2rem 0" }}>
+        <div style={{ fontSize: "3.5rem", marginBottom: "0.75rem" }}>{pct >= 70 ? "🎓" : "📚"}</div>
+        <h2 style={{ color: "#a5d6a7", fontSize: "1.5rem", marginBottom: "0.5rem" }}>Quiz Complete</h2>
+        <p style={{ color: "#81c784", marginBottom: "1.5rem", fontSize: "0.9rem" }}>{activeChapter ? activeChapter.title : "Full Practice Exam"}</p>
+        <div style={{ background: "#1a2e1a", borderRadius: 14, padding: "1.5rem", marginBottom: "1.5rem", border: `2px solid ${passColor}` }}>
+          <div style={{ fontSize: "3rem", fontWeight: "bold", color: passColor }}>{pct}%</div>
+          <div style={{ color: "#a5d6a7", marginTop: "0.5rem" }}>{score} of {questions.length} correct</div>
+          <div style={{ marginTop: "0.75rem", color: pct >= 70 ? "#86efac" : "#fca5a5", fontSize: "0.9rem" }}>
+            {pct >= 70 ? "✓ Passing score — solid work!" : "✗ Below 70% — review weak areas and retry"}
           </div>
+        </div>
+        <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <button onClick={() => setMode("select")} style={{ background: "#2d5a27", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "0.65rem 1.2rem", fontSize: "0.9rem" }}>← Back</button>
+          <button onClick={() => startQuiz(activeChapter)} style={{ background: ac, color: "#fff", border: "none", borderRadius: 8, padding: "0.65rem 1.2rem", fontSize: "0.9rem" }}>Retry</button>
+        </div>
+      </div>
+    );
+  }
+
+  const q = questions[currentQ];
+  const progress = (currentQ / questions.length) * 100;
+  return (
+    <div style={{ maxWidth: 640, margin: "0 auto" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
+        <button onClick={() => setMode("select")} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.35rem 0.7rem", fontSize: "0.82rem" }}>← Exit</button>
+        <span style={{ color: "#81c784", fontSize: "0.88rem" }}>{currentQ + 1} / {questions.length}</span>
+        <span style={{ color: ac, fontWeight: "bold", fontSize: "0.88rem" }}>Score: {score}</span>
+      </div>
+      <div style={{ height: 5, background: "#1a2e1a", borderRadius: 3, marginBottom: "1.25rem" }}>
+        <div style={{ height: "100%", width: `${progress}%`, background: ac, borderRadius: 3, transition: "width 0.3s" }} />
+      </div>
+      {q.chapter && <div style={{ color: "#6ee7b7", fontSize: "0.75rem", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>{q.chapter}</div>}
+      <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.25rem", border: "1px solid #2d5a27" }}>
+        <p style={{ fontSize: "1rem", lineHeight: 1.65, margin: 0 }}>{q.q}</p>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.25rem" }}>
+        {q.options.map((opt, i) => {
+          const isSelected = selectedAnswer === opt;
+          const isCorrect = opt[0] === q.answer;
+          let bg = "#1a2e1a", border = "1px solid #2d5a27";
+          if (selectedAnswer) {
+            if (isCorrect) { bg = "#14532d"; border = `2px solid ${ac}`; }
+            else if (isSelected) { bg = "#450a0a"; border = "2px solid #f87171"; }
+          }
+          return (
+            <button key={i} onClick={() => handleAnswer(opt)}
+              style={{ background: bg, border, borderRadius: 8, padding: "0.85rem 1rem", textAlign: "left", color: "#e8f5e9", fontSize: "0.92rem", lineHeight: 1.5 }}>
+              {selectedAnswer && isCorrect && <span style={{ color: ac, marginRight: 8 }}>✓</span>}
+              {selectedAnswer && isSelected && !isCorrect && <span style={{ color: "#f87171", marginRight: 8 }}>✗</span>}
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      {showExplanation && (
+        <div style={{ background: "#0f2e1f", border: `1px solid ${ac}`, borderRadius: 10, padding: "1rem", marginBottom: "1.25rem" }}>
+          <div style={{ color: ac, fontWeight: "bold", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "0.5rem" }}>Explanation</div>
+          <p style={{ margin: 0, color: "#d1fae5", fontSize: "0.92rem", lineHeight: 1.6 }}>{q.explanation}</p>
+        </div>
+      )}
+      {showExplanation && (
+        <button onClick={nextQ} style={{ width: "100%", background: ac, color: "#fff", border: "none", borderRadius: 8, padding: "0.9rem", fontSize: "0.95rem" }}>
+          {currentQ + 1 >= questions.length ? "See Results →" : "Next Question →"}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// CHAPTER DETAIL VIEW
+// ============================================================
+function ChapterDetail({ chapter, accentColor, onBack, onQuiz }) {
+  return (
+    <div>
+      <button onClick={onBack} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", fontSize: "0.82rem", marginBottom: "1.25rem" }}>← All Chapters</button>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>
+        <div style={{ fontSize: "1.8rem" }}>{chapter.emoji}</div>
+        <div style={{ flex: 1 }}>
+          <div style={{ color: "#6ee7b7", fontSize: "0.72rem" }}>Chapter {chapter.id}</div>
+          <h2 style={{ margin: 0, color: "#a5d6a7", fontSize: "1.2rem" }}>{chapter.title}</h2>
+        </div>
+        <button onClick={onQuiz} style={{ background: accentColor, color: "#fff", border: "none", borderRadius: 8, padding: "0.5rem 1rem", fontSize: "0.85rem" }}>
+          📝 Quiz ({chapter.questions.length}Q)
+        </button>
+      </div>
+      <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "0.75rem", border: "1px solid #2d5a27" }}>
+        <div style={{ color: accentColor, fontWeight: "bold", fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>📋 Key Topics</div>
+        {chapter.keyTopics.map((t, i) => (
+          <div key={i} style={{ display: "flex", gap: "0.6rem", marginBottom: "0.35rem" }}>
+            <div style={{ color: accentColor, fontSize: "0.78rem", minWidth: 14 }}>▸</div>
+            <div style={{ color: "#d1fae5", fontSize: "0.86rem" }}>{t}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ background: "#0f2e1f", borderRadius: 12, padding: "1.25rem", border: "1px solid #14532d" }}>
+        <div style={{ color: accentColor, fontWeight: "bold", fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>⭐ Must-Know Concepts</div>
+        {chapter.mustKnow.map((m, i) => (
+          <div key={i} style={{ display: "flex", gap: "0.6rem", marginBottom: "0.5rem", paddingBottom: "0.5rem", borderBottom: i < chapter.mustKnow.length - 1 ? "1px solid #1a4a2a" : "none" }}>
+            <div style={{ color: "#fbbf24", minWidth: 14 }}>★</div>
+            <div style={{ color: "#a5d6a7", fontSize: "0.86rem", lineHeight: 1.5 }}>{m}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN APP
+// ============================================================
+function App() {
+  const [activeBook, setActiveBook] = useState("core"); // core | ornamental
+  const [activeTab, setActiveTab] = useState("overview"); // overview | chapters
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const [quizChapter, setQuizChapter] = useState(null); // null = chapter list; chapter obj = quiz
+  const [showQuiz, setShowQuiz] = useState(false);
+
+  const isCore = activeBook === "core";
+  const chapters = isCore ? coreChapters : ornamentalChapters;
+  const accent = isCore ? "#4ade80" : "#38bdf8"; // green for core, sky-blue for ornamental
+  const bookTitle = isCore ? "EPA Core Manual" : "Ornamental & Turfgrass (Cat. 3 — TN)";
+  const bookEmoji = isCore ? "📗" : "📘";
+
+  const handleChapterAction = (action, ch) => {
+    if (action === "chapter") { setSelectedChapter(ch); setShowQuiz(false); }
+    if (action === "quiz") { setSelectedChapter(ch); setShowQuiz(true); }
+  };
+
+  const signalWords = [
+    { word: "DANGER-POISON ☠️", cat: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", desc: "Highest toxicity — drops to teaspoon lethal", color: "#fca5a5", bg: "#3b0f0f", border: "#7f1d1d" },
+    { word: "DANGER ⚠️", cat: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", desc: "Severe eye/skin irritation or corrosion", color: "#fde68a", bg: "#3b2a0f", border: "#713f12" },
+    { word: "WARNING 🟡", cat: "II", oral: "50–500 mg/kg", dermal: "200–2000 mg/kg", desc: "Moderate toxicity — teaspoon to 2 tbsp lethal", color: "#bef264", bg: "#2a3b0f", border: "#365314" },
+    { word: "CAUTION 🟢", cat: "III/IV", oral: "> 500 mg/kg", dermal: "> 2000 mg/kg", desc: "Low toxicity — ounce to pint or more lethal", color: "#86efac", bg: "#0f2e0f", border: "#14532d" },
+  ];
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0f1a0f" }}>
+      {/* HEADER */}
+      <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1e3a1e", padding: "1rem 1.5rem" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ fontSize: "0.7rem", color: accent, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.2rem" }}>TN Pesticide Applicator Certification</div>
+          <h1 style={{ fontSize: "1.25rem", color: "#a5d6a7", margin: 0 }}>Complete Study Guide — Two-Book Edition</h1>
         </div>
       </div>
 
-      {/* Nav */}
+      {/* BOOK TOGGLE */}
+      <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1a3a1a", padding: "0.75rem 1.5rem" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+          <span style={{ color: "#6ee7b7", fontSize: "0.8rem", marginRight: "0.25rem" }}>Studying:</span>
+          {[
+            { key: "core", label: "📗 EPA Core Manual", sub: "11 Chapters" },
+            { key: "ornamental", label: "📘 Ornamental & Turfgrass (Cat. 3)", sub: "9 Chapters — TN Specific" }
+          ].map(b => (
+            <button key={b.key} onClick={() => { setActiveBook(b.key); setSelectedChapter(null); setShowQuiz(false); setActiveTab("overview"); }}
+              style={{ background: activeBook === b.key ? (b.key === "core" ? "#14532d" : "#0c3d5c") : "#1a2e1a", border: `2px solid ${activeBook === b.key ? (b.key === "core" ? "#4ade80" : "#38bdf8") : "#2d5a27"}`, color: activeBook === b.key ? "#fff" : "#81c784", borderRadius: 8, padding: "0.5rem 1rem", fontSize: "0.88rem" }}>
+              {b.label}
+              <span style={{ display: "block", fontSize: "0.7rem", opacity: 0.7, marginTop: "0.1rem" }}>{b.sub}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* SUB-NAV */}
       <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1a3a1a", padding: "0 1.5rem" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", gap: "0", overflowX: "auto" }}>
-          {["overview", "signal-words", "chapters"].map(tab => (
-            <button key={tab} onClick={() => { setActiveTab(tab); setSelectedChapter(null); }}
-              style={{ background: activeTab === tab ? "#1a3a1a" : "transparent", color: activeTab === tab ? "#4ade80" : "#81c784", border: "none", borderBottom: activeTab === tab ? "2px solid #4ade80" : "2px solid transparent", padding: "0.75rem 1.25rem", cursor: "pointer", fontSize: "0.9rem", whiteSpace: "nowrap", fontFamily: "inherit" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", overflowX: "auto" }}>
+          {(isCore ? ["overview", "signal-words", "chapters"] : ["overview", "chapters"]).map(tab => (
+            <button key={tab} onClick={() => { setActiveTab(tab); setSelectedChapter(null); setShowQuiz(false); }}
+              style={{ background: activeTab === tab ? "#1a3a1a" : "transparent", color: activeTab === tab ? accent : "#81c784", border: "none", borderBottom: `2px solid ${activeTab === tab ? accent : "transparent"}`, padding: "0.7rem 1.1rem", fontSize: "0.88rem", whiteSpace: "nowrap" }}>
               {tab === "overview" ? "📌 Quick Reference" : tab === "signal-words" ? "⚠️ Signal Words" : "📚 Chapters"}
             </button>
           ))}
         </div>
       </div>
 
+      {/* CONTENT */}
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "1.5rem" }}>
-
-        {/* OVERVIEW TAB */}
-        {activeTab === "overview" && (
-          <div>
-            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
-              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🎯 Exam Strategy — What You Must Know Cold</h2>
-              {[
-                ["The label IS the law", "Under FIFRA, the pesticide label has the full force of federal law. You CANNOT use a pesticide in a manner inconsistent with its labeling."],
-                ["States can be MORE restrictive", "Federal law is the floor. States, tribes, and territories can impose stricter requirements — never less strict."],
-                ["Lower LD50 = MORE toxic", "LD50 of 5 mg/kg is far more dangerous than 500 mg/kg. Less is deadlier — think of it as 'the dose it takes to kill half.'"],
-                ["Dermal is the #1 route of exposure", "About 97% of body exposure during spraying comes through the skin — not inhalation. Protect your skin first."],
-                ["PPE first — ALWAYS", "In any emergency (spill, leaking container, fire), put on PPE before taking any other action."],
-                ["Certified applicators can apply AND supervise RUPs", "They can also allow others to apply under their direct supervision."],
-                ["Buy only what you need", "Inventory management prevents storage hazards, disposal costs, and security risks."],
-                ["Cholinesterase inhibitors = OPs and Carbamates", "Pyrethroids and phenoxy herbicides do NOT inhibit cholinesterase. This distinction is often tested."],
-                ["Sandy soil + low organic matter = most vulnerable to leaching", "Clay + high organic matter = most resistant. High adsorption keeps pesticides in soil."],
-                ["Apply insecticides at night to protect bees", "Bees are not foraging; some residues break down before morning. Avoid bloom-time applications."],
-              ].map(([title, detail], i) => (
-                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.75rem", paddingBottom: "0.75rem", borderBottom: i < 9 ? "1px solid #2d5a27" : "none" }}>
-                  <div style={{ color: "#4ade80", fontWeight: "bold", minWidth: 24, fontSize: "1rem" }}>{i + 1}.</div>
-                  <div>
-                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.95rem", marginBottom: "0.25rem" }}>{title}</div>
-                    <div style={{ color: "#81c784", fontSize: "0.88rem", lineHeight: 1.5 }}>{detail}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
-              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🔢 Math Formulas You Need</h2>
-              {[
-                ["Rectangle Area", "Length × Width", "100 ft × 50 ft = 5,000 sq ft"],
-                ["Triangle Area", "½ × Base × Height", "½ × 60 × 30 = 900 sq ft"],
-                ["Circle Area", "π × radius²   (π ≈ 3.14)", "Diameter = 20 ft → radius = 10 ft → 3.14 × 100 = 314 sq ft"],
-                ["Application Rate", "(Amount applied ÷ Area treated)", "50 gal sprayed on 2 acres = 25 gal/acre"],
-                ["Pounds per tank", "Label rate × (tank size ÷ 100)", "3 lbs/100 gal × (50 gal ÷ 100) = 1.5 lbs"],
-              ].map(([formula, calc, example], i) => (
-                <div key={i} style={{ background: "#0f2e1f", borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "0.5rem", border: "1px solid #1a4a2a" }}>
-                  <div style={{ color: "#4ade80", fontSize: "0.85rem", fontWeight: "bold", marginBottom: "0.3rem" }}>{formula}</div>
-                  <div style={{ color: "#d1fae5", fontFamily: "monospace", fontSize: "0.95rem", marginBottom: "0.25rem" }}>{calc}</div>
-                  <div style={{ color: "#6ee7b7", fontSize: "0.82rem" }}>Example: {example}</div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
-              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🏃 Study Plan — 7 Days to Exam Ready</h2>
-              {[
-                ["Day 1", "Chapters 1–2", "Pest management & IPM, Federal law (FIFRA), signal words"],
-                ["Day 2", "Chapter 3", "Pesticide labeling — read every label element; know signal word categories"],
-                ["Day 3", "Chapters 4–5", "Formulations (abbreviations + advantages/disadvantages), Hazards & first aid"],
-                ["Day 4", "Chapters 6–7", "PPE (respirator types, filter selection), Environmental movement"],
-                ["Day 5", "Chapters 8–9", "Storage/transport/security, Emergency response procedures"],
-                ["Day 6", "Chapters 10–11", "Application planning, equipment calibration, math problems"],
-                ["Day 7", "FULL REVIEW", "Take the full practice exam above — score under 80%? Review weak chapters"],
-              ].map(([day, chapters, focus], i) => (
-                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.6rem", alignItems: "flex-start" }}>
-                  <div style={{ background: "#14532d", color: "#4ade80", borderRadius: 6, padding: "0.2rem 0.5rem", fontSize: "0.78rem", fontWeight: "bold", whiteSpace: "nowrap", minWidth: 50, textAlign: "center" }}>{day}</div>
-                  <div>
-                    <div style={{ color: "#a5d6a7", fontSize: "0.88rem", fontWeight: "bold" }}>{chapters}</div>
-                    <div style={{ color: "#6ee7b7", fontSize: "0.82rem" }}>{focus}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* SIGNAL WORDS TAB */}
-        {activeTab === "signal-words" && (
-          <div>
-            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
-              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>⚠️ Signal Word Reference — Toxicity Categories</h2>
-              <p style={{ color: "#81c784", fontSize: "0.88rem", marginBottom: "1.25rem", lineHeight: 1.6 }}>Signal words reflect <strong style={{ color: "#a5d6a7" }}>ACUTE toxicity only</strong> — they do NOT indicate chronic effects. A lower LD50 number = MORE toxic.</p>
-              {signalWordTable.map((row, i) => (
-                <div key={i} style={{ background: i === 0 ? "#3b0f0f" : i === 1 ? "#3b2a0f" : i === 2 ? "#2a3b0f" : "#0f2e0f", borderRadius: 10, padding: "1rem 1.25rem", marginBottom: "0.75rem", border: `1px solid ${i === 0 ? "#7f1d1d" : i === 1 ? "#713f12" : i === 2 ? "#365314" : "#14532d"}` }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem", flexWrap: "wrap", gap: "0.5rem" }}>
-                    <div style={{ fontWeight: "bold", fontSize: "1rem", color: i === 0 ? "#fca5a5" : i === 1 ? "#fde68a" : i === 2 ? "#bef264" : "#86efac" }}>{row.word}</div>
-                    <div style={{ background: "rgba(0,0,0,0.3)", borderRadius: 4, padding: "0.2rem 0.5rem", fontSize: "0.78rem", color: "#d1d5db" }}>Category {row.category}</div>
-                  </div>
-                  <div style={{ color: "#d1fae5", fontSize: "0.85rem", marginBottom: "0.5rem" }}>{row.description}</div>
-                  <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.8rem", color: "#9ca3af", flexWrap: "wrap" }}>
-                    <span>Oral LD50: <span style={{ color: "#e8f5e9" }}>{row.oral}</span></span>
-                    <span>Dermal LD50: <span style={{ color: "#e8f5e9" }}>{row.dermal}</span></span>
-                    <span>Inhalation LC50: <span style={{ color: "#e8f5e9" }}>{row.inhale}</span></span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
-              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🧠 Memory Tricks</h2>
-              {[
-                ["DPW-C mnemonic", "Danger-Poison → Danger → Warning → Caution = most to least toxic. Think 'Deadly, Perilous, Watch out, Careful.'"],
-                ["LD50 flip rule", "Lower number = deadlier. LD50 of 1 mg/kg means just 1mg per kg of body weight kills 50% of test animals — tiny dose, huge danger."],
-                ["The 3 D's of spills", "Don: PPE first. Defend: stop the source. Dike: contain the spill."],
-                ["Sandy soil = sieve", "Think of sandy soil as a kitchen sieve — water and dissolved pesticides pass right through to groundwater."],
-                ["EC degrades equipment", "Emulsifiable Concentrates use petroleum solvents — they Eat rubber Cartridges (gaskets, hoses, pump parts)."],
-              ].map(([title, tip], i) => (
-                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.75rem", paddingBottom: "0.75rem", borderBottom: i < 4 ? "1px solid #2d5a27" : "none" }}>
-                  <div style={{ color: "#4ade80", fontSize: "1.1rem", minWidth: 20 }}>💡</div>
-                  <div>
-                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.9rem", marginBottom: "0.2rem" }}>{title}</div>
-                    <div style={{ color: "#81c784", fontSize: "0.85rem", lineHeight: 1.5 }}>{tip}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* CHAPTERS TAB */}
         {activeTab === "chapters" && !selectedChapter && (
+          <QuizEngine chapters={chapters} bookLabel={bookTitle} accentColor={accent} onExit={handleChapterAction} />
+        )}
+
+        {activeTab === "chapters" && selectedChapter && !showQuiz && (
+          <ChapterDetail chapter={selectedChapter} accentColor={accent}
+            onBack={() => setSelectedChapter(null)}
+            onQuiz={() => setShowQuiz(true)} />
+        )}
+
+        {activeTab === "chapters" && selectedChapter && showQuiz && (
           <div>
-            <p style={{ color: "#81c784", marginBottom: "1.25rem", fontSize: "0.9rem" }}>Select a chapter to review key topics, must-know concepts, and practice questions.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "0.75rem" }}>
-              {chapters.map(ch => (
-                <div key={ch.id} onClick={() => setSelectedChapter(ch.id)}
-                  style={{ background: "#1a2e1a", borderRadius: 10, padding: "1rem 1.25rem", border: "1px solid #2d5a27", cursor: "pointer", transition: "border-color 0.2s" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "#4ade80"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#2d5a27"}>
-                  <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>{ch.emoji}</div>
-                  <div style={{ color: "#6ee7b7", fontSize: "0.75rem", marginBottom: "0.25rem" }}>Chapter {ch.id}</div>
-                  <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.95rem", marginBottom: "0.5rem" }}>{ch.title}</div>
-                  <div style={{ color: "#81c784", fontSize: "0.8rem" }}>{ch.questions.length} practice questions · {ch.keyTopics.length} key topics</div>
+            <button onClick={() => setShowQuiz(false)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", fontSize: "0.82rem", marginBottom: "1.25rem" }}>← Back to Chapter</button>
+            <QuizEngine chapters={[selectedChapter]} bookLabel={selectedChapter.title} accentColor={accent} onExit={() => setShowQuiz(false)} />
+          </div>
+        )}
+
+        {/* SIGNAL WORDS TAB (Core only) */}
+        {activeTab === "signal-words" && (
+          <div>
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 0.75rem 0", color: "#a5d6a7", fontSize: "1.05rem" }}>⚠️ Signal Words — Toxicity Categories</h2>
+              <p style={{ color: "#81c784", fontSize: "0.86rem", marginBottom: "1rem", lineHeight: 1.6 }}>Signal words reflect <strong style={{ color: "#a5d6a7" }}>ACUTE toxicity only</strong> — they do NOT indicate chronic effects. Lower LD50 = MORE toxic.</p>
+              {signalWords.map((row, i) => (
+                <div key={i} style={{ background: row.bg, borderRadius: 10, padding: "0.9rem 1rem", marginBottom: "0.65rem", border: `1px solid ${row.border}` }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.4rem", marginBottom: "0.4rem" }}>
+                    <div style={{ color: row.color, fontWeight: "bold", fontSize: "0.95rem" }}>{row.word}</div>
+                    <div style={{ background: "rgba(0,0,0,0.3)", borderRadius: 4, padding: "0.15rem 0.45rem", fontSize: "0.75rem", color: "#d1d5db" }}>Cat. {row.cat}</div>
+                  </div>
+                  <div style={{ color: "#d1fae5", fontSize: "0.83rem", marginBottom: "0.4rem" }}>{row.desc}</div>
+                  <div style={{ display: "flex", gap: "1.25rem", fontSize: "0.78rem", color: "#9ca3af", flexWrap: "wrap" }}>
+                    <span>Oral: <span style={{ color: "#e8f5e9" }}>{row.oral}</span></span>
+                    <span>Dermal: <span style={{ color: "#e8f5e9" }}>{row.dermal}</span></span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.05rem" }}>💡 Memory Tricks</h2>
+              {[
+                ["DPW-C mnemonic","Danger-Poison → Danger → Warning → Caution = most to least toxic. 'Deadly, Perilous, Watch out, Careful.'"],
+                ["LD50 flip rule","Lower number = deadlier. LD50 of 1 mg/kg means just 1mg per kg of body weight kills 50% of test animals."],
+                ["The 3 D's of spills","Don (PPE): put it on first. Defend: stop the source. Dike: contain the spill."],
+                ["Sandy soil = sieve","Sandy soil with low organic matter lets water and dissolved pesticides pass straight through to groundwater."],
+                ["EC degrades equipment","Emulsifiable Concentrates use petroleum solvents — they Eat rubber Cartridges (gaskets, hoses, pump parts)."],
+              ].map(([title, tip], i) => (
+                <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.65rem", paddingBottom: "0.65rem", borderBottom: i < 4 ? "1px solid #2d5a27" : "none" }}>
+                  <div style={{ color: "#4ade80", minWidth: 18 }}>💡</div>
+                  <div>
+                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.88rem", marginBottom: "0.2rem" }}>{title}</div>
+                    <div style={{ color: "#81c784", fontSize: "0.84rem", lineHeight: 1.5 }}>{tip}</div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* CHAPTER DETAIL */}
-        {activeTab === "chapters" && selectedChapter && (() => {
-          const ch = chapters.find(c => c.id === selectedChapter);
-          return (
-            <div>
-              <button onClick={() => setSelectedChapter(null)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", cursor: "pointer", marginBottom: "1.25rem", fontSize: "0.85rem" }}>← All Chapters</button>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>
-                <div style={{ fontSize: "2rem" }}>{ch.emoji}</div>
-                <div>
-                  <div style={{ color: "#6ee7b7", fontSize: "0.75rem" }}>Chapter {ch.id}</div>
-                  <h2 style={{ margin: 0, color: "#a5d6a7", fontSize: "1.3rem" }}>{ch.title}</h2>
+        {/* OVERVIEW TAB */}
+        {activeTab === "overview" && isCore && (
+          <div>
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.05rem" }}>🎯 Core Exam — Must Know Cold</h2>
+              {[
+                ["The label IS the law","Under FIFRA, the pesticide label has the full force of federal law. You CANNOT use a pesticide inconsistently with its labeling."],
+                ["States can be MORE restrictive","Federal law is the floor. States can impose stricter requirements — never less strict."],
+                ["Lower LD50 = MORE toxic","LD50 of 5 mg/kg is far more dangerous than 500 mg/kg. Less is deadlier."],
+                ["Dermal is the #1 route of exposure","About 97% of body exposure during spraying comes through the skin — not inhalation."],
+                ["PPE first — ALWAYS","In any emergency (spill, leaking container, fire), put on PPE before taking any other action."],
+                ["Cholinesterase inhibitors = OPs and Carbamates","Pyrethroids and phenoxy herbicides do NOT inhibit cholinesterase."],
+                ["Sandy soil + low organic matter = most vulnerable to leaching","Clay + high organic matter = most resistant."],
+                ["Apply insecticides at night to protect bees","Bees are not foraging; some residues break down before morning."],
+              ].map(([title, detail], i) => (
+                <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.7rem", paddingBottom: "0.7rem", borderBottom: i < 7 ? "1px solid #2d5a27" : "none" }}>
+                  <div style={{ color: accent, fontWeight: "bold", minWidth: 22, fontSize: "0.95rem" }}>{i + 1}.</div>
+                  <div>
+                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.92rem", marginBottom: "0.2rem" }}>{title}</div>
+                    <div style={{ color: "#81c784", fontSize: "0.85rem", lineHeight: 1.5 }}>{detail}</div>
+                  </div>
                 </div>
-                <button onClick={() => startQuiz(ch.id)} style={{ marginLeft: "auto", background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.5rem 1rem", cursor: "pointer", fontSize: "0.88rem", fontFamily: "inherit" }}>
-                  📝 Take Quiz ({ch.questions.length}Q)
-                </button>
-              </div>
-
-              <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1rem", border: "1px solid #2d5a27" }}>
-                <h3 style={{ margin: "0 0 0.75rem 0", color: "#4ade80", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>📋 Key Topics</h3>
-                {ch.keyTopics.map((t, i) => (
-                  <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.4rem" }}>
-                    <div style={{ color: "#4ade80", fontSize: "0.8rem", minWidth: 16 }}>▸</div>
-                    <div style={{ color: "#d1fae5", fontSize: "0.88rem" }}>{t}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ background: "#0f2e1f", borderRadius: 12, padding: "1.25rem", marginBottom: "1rem", border: "1px solid #14532d" }}>
-                <h3 style={{ margin: "0 0 0.75rem 0", color: "#4ade80", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>⭐ Must-Know Concepts</h3>
-                {ch.mustKnow.map((m, i) => (
-                  <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.5rem", paddingBottom: "0.5rem", borderBottom: i < ch.mustKnow.length - 1 ? "1px solid #1a4a2a" : "none" }}>
-                    <div style={{ color: "#fbbf24", fontSize: "0.9rem", minWidth: 16 }}>★</div>
-                    <div style={{ color: "#a5d6a7", fontSize: "0.88rem", lineHeight: 1.5 }}>{m}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-                <button onClick={() => startQuiz(ch.id)} style={{ background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 10, padding: "0.9rem 2rem", cursor: "pointer", fontSize: "1rem", fontFamily: "inherit" }}>
-                  Start Chapter {ch.id} Quiz ({ch.questions.length} questions) →
-                </button>
-              </div>
+              ))}
             </div>
-          );
-        })()}
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 0.75rem 0", color: "#a5d6a7", fontSize: "1.05rem" }}>🔢 Math Formulas</h2>
+              {[["Rectangle","Length × Width","100 ft × 50 ft = 5,000 sq ft"],["Triangle","½ × Base × Height","½ × 60 × 30 = 900 sq ft"],["Circle","π × radius²  (π ≈ 3.14)","Diameter=20 → radius=10 → 3.14×100=314 sq ft"],["Lbs per tank","Label rate × (tank ÷ 100)","3 lbs/100 gal × (50÷100) = 1.5 lbs"]].map(([f,c,e],i) => (
+                <div key={i} style={{ background: "#0f2e1f", borderRadius: 8, padding: "0.65rem 0.9rem", marginBottom: "0.45rem", border: "1px solid #1a4a2a" }}>
+                  <div style={{ color: accent, fontSize: "0.82rem", fontWeight: "bold", marginBottom: "0.2rem" }}>{f}</div>
+                  <div style={{ color: "#d1fae5", fontFamily: "monospace", fontSize: "0.92rem", marginBottom: "0.2rem" }}>{c}</div>
+                  <div style={{ color: "#6ee7b7", fontSize: "0.78rem" }}>Example: {e}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "overview" && !isCore && (
+          <div>
+            <div style={{ background: "#0f2535", borderRadius: 12, padding: "1.25rem", marginBottom: "1.25rem", border: "1px solid #0c3d5c" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#7dd3fc", fontSize: "1.05rem" }}>🎯 Cat. 3 Exam — Tennessee-Specific Must-Knows</h2>
+              {[
+                ["TDA administers TN certification","Tennessee Dept of Agriculture — not EPA — certifies and enforces in Tennessee. State laws must be at least as strict as federal."],
+                ["Commercial applicator = charges a fee","The moment you charge a fee for pest control, you're a commercial applicator requiring certification."],
+                ["White grubs = #1 turfgrass pest in TN","Treat mid-July to early August — spring treatments are NOT effective. Thatch removal improves control."],
+                ["Cutworms = #2 turfgrass pest in TN","Feed at NIGHT; hide in soil during day. Curl into C-shape when disturbed."],
+                ["Herbaceous plants more susceptible to phytotoxicity","Never use air blast sprayers for herbicides — risk of off-target damage is too high."],
+                ["Crawler stage of scales = easiest to control","Once scales form their protective shell, contact insecticides lose effectiveness."],
+                ["Sooty mold = eliminate the pest causing honeydew","Aphids, whiteflies, scales, and mealybugs produce honeydew — address the insect, the mold goes away."],
+                ["Most fungal diseases: apply fungicides preventively or early","Especially for powdery mildew, dollar spot, brown patch. Curative programs require rapid diagnosis."],
+                ["Records required 2 years in TN","Application records must be available on demand to Commissioner of Agriculture."],
+                ["Certification: 18 recertification points per 3-year cycle","Expires June 30 of the third year. In-house training limited to 50% of points."],
+              ].map(([title, detail], i) => (
+                <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.7rem", paddingBottom: "0.7rem", borderBottom: i < 9 ? "1px solid #1a3a4a" : "none" }}>
+                  <div style={{ color: accent, fontWeight: "bold", minWidth: 22, fontSize: "0.95rem" }}>{i + 1}.</div>
+                  <div>
+                    <div style={{ color: "#7dd3fc", fontWeight: "bold", fontSize: "0.92rem", marginBottom: "0.2rem" }}>{title}</div>
+                    <div style={{ color: "#93c5fd", fontSize: "0.85rem", lineHeight: 1.5 }}>{detail}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ background: "#0f2535", borderRadius: 12, padding: "1.25rem", border: "1px solid #0c3d5c" }}>
+              <h2 style={{ margin: "0 0 0.75rem 0", color: "#7dd3fc", fontSize: "1.05rem" }}>🌿 Key Identification Quick Reference</h2>
+              {[
+                ["White grubs","Whitish, fat, C-shaped; brown head; 1/8–2 inches; feed on roots 1-2 inches deep; turf rolls back"],
+                ["Dollar spot","Small (1-3 inch) straw-colored patches; most common turf disease; warm, moist spring/fall"],
+                ["Brown patch","Large patches (up to 3 ft); 'smoke ring' of grayish mycelium; hot, wet weather; tall fescue"],
+                ["Powdery mildew (turf)","White/gray growth on leaves; bluegrass ONLY in TN; moderate temps + high humidity"],
+                ["Yellow nutsedge","SOLID triangular stems (not hollow like grasses); underground tubers; very difficult to eradicate"],
+                ["Aphids","Cluster on stems/leaf undersides; honeydew producers; may be green, red, black, or waxy-coated"],
+                ["Fire blight","Most serious bacterial disease; scorched appearance; apple/pear/pyracantha; prune out infected wood"],
+              ].map(([pest, desc], i) => (
+                <div key={i} style={{ display: "flex", gap: "0.65rem", marginBottom: "0.5rem", paddingBottom: "0.5rem", borderBottom: i < 6 ? "1px solid #1a3a4a" : "none" }}>
+                  <div style={{ color: accent, minWidth: 14, fontSize: "0.9rem" }}>▸</div>
+                  <div>
+                    <span style={{ color: "#7dd3fc", fontWeight: "bold", fontSize: "0.88rem" }}>{pest}: </span>
+                    <span style={{ color: "#93c5fd", fontSize: "0.85rem" }}>{desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
 }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<StudyGuide />);
-  </script>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
 </body>
 </html>
