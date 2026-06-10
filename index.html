@@ -298,10 +298,12 @@ const ornamentalChapters = [
 // ============================================================
 // QUIZ ENGINE
 // ============================================================
-function QuizEngine({ chapters, bookLabel, accentColor, onExit }) {
-  const [mode, setMode] = useState("select"); // select | quiz | results
-  const [activeChapter, setActiveChapter] = useState(null);
-  const [questions, setQuestions] = useState([]);
+function QuizEngine({ chapters, bookLabel, accentColor, onExit, autoStart }) {
+  const autoChapter = (autoStart && chapters.length === 1) ? chapters[0] : null;
+  const initQuestions = autoChapter ? autoChapter.questions : [];
+  const [mode, setMode] = useState(autoChapter ? "quiz" : "select");
+  const [activeChapter, setActiveChapter] = useState(autoChapter);
+  const [questions, setQuestions] = useState(initQuestions);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -558,7 +560,7 @@ function App() {
         {activeTab === "chapters" && selectedChapter && showQuiz && (
           <div>
             <button onClick={() => setShowQuiz(false)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", fontSize: "0.82rem", marginBottom: "1.25rem" }}>← Back to Chapter</button>
-            <QuizEngine chapters={[selectedChapter]} bookLabel={selectedChapter.title} accentColor={accent} onExit={() => setShowQuiz(false)} />
+            <QuizEngine chapters={[selectedChapter]} bookLabel={selectedChapter.title} accentColor={accent} onExit={() => setShowQuiz(false)} autoStart={true} />
           </div>
         )}
 
