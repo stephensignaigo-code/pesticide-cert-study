@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesticide Applicator Cert — Study Guide</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0f1a0f; color: #e8f5e9; font-family: Georgia, serif; }
+    ::-webkit-scrollbar { width: 6px; } 
+    ::-webkit-scrollbar-track { background: #0f1a0f; }
+    ::-webkit-scrollbar-thumb { background: #2d5a27; border-radius: 3px; }
+    button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+const { useState } = React;
+
+const chapters = [
+  {
+    id: 1,
+    title: "Pest Management",
+    emoji: "🐛",
+    keyTopics: [
+      "Pest recognition and identification methods",
+      "6 pest management methods: Biological, Chemical, Cultural, Genetic, Mechanical/Physical, Regulatory",
+      "Integrated Pest Management (IPM) — core concept",
+      "IPM goals: Prevention, Suppression, Eradication",
+      "Action thresholds / economic thresholds",
+      "Why pesticide applications fail (resistance, timing, wrong product)",
+      "Pesticide resistance — how it develops and how to avoid it",
+    ],
+    mustKnow: [
+      "IPM combines multiple methods — chemical is a last resort, not a first choice",
+      "Action threshold = the pest population level at which control action becomes necessary",
+      "Resistance develops faster with: short generation times, high reproduction rates, same chemical class used repeatedly",
+      "Prevention strategies reduce establishment, reproduction, and survival of pests",
+    ],
+    questions: [
+      { q: "Using barriers to prevent pests from entering an area is an example of which pest management method?", options: ["A. Biological", "B. Mechanical", "C. Genetic"], answer: "B", explanation: "Physical/mechanical controls include barriers, traps, and exclusion devices." },
+      { q: "Using plant varieties naturally resistant to insect feeding is which type of pest management?", options: ["A. Biological", "B. Genetic", "C. Regulatory"], answer: "B", explanation: "Genetic control uses naturally resistant or selectively bred plant varieties." },
+      { q: "Which statement about biological control is true?", options: ["A. Modifying the environment to enhance natural enemies is recommended", "B. It involves importing exotic pests to control natural enemies", "C. Using many cultural practices and pesticides works best"], answer: "A", explanation: "Biological control uses natural enemies (predators, parasites, pathogens) and enhancing their environment." },
+      { q: "Sealing cracks and crevices in buildings is an example of which pest management method?", options: ["A. Physical", "B. Genetic", "C. Biological"], answer: "A", explanation: "Sealing entry points is a mechanical/physical exclusion technique." },
+      { q: "Monitoring pests at airports and ocean ports is an example of which method?", options: ["A. Regulatory", "B. Genetic", "C. Biological"], answer: "A", explanation: "Regulatory control includes quarantine, inspection, and monitoring at ports of entry." },
+      { q: "Which statement about IPM strategies is true?", options: ["A. The goal is to prevent pests from reaching damaging levels", "B. Eradication is never the goal of IPM", "C. Nonchemical methods are short-term solutions"], answer: "A", explanation: "IPM aims to keep pest populations below damaging levels using the most economical means with least risk." },
+      { q: "Which would INCREASE the likelihood of pesticide resistance?", options: ["A. An insect with one generation per year", "B. Continual use of pesticides from the same chemical class", "C. Applying a pesticide with little residual effect"], answer: "B", explanation: "Rotating chemical classes is the primary strategy to prevent resistance development." },
+      { q: "Which is a PREVENTIVE pest management strategy?", options: ["A. Planting weed- and disease-free seed", "B. Releasing natural enemies to reduce pest populations", "C. Removing a pest that is a public health concern from an area"], answer: "A", explanation: "Prevention keeps pests from establishing; B is suppression; C is eradication." },
+      { q: "Which statement about action thresholds is true?", options: ["A. Control measures should be implemented BELOW the action threshold", "B. The action threshold may be set at zero pest population density", "C. In urban landscapes, thresholds are usually related to economics more than aesthetics"], answer: "B", explanation: "For some pests (e.g., cockroaches in food facilities), even one pest triggers action — zero tolerance threshold." },
+    ]
+  },
+  {
+    id: 2,
+    title: "Federal Pesticide Laws & Regulations",
+    emoji: "⚖️",
+    keyTopics: [
+      "FIFRA — Federal Insecticide, Fungicide, and Rodenticide Act (primary law)",
+      "Pesticide registration process with EPA",
+      "Tolerances — legal limits of residue on food",
+      "Restricted-Use Pesticides (RUPs) — only certified applicators",
+      "Worker Protection Standard (WPS) — 40 CFR Part 170",
+      "Certification of Pesticide Applicators — 40 CFR Part 171",
+      "Violations and penalties (civil and criminal)",
+      "Recordkeeping requirements",
+      "Food Quality Protection Act (FQPA)",
+      "Endangered Species Act and pesticide use",
+    ],
+    mustKnow: [
+      "The pesticide label IS the law — it has the force of law under FIFRA",
+      "States CAN be MORE restrictive than federal law, but not less restrictive",
+      "Certified applicators can apply AND supervise application of RUPs",
+      "Altering, defacing, or destroying a label is a federal violation",
+      "RUPs are restricted because of hazard to applicator or environment",
+      "Tolerances = maximum legal pesticide residue allowed on food",
+    ],
+    questions: [
+      { q: "Which statement about FIFRA is FALSE?", options: ["A. It provides the overall framework for federal pesticide regulation", "B. It PREVENTS states from creating laws more stringent than federal regulations", "C. It allows applicators to deviate from the label under specific situations"], answer: "B", explanation: "States CAN create MORE stringent regulations than federal law — FIFRA sets a floor, not a ceiling." },
+      { q: "Under federal law, which statement about certified applicators is true?", options: ["A. They may apply and/or supervise application of restricted-use pesticides", "B. They must receive supplemental training before mixing RUPs", "C. They are exempt from obtaining county bulletins for endangered species"], answer: "A", explanation: "Certified applicators are legally authorized to purchase, use, and supervise the use of RUPs." },
+      { q: "What is the purpose of the pesticide registration process?", options: ["A. To control the flow of new products entering the marketplace", "B. To provide evidence the pesticide will not cause unreasonable risks", "C. To ensure zero pesticide residue remains on food crops"], answer: "B", explanation: "EPA reviews toxicity, efficacy, environmental impact, and residue data before registration." },
+      { q: "Which statement about federal pesticide regulation is true?", options: ["A. Civil penalties are typically assessed against first-time violators to ensure future compliance", "B. Devices used to control pests must also be registered with EPA", "C. Approved pesticide labels have the force of law"], answer: "C", explanation: "This is the most fundamental concept: the label is the law under FIFRA." },
+      { q: "Which criteria does EPA use to establish pesticide tolerances?", options: ["A. Research data completely independent of the manufacturer's", "B. The anticipated volume of product to be sold", "C. The toxicity of the pesticide and its breakdown products"], answer: "C", explanation: "EPA considers toxicity, dietary exposure, cumulative risk, and special sensitivity of children." },
+      { q: "Which action is unlawful and subject to civil or criminal penalties?", options: ["A. Allowing a person under certified applicator supervision to apply RUPs", "B. Detaching, altering, defacing, or destroying any part of a container or label", "C. Keeping inadequate records of employee training"], answer: "B", explanation: "Tampering with labels is a direct FIFRA violation — the label is a legal document." },
+      { q: "Which federal regulation requires employee training in pesticide use?", options: ["A. Worker Protection Standard", "B. Pesticide Container and Containment Regulation", "C. Food Quality Protection Act"], answer: "A", explanation: "WPS (40 CFR Part 170) requires training for agricultural workers and pesticide handlers." },
+    ]
+  },
+  {
+    id: 3,
+    title: "Pesticide Labeling",
+    emoji: "🏷️",
+    keyTopics: [
+      "Required label elements (trade name, active ingredient, signal word, EPA reg number, etc.)",
+      "Signal words: DANGER-POISON, DANGER, WARNING, CAUTION",
+      "Precautionary statements (routes of entry, specific actions, PPE)",
+      "First aid statements — mandatory vs. advisory",
+      "Environmental hazards section",
+      "Restricted-entry intervals (REI)",
+      "Directions for use — must follow exactly",
+      "Storage and disposal instructions",
+      "Safety Data Sheets (SDS) — who provides them",
+      "Minimum risk pesticides (Section 25(b)) — exempt from registration",
+    ],
+    mustKnow: [
+      "Signal word indicates ACUTE toxicity to humans — higher toxicity = stronger signal word",
+      "DANGER-POISON (skull & crossbones) = highest toxicity (Category I)",
+      "DANGER (without skull & crossbones) = severe eye/skin irritation or corrosion",
+      "WARNING = moderate toxicity (Category II) — LD50 50-500 mg/kg oral",
+      "CAUTION = low toxicity (Category III/IV)",
+      "SDS is provided by the MANUFACTURER, not EPA or OSHA",
+      "Read the label BEFORE purchasing, mixing, applying, storing, and disposing",
+      "Mandatory statements must be followed; advisory statements are recommendations",
+    ],
+    questions: [
+      { q: "Which group of pesticides is exempt from registration because it poses little or no risk?", options: ["A. Restricted use", "B. Minimum risk", "C. Special local need"], answer: "B", explanation: "Section 25(b) 'minimum risk' pesticides (like certain essential oils) are exempt from FIFRA registration." },
+      { q: "What does the term 'Cyfluthrin' represent in a chemical name like 'β-Cyfluthrin...'?", options: ["A. The brand name", "B. The chemical name", "C. The common name"], answer: "C", explanation: "Common names are simpler, standardized names for active ingredients; chemical names are the full IUPAC designation." },
+      { q: "Which statement about label names and ingredients is true?", options: ["A. Both active and inert ingredients must be listed by chemical name", "B. Various manufacturers may use different trade names for products with the same active ingredient", "C. Common names are officially accepted by the manufacturer"], answer: "B", explanation: "Many products can share the same active ingredient but have different trade names (e.g., multiple permethrin products)." },
+      { q: "What is the purpose of the signal word?", options: ["A. Indicates the product's relative ACUTE toxicity to humans", "B. Informs the user what PPE to wear", "C. Tells the user what first aid to seek"], answer: "A", explanation: "Signal words reflect acute toxicity category — they do not indicate chronic effects." },
+      { q: "'Extremely hazardous by skin contact — rapidly absorbed through the skin' would carry which signal word?", options: ["A. DANGER", "B. WARNING", "C. CAUTION"], answer: "A", explanation: "Rapid skin absorption with extreme hazard indicates highest toxicity category requiring DANGER." },
+      { q: "'Do not breathe vapors or spray mist' is an example of:", options: ["A. Specific action statement", "B. Statement of practical treatment", "C. Routes of entry statement"], answer: "A", explanation: "Specific action statements tell you what NOT to do to avoid exposure. Routes of entry statements describe HOW pesticides enter the body." },
+      { q: "Directions for mixing and loading are usually found under:", options: ["A. Directions for use", "B. Environmental hazards", "C. Precautionary statements"], answer: "A", explanation: "The 'Directions for Use' section contains mixing, application rates, timing, and safety instructions." },
+      { q: "'If swallowed, call a doctor' is what kind of statement?", options: ["A. Routes of entry", "B. Advisory", "C. Mandatory"], answer: "C", explanation: "First aid statements on labels are mandatory — you MUST follow them. Advisory statements use 'should' language." },
+      { q: "Who is responsible for developing Safety Data Sheets (SDS) for pesticides?", options: ["A. EPA", "B. OSHA", "C. The product manufacturer"], answer: "C", explanation: "Manufacturers create SDS; OSHA requires them to be available; EPA approves the pesticide label separately." },
+    ]
+  },
+  {
+    id: 4,
+    title: "Pesticide Formulations",
+    emoji: "🧪",
+    keyTopics: [
+      "Liquid formulations: EC, Solutions (RTU, Concentrate, Liquid Bait), ULV, Flowables, Aerosols",
+      "Dry/solid formulations: Dusts (D), Granules (G), Pellets (P), Wettable Powders (WP), WDG/DF, Soluble Powders (SP), Baits (B)",
+      "Other: Fumigants, Microencapsulated (M), Water-Soluble Bags (WSB)",
+      "Adjuvants: surfactants, buffers, stickers, extenders, thickeners",
+      "Label abbreviations: EC, WP, WDG, G, SP, RTU, ULV, M",
+    ],
+    mustKnow: [
+      "EC (Emulsifiable Concentrate) — oil-based, mixes with water; can degrade rubber/plastic parts",
+      "ULV — may approach 100% active ingredient; very concentrated",
+      "WP (Wettable Powder) — requires constant agitation; inhalation risk when mixing",
+      "WDG/DF — like WP but granular; LESS inhalation risk than WP",
+      "Granules (G) — used on/in soil; minimal drift; low applicator exposure",
+      "Microencapsulated (M) — slow release; longer residual; BEE HAZARD (bees can collect capsules)",
+      "Fumigants — gas form; penetrates enclosed spaces; highest inhalation risk",
+      "Surfactant = the most common adjuvant; reduces surface tension",
+      "'5G' on a label = 5% active ingredient in granule form",
+    ],
+    questions: [
+      { q: "The name 'X-Pest 5G' on a label indicates:", options: ["A. Granular pesticide with 5% active ingredient", "B. Granular pesticide with 5% inert ingredients", "C. Gel pesticide with 5% active ingredient"], answer: "A", explanation: "G = Granule; the number indicates the percentage of active ingredient." },
+      { q: "Which formulation process disperses solid particles in a liquid?", options: ["A. Emulsion", "B. Solution", "C. Suspension"], answer: "C", explanation: "Suspensions (like WP mixed in water) have solid particles dispersed but not dissolved. Solutions are fully dissolved." },
+      { q: "Which liquid formulation has a small amount of active ingredient (often 1% or less)?", options: ["A. Microencapsulated (M)", "B. Ready-to-use (RTU) solution", "C. Ultra-low volume (ULV)"], answer: "B", explanation: "RTU products are pre-diluted for direct use — very low concentration, no further mixing needed." },
+      { q: "Which liquid formulation may approach 100% active ingredient?", options: ["A. Aerosol (A)", "B. Emulsifiable concentrate (EC)", "C. Ultra-low volume (ULV)"], answer: "C", explanation: "ULV formulations are nearly pure active ingredient applied in tiny volumes — handle with extreme care." },
+      { q: "Which is a disadvantage of BOTH EC and ULV formulations?", options: ["A. Difficult to handle, transport, and store", "B. Require constant agitation to stay in suspension", "C. Solvents may cause rubber or plastic parts to deteriorate"], answer: "C", explanation: "EC and ULV both use petroleum-based solvents that can degrade rubber gaskets, hoses, and pump parts." },
+      { q: "Which dry formulation is mixed in water and REDUCES inhalation risk during mixing?", options: ["A. Soluble powder (SP)", "B. Water-dispersible granule (WDG) or dry flowable (DF)", "C. Wettable powder (WP)"], answer: "B", explanation: "WDG/DF are granular so they produce less dust than WP — lower inhalation hazard when measured and poured." },
+      { q: "Which dry pesticide formulation has particles of the SAME weight and shape?", options: ["A. Bait", "B. Granule", "C. Pellet"], answer: "C", explanation: "Pellets are uniform in size and shape (like a cylinder or sphere); granules are irregular mineral particles." },
+      { q: "Which is an advantage of microencapsulated pesticides?", options: ["A. Delayed/slow release prolongs effectiveness", "B. Pesticidal activity is independent of weather", "C. They require only short restricted-entry intervals"], answer: "A", explanation: "Microencapsulation creates a timed-release effect, extending residual activity." },
+      { q: "Which adjuvant functions as a wetting agent and spreader?", options: ["A. Buffer", "B. Extender", "C. Surfactant"], answer: "C", explanation: "Surfactants (surface-active agents) reduce surface tension, improving coverage and penetration." },
+      { q: "Which adjuvant INCREASES the viscosity of spray mixtures?", options: ["A. Sticker", "B. Extender", "C. Thickener"], answer: "C", explanation: "Thickeners increase spray viscosity to reduce drift of fine droplets. Stickers improve adhesion to plant surfaces." },
+    ]
+  },
+  {
+    id: 5,
+    title: "Pesticide Hazards & First Aid",
+    emoji: "⚠️",
+    keyTopics: [
+      "Toxicity vs. Exposure vs. Hazard (know the difference!)",
+      "LD50 and LC50 — what they mean and how to interpret them",
+      "Routes of exposure: Dermal (most common), Ocular, Inhalation, Oral",
+      "Acute vs. Chronic toxicity",
+      "Cholinesterase inhibition (organophosphates and carbamates)",
+      "First aid by route of exposure",
+      "Heat stress — symptoms and response",
+      "Signal words and toxicity categories",
+    ],
+    mustKnow: [
+      "HAZARD = Toxicity × Exposure (reduce either to reduce hazard)",
+      "Dermal exposure is the MOST COMMON route during application (97% of body exposure in spraying)",
+      "LOWER LD50 = MORE toxic (e.g., LD50 of 5 mg/kg is more toxic than LD50 of 500 mg/kg)",
+      "Organophosphates and carbamates inhibit cholinesterase — can monitor blood cholinesterase levels",
+      "First aid for skin: remove clothing, wash with soap and water",
+      "First aid for eyes: flush with clean water for 15-20 minutes, hold eye open",
+      "First aid for inhalation: move to fresh air IMMEDIATELY",
+      "First aid for ingestion: call Poison Control (1-800-222-1222), follow label",
+      "Heatstroke sign: NO sweating (dry skin) — medical emergency",
+    ],
+    questions: [
+      { q: "The capacity of a pesticide to cause injury is referred to as its:", options: ["A. Toxicity", "B. Exposure", "C. Hazard"], answer: "A", explanation: "Toxicity = inherent capacity to cause harm. Hazard = risk when exposure is considered. Exposure = amount of contact." },
+      { q: "Which statement about harmful effects of pesticides is FALSE?", options: ["A. The most common form of pesticide injury is by inhalation", "B. Asthma-like symptoms may be caused by pesticide allergies", "C. Many herbicides and fungicides cause dermatitis"], answer: "A", explanation: "Dermal (skin) exposure is the MOST COMMON route — not inhalation. Studies show skin accounts for ~97% of exposure during spraying." },
+      { q: "Which signal word is associated with very low oral LD50 values (most toxic)?", options: ["A. DANGER-POISON", "B. WARNING", "C. CAUTION"], answer: "A", explanation: "DANGER-POISON with skull & crossbones = Category I, LD50 less than 50 mg/kg — the most acutely toxic." },
+      { q: "A pesticide with an oral LD50 of 5 mg/kg vs. one with 250 mg/kg — which is more toxic?", options: ["A. LD50 of 5 mg/kg is more toxic", "B. LD50 of 250 mg/kg is more toxic", "C. They are equally toxic"], answer: "A", explanation: "LOWER LD50 = MORE toxic. A smaller dose is lethal — think of it as 'less is deadlier.'" },
+      { q: "For which pesticide class might cholinesterase monitoring be appropriate?", options: ["A. Organophosphate and carbamate insecticides", "B. Pyrethroids", "C. Phenoxy herbicides like 2,4-D"], answer: "A", explanation: "OPs and carbamates inhibit acetylcholinesterase, causing nerve signal accumulation. Blood tests can track exposure levels." },
+      { q: "Which statement about pesticide routes of exposure is true?", options: ["A. About 97% of body exposure during spraying is by inhalation", "B. Eating/drinking without handwashing likely transfers pesticide to your mouth", "C. Palms and forearms absorb pesticides more quickly than scalp and forehead"], answer: "B", explanation: "The scalp, forehead, and ear canal actually absorb pesticides faster than forearms. Handwashing before eating is critical." },
+      { q: "Which statement about first aid for EYE exposure is FALSE?", options: ["A. Hold the eye open and immediately begin gently washing it", "B. Drip water directly into the eye", "C. Flush under the eyelid with water to remove debris"], answer: "B", explanation: "You should use a gentle stream of water — not drip or pour forcefully. Flush for 15-20 minutes, holding the eye open." },
+      { q: "What is the FIRST thing to do for inhalation exposure?", options: ["A. Get the victim to fresh air", "B. Administer artificial respiration", "C. Have the victim lie down and loosen clothing"], answer: "A", explanation: "Always move the victim away from the source first. Only then assess if artificial respiration is needed." },
+      { q: "Which statement about heat stress is true?", options: ["A. Wearing extra PPE prevents heat stress", "B. Constricted pupils are a symptom of heatstroke", "C. Lack of sweating is a symptom of heatstroke"], answer: "C", explanation: "Heatstroke (the most severe form) is marked by DRY, hot skin — the body's cooling system has failed. Medical emergency." },
+    ]
+  },
+  {
+    id: 6,
+    title: "Personal Protective Equipment (PPE)",
+    emoji: "🥽",
+    keyTopics: [
+      "Types of PPE: body protection, eye protection, respiratory protection, footwear, gloves",
+      "How to select the right glove material based on formulation solvents",
+      "Respirator types: air-purifying vs. supplied-air",
+      "Particulate filters: N-series (no oil), R-series (resistant), P-series (oil-proof)",
+      "Chemical cartridges and canisters",
+      "Fit testing (qualitative) vs. seal check (user seal check)",
+      "PPE maintenance, cleaning, and disposal",
+      "Label determines minimum PPE required",
+    ],
+    mustKnow: [
+      "The LABEL specifies minimum PPE — always check it first",
+      "Different PPE may be required for handlers vs. early-entry workers",
+      "Glove type is determined by the SOLVENT in the formulation, not the active ingredient",
+      "Replace chemical cartridges at the END OF EACH WORKDAY if no change-out schedule exists",
+      "Use P-series filters when oil may be present",
+      "Fit TEST = done by trained professional; Seal CHECK = done by wearer each time before use",
+      "Work clothes soaked with pesticide concentrate should be DISPOSED OF, not washed",
+      "Wash work clothes AFTER EACH DAY of use",
+      "NIOSH approves respirators — only use NIOSH-approved respirators",
+    ],
+    questions: [
+      { q: "Which statement about PPE requirements on the label is true?", options: ["A. A label may have different PPE requirements for handlers vs. early-entry workers", "B. You are not required to wear all PPE listed on the label", "C. Wearing label-required PPE eliminates exposure to pesticides"], answer: "A", explanation: "WPS distinguishes handlers (who apply) from early-entry workers (who enter treated areas) — different exposures, different requirements." },
+      { q: "Which part of the product formulation determines the required glove type?", options: ["A. Active ingredient", "B. Surfactants", "C. Solvents"], answer: "C", explanation: "The solvent determines glove permeability. Petroleum solvents can penetrate some glove materials — check compatibility charts." },
+      { q: "When should chemical cartridges be replaced if no manufacturer schedule exists?", options: ["A. At the end of each season", "B. After one week of use", "C. At the end of each workday"], answer: "C", explanation: "Without a manufacturer change-out schedule, replace at end of each workday — don't reuse saturated cartridges." },
+      { q: "When oil may be present, which particulate filter must be used?", options: ["A. N-series", "B. P-series", "C. Dust mask"], answer: "B", explanation: "N = Not oil resistant; R = oil Resistant (time-limited); P = oil Proof (P100 = 99.97% efficient)." },
+      { q: "How do air-purifying respirators protect applicators?", options: ["A. Filtering and/or absorbing the pesticide", "B. Breaking down the pesticide", "C. Neutralizing the pesticide"], answer: "A", explanation: "APRs use filters for particles and chemical cartridges for vapors/gases — they physically trap or absorb contaminants." },
+      { q: "When should you do a qualitative fit test?", options: ["A. Every five years", "B. Semiannually", "C. If you have a significant change in weight"], answer: "C", explanation: "Also required annually and when respirator model changes. Significant weight change (±10 lbs) can change facial contours and fit." },
+      { q: "Every time you wear a tight-fitting respirator, you should first:", options: ["A. Perform seal check(s)", "B. Do a qualitative fit test", "C. Apply Vaseline to edges to enhance the seal"], answer: "A", explanation: "Seal checks are done by the wearer each use. Fit tests are done by a professional periodically. Never use Vaseline — it damages respirator materials." },
+      { q: "Which statement about washing work clothes soaked with pesticide concentrate is true?", options: ["A. Use cold water and one wash cycle", "B. Wash separately from other laundry", "C. Do not attempt to wash — dispose of it immediately"], answer: "C", explanation: "Clothing soaked with concentrate cannot be adequately decontaminated by laundering — it must be discarded as pesticide waste." },
+      { q: "When should work clothes worn to apply pesticides be laundered?", options: ["A. After each day's use", "B. After they get wet with spray", "C. When they have a strong odor like the pesticide"], answer: "A", explanation: "Launder after each day of use — don't wait for visible contamination or odor. Pesticide residues may not be visible or smell obvious." },
+    ]
+  },
+  {
+    id: 7,
+    title: "Pesticides in the Environment",
+    emoji: "🌍",
+    keyTopics: [
+      "Pesticide characteristics: solubility, adsorption, persistence, volatility",
+      "Pesticide breakdown: chemical, biological, photodegradation",
+      "Movement in air (drift), water (runoff, leaching), and on objects",
+      "Spray drift — droplet size, temperature inversions, vapor drift",
+      "Surface water contamination sources",
+      "Groundwater contamination — leaching factors",
+      "Preventing contamination — best management practices",
+      "Sensitive areas and nontarget organisms",
+      "Protecting bees and endangered species",
+    ],
+    mustKnow: [
+      "HIGH solubility = more likely to move with water (runoff/leaching)",
+      "HIGH adsorption to soil = LESS likely to leach (stays bound to soil particles)",
+      "Sandy soil, low organic matter = MOST vulnerable to leaching",
+      "Clay soil, high organic matter = LEAST vulnerable to leaching",
+      "Temperature inversions trap pesticide vapors near ground — avoid spraying during inversions",
+      "FINE droplets drift more than coarse droplets",
+      "Back-siphoning = pesticide in hose siphons back into water source — use anti-siphon devices",
+      "Bees: apply insecticides in EVENING or at NIGHT when bees are not foraging",
+      "Never mix/load near wells or surface water",
+    ],
+    questions: [
+      { q: "Which property makes a pesticide more likely to move in surface water runoff?", options: ["A. High solubility", "B. High adsorption", "C. High volatility"], answer: "A", explanation: "High water solubility means pesticides dissolve and move with water. High adsorption keeps them bound to soil." },
+      { q: "Which statement about pesticide movement is true?", options: ["A. Drift is seldom an issue with indoor applications", "B. Runoff and erosion are sources of surface water contamination", "C. Leaching is the main way pesticides move great distances"], answer: "B", explanation: "Runoff carries pesticides to ditches, streams, and ponds. Drift (air movement) can also contaminate surface water." },
+      { q: "Which is an example of NON-POINT source groundwater contamination?", options: ["A. Back-siphoning of pesticide spills at a wellhead", "B. Leaching from a pesticide mixing area", "C. Pesticides that dissolve and leach through soil after rain"], answer: "C", explanation: "Non-point source = diffuse contamination over a large area (like field application). Point source = specific location like a spill." },
+      { q: "Under which conditions are pesticides MORE likely to leach through soil?", options: ["A. Heavy clay soil, high in organic matter", "B. Sandy soil, high in organic matter", "C. Sandy soil, low in organic matter"], answer: "C", explanation: "Sandy soil has large pores (fast drainage) and low organic matter means less adsorption — pesticides move through freely." },
+      { q: "Which best management practice prevents pesticide contamination of water?", options: ["A. Using highly water-soluble pesticides", "B. Following IPM principles", "C. Selecting persistent pesticides"], answer: "B", explanation: "IPM reduces the frequency and volume of pesticide use, minimizing contamination risk overall." },
+      { q: "Which two factors are most important in avoiding VAPOR drift?", options: ["A. Droplet size and wind speed", "B. Air stability and temperature", "C. Temperature and pesticide volatility"], answer: "C", explanation: "High temperatures increase volatilization; high volatility pesticides vaporize more readily. Both increase vapor drift risk." },
+      { q: "Which statement about sensitive areas is true?", options: ["A. Do not spray if a target site contains a sensitive area", "B. Pesticide labels may list special precautions around sensitive areas", "C. Endangered species habitats are not considered sensitive areas"], answer: "B", explanation: "Labels must be followed — some include specific buffers or restrictions near sensitive areas, waterways, or habitats." },
+      { q: "Which statement about protecting bees is true?", options: ["A. Use foliar applications when possible", "B. Spray crops when they are in bloom", "C. Apply insecticides in the evening or at night"], answer: "C", explanation: "Bees are less active at night; residues may also break down before morning foraging. Avoid bloom-time applications when possible." },
+    ]
+  },
+  {
+    id: 8,
+    title: "Transportation, Storage & Security",
+    emoji: "🚚",
+    keyTopics: [
+      "Safe transport practices — enclosed/lockable cargo, driver responsibility",
+      "Vehicle placard requirements (DOT hazmat)",
+      "Pesticide storage requirements (secure, ventilated, locked, labeled, organized)",
+      "Preventing water damage, temperature extremes, and contamination",
+      "Container integrity — leaking containers",
+      "Inventory control — buy only what you need",
+      "Pesticide security — risk assessment, employee training",
+      "Isolating waste/unwanted pesticides",
+    ],
+    mustKnow: [
+      "NEVER transport pesticides in the passenger compartment",
+      "Enclosed, lockable cargo boxes offer the GREATEST protection",
+      "The driver IS responsible for safe transport — cannot waive liability",
+      "Floor must be NON-POROUS to allow spill containment",
+      "If a container is LEAKING — put on PPE FIRST before doing anything else",
+      "Store based on previous usage — buy only what you need",
+      "Conduct a RISK ASSESSMENT as the first step in a security program",
+      "Metal containers should be stored on LOWER shelves (prevent rusting from moisture rising)",
+      "Keep labels legible at all times — required by law",
+    ],
+    questions: [
+      { q: "Which statement about transporting pesticides is true?", options: ["A. Carry in passenger compartment to prevent unauthorized access", "B. Enclosed and lockable cargo boxes offer the greatest protection", "C. The driver is not responsible if a spill occurs"], answer: "B", explanation: "Locked cargo areas prevent theft and contain spills. Passenger compartment transport is never appropriate." },
+      { q: "Which statement about pesticide storage facilities is true?", options: ["A. Vent air into an adjoining area to reduce noxious vapors", "B. Carefully consider terrain when selecting a storage site", "C. The floor should remain as bare soil to absorb spills"], answer: "B", explanation: "Terrain affects drainage and flood risk. Floors must be NON-porous — soil absorbs pesticides and creates contamination." },
+      { q: "What is the FIRST thing to do if a pesticide container is leaking?", options: ["A. Put on personal protective equipment", "B. Transfer contents to another container", "C. Clean up spilled material"], answer: "A", explanation: "Always protect yourself first — you cannot help if you are also contaminated. PPE first, then address the leak." },
+      { q: "Which practice minimizes pesticide storage problems?", options: ["A. Purchase quantities based on previous usage", "B. Purchase more than needed to ensure availability", "C. Store metal containers on higher shelves to prevent rusting"], answer: "A", explanation: "Buy only what you need for the season — reduces storage hazards, waste disposal costs, and security risks." },
+      { q: "What is the FIRST step to develop an effective pesticide security program?", options: ["A. Coordinate planned actions with authorities", "B. Conduct a risk assessment of business vulnerabilities", "C. Train employees on security measures"], answer: "B", explanation: "Risk assessment identifies what you have, who might want it, and what vulnerabilities exist — then you plan and train." },
+      { q: "Which is considered a good security practice?", options: ["A. Instruct employees on pesticide inventory control", "B. Allow employees free access to inventory", "C. Back up confidential data daily and keep it at the facility"], answer: "A", explanation: "Employees should know inventory procedures but not have unrestricted access. Data backups should be stored off-site." },
+    ]
+  },
+  {
+    id: 9,
+    title: "Emergency / Incident Response",
+    emoji: "🚨",
+    keyTopics: [
+      "Emergency response planning (contingency plan) — before an incident",
+      "Fire response — contain runoff, DO NOT enter building, call 911",
+      "Spill response — PPE first, control, contain, clean up",
+      "Emergency response kit contents",
+      "Reporting requirements — who to call",
+      "Documentation of incidents",
+    ],
+    mustKnow: [
+      "BACKBONE of emergency response plan = outlining the sequence of actions in a crisis",
+      "Emergency response plan reduces LIABILITY and protects employees/community",
+      "For pesticide FIRES: construct berms to contain runoff — do NOT enter building",
+      "Always call 911 for fires — never try to fight a pesticide fire alone",
+      "For SPILLS: Put on PPE FIRST, then control → contain → clean up",
+      "Always document what happened BEFORE, DURING, and AFTER an incident",
+      "Keep labels and SDS accessible at ALL times for emergency responders",
+      "Fire-detection systems in storage reduce risk — smoke detectors are not optional",
+    ],
+    questions: [
+      { q: "Which statement about emergency response planning is true?", options: ["A. The main reason to have a plan is to reduce economic losses", "B. The first person to contact in an emergency is an attorney", "C. Make a detailed report of what happened before, during, and after the incident"], answer: "C", explanation: "Documentation protects you legally and helps authorities respond. The plan exists to protect people and environment first." },
+      { q: "What is the BACKBONE of any emergency response plan?", options: ["A. Outlining the sequence of actions in a crisis", "B. Knowing where labels and SDS are kept", "C. Having a designated emergency responder"], answer: "A", explanation: "The step-by-step action sequence is the core — it ensures people act correctly under stress without thinking." },
+      { q: "Which is recommended in the event of a pesticide FIRE?", options: ["A. Construct berms to contain contaminated runoff water", "B. Enter storage facility and remove as much pesticide as possible", "C. Try to extinguish the fire before calling 911"], answer: "A", explanation: "Containing contaminated runoff prevents water pollution. Never enter a burning pesticide storage area — toxic gases. Call 911 immediately." },
+      { q: "Which is appropriate in the event of a pesticide SPILL?", options: ["A. Take time out to read your emergency response plan", "B. Call 911 only if the spill may enter surface water", "C. Put on appropriate PPE before responding to the spill"], answer: "C", explanation: "PPE first — always. Then control the spill source, contain the spill, clean it up, and document/report as required." },
+      { q: "Which further reduces the risk of a pesticide FIRE in storage?", options: ["A. Store near a heat source to prevent freezing", "B. Keep a fire-detection system in the storage area", "C. Post the storage area with a warning sign"], answer: "B", explanation: "Smoke/heat detectors provide early warning. Warning signs are required but don't prevent fires." },
+    ]
+  },
+  {
+    id: 10,
+    title: "Planning the Pesticide Application",
+    emoji: "📋",
+    keyTopics: [
+      "Pesticide selection — label review, compatibility, timing",
+      "Compatibility testing — jar test before tank mixing",
+      "Tank mix order of addition (critical!)",
+      "Safe mixing and loading — area selection, PPE, measuring accurately",
+      "Container rinsing — triple rinse vs. pressure rinse",
+      "Rinsate handling",
+      "Application procedures — pre-app, during, cleanup",
+      "Equipment cleanup procedures",
+      "Professionalism and public communication",
+    ],
+    mustKnow: [
+      "Timing application: consider pest LIFE CYCLE and WEATHER conditions",
+      "Physical incompatibility = layers, curds, sediment when mixed (visual signs)",
+      "Chemical incompatibility = products react and lose effectiveness or cause phytotoxicity",
+      "Tank mix order: Half-fill with water → suspensions → emulsions → solutions → surfactants → compatibility agents",
+      "Triple rinse: fill 1/4 full, rinse, pour into tank — repeat 3 times",
+      "Rinsate CAN be applied to labeled target sites at or BELOW labeled rates",
+      "Open containers with PPE ON — not after",
+      "Containers must be disposed of per LABEL directions and regulations",
+      "Clean equipment before switching products — leftover residue is NOT permitted",
+    ],
+    questions: [
+      { q: "Determining when to apply a pesticide includes considering:", options: ["A. Life cycle of the pest and weather conditions", "B. Percent active ingredient", "C. Need for additives or adjuvants"], answer: "A", explanation: "Timing to pest vulnerability (e.g., larval stage) and weather (wind, rain, temp) determines effectiveness." },
+      { q: "The 'Directions for Use' section of a label indicates:", options: ["A. Various crops or areas on which the pesticide may be legally used", "B. Disposal of pesticide waste", "C. Environmental, physical, and chemical hazards"], answer: "A", explanation: "Directions for Use specifies legal use sites, rates, timing, and methods. Disposal is in the Storage and Disposal section." },
+      { q: "When two mixed pesticides form a putty or separate into layers, it is:", options: ["A. Limited agitation", "B. Chemical incompatibility", "C. Physical incompatibility"], answer: "C", explanation: "Physical incompatibility = visible problems (curdling, layering, sediment). Chemical incompatibility = degraded effectiveness (may not be visible)." },
+      { q: "After filling tank 1/5 to 1/2 full with carrier, what is the usual tank mix order?", options: ["A. Suspension → emulsion → solution → surfactants → compatibility agent", "B. Compatibility agent → suspension → solution → surfactants → emulsion", "C. Surfactants → suspension → emulsion → solution → compatibility agent"], answer: "A", explanation: "This 'WETTABLE' order reduces incompatibility risks. Suspensions first, then emulsions, then solutions, then adjuvants." },
+      { q: "Which statement about opening pesticide containers is true?", options: ["A. Put on PPE AFTER containers have been opened", "B. Use a sharp knife or scissors to open paper or cardboard containers", "C. Leave the container open until you are finished mixing for the day"], answer: "B", explanation: "Scissors or sharp knives prevent tearing that creates dust. PPE must be on BEFORE opening. Close containers when not actively using." },
+      { q: "Which statement about measuring/transferring pesticides is true?", options: ["A. Metal measuring utensils are recommended over plastic", "B. Most dusts, powders, and dry formulations are measured by volume", "C. After adding pesticide to the tank, rinse the measuring container and pour into the tank"], answer: "C", explanation: "Rinsing measures eliminates wasted product and pesticide residue. Dry formulations are usually measured by WEIGHT, not volume." },
+      { q: "Which statement about cleaning/disposing pesticide containers is true?", options: ["A. Do not puncture rinsed pesticide containers", "B. Containers that cannot be recycled should be reused", "C. Containers must be disposed of per label directions and regulations"], answer: "C", explanation: "Label directions on disposal are legally binding. Rinsed containers may be punctured to prevent reuse. Never reuse pesticide containers." },
+      { q: "Which statement about triple-rinsing vs. pressure-rinsing is true?", options: ["A. Triple rinsing is more effective than pressure rinsing", "B. All containers must be either triple-rinsed or pressure-rinsed", "C. Rinsate from triple rinsing may be stored for later use"], answer: "C", explanation: "Rinsate can be stored and used in future sprays for the same target site at or below labeled rates — never waste it." },
+      { q: "Which statement about rinsates is true?", options: ["A. Rinsates may be applied to labeled target sites at or below labeled rates", "B. Rinsates with strong cleaning agents may be reused in pesticide mixtures", "C. Rinsate plus new product in tank may exceed the label rate"], answer: "A", explanation: "Rinsate is used pesticide — apply it as if it were product. Exceeding label rates is illegal." },
+      { q: "Which statement about equipment cleanup is FALSE?", options: ["A. Sprayers should be rinsed with water-detergent solution for several minutes", "B. Add lightweight oil to tank before final flushing when storing sprayer", "C. Leftover pesticide residue in spray tank is permitted when changing products"], answer: "C", explanation: "NEVER leave residue when switching products — cross-contamination can damage crops or create illegal applications." },
+    ]
+  },
+  {
+    id: 11,
+    title: "Pesticide Application Procedures",
+    emoji: "💨",
+    keyTopics: [
+      "Application methods: Broadcast, Band, Crack & Crevice, Spot, Directed, Basal, Injection",
+      "Safety systems: closed mixing, water-soluble packaging, enclosed cabs",
+      "Containment pads and systems",
+      "Sprayer components — tank, pump, agitator, pressure gauge, nozzles, screens",
+      "Nozzle types and selection",
+      "Granular applicators — drop spreaders vs. rotary spreaders",
+      "Equipment calibration — critical for legal compliance",
+      "Area calculations: rectangle, triangle, circle",
+      "Application rate calculations",
+      "Drift minimization techniques",
+    ],
+    mustKnow: [
+      "Broadcast = entire area uniformly; Band = strip along row; Crack & crevice = structural pest control",
+      "Containment PADS should be made of IMPERMEABLE materials; make cleanup EASIER",
+      "NOZZLES control: volume applied + pattern created + droplet size",
+      "COARSE droplets = less drift but LESS coverage; fine droplets = more coverage but MORE drift",
+      "Drop spreaders = more precise placement than rotary spreaders",
+      "In rotary spreaders, LIGHTER granules throw FARTHER than heavier ones",
+      "Calibration ensures correct rate — required for legal compliance",
+      "Triangle area = ½ × base × height",
+      "Circle area = π × radius² (or π × (diameter/2)²)",
+      "To minimize drift: use LARGER droplets, LOWER pressure, LOWER nozzle height, apply when wind is 3-10 mph",
+    ],
+    questions: [
+      { q: "Which application method involves uniformly applying pesticide to an ENTIRE area?", options: ["A. Broadcast", "B. Band", "C. Directed spray"], answer: "A", explanation: "Broadcast covers the full area. Band targets a strip. Directed spray targets a specific location (base of plants, cracks)." },
+      { q: "Which application method would you use for cockroaches inside buildings?", options: ["A. Basal", "B. Band", "C. Crack and crevice"], answer: "C", explanation: "Crack and crevice application places pesticide in voids and harborage areas where cockroaches hide — targeted and efficient." },
+      { q: "Which statement about containment PADS is true?", options: ["A. Pads make spill cleanup more difficult", "B. Pads should be made of permeable materials", "C. Pads should be used where large quantities of pesticides are handled"], answer: "C", explanation: "Containment pads are impermeable surfaces that capture spills — they make cleanup EASIER and prevent soil/water contamination." },
+      { q: "Which statement about sprayer NOZZLES is true?", options: ["A. A nozzle producing fine droplets minimizes off-target drift", "B. Coarse droplets provide maximum coverage of the target", "C. Nozzles control the amount applied and type of pattern created"], answer: "C", explanation: "Nozzle selection determines flow rate, spray angle/pattern, and droplet size. Fine droplets INCREASE drift — use larger droplets to minimize it." },
+      { q: "Which statement about GRANULAR applicators is true?", options: ["A. Ground speed has no effect on application rate", "B. In a rotary spreader, lighter granules are thrown farther than heavier ones", "C. Drop spreaders are superior when precise placement is desired"], answer: "C", explanation: "Drop spreaders release directly below — precise. Rotary spreaders throw granules — variable distribution, wind-affected." },
+      { q: "Which technique minimizes off-target drift?", options: ["A. Spraying during a temperature inversion", "B. Using the largest droplets practical", "C. Increasing nozzle height above the target"], answer: "B", explanation: "Larger droplets fall faster and resist wind movement. Temperature inversions and higher nozzle height both INCREASE drift." },
+      { q: "A triangular area with base 60 ft and height 30 ft — how many square feet?", options: ["A. 450", "B. 900", "C. 1,800"], answer: "B", explanation: "Area = ½ × base × height = ½ × 60 × 30 = 900 sq ft. Know this formula!" },
+      { q: "A circular area with 20-foot DIAMETER — how many square feet?", options: ["A. 128", "B. 314", "C. 400"], answer: "B", explanation: "Radius = 10 ft. Area = π × r² = 3.14 × 100 = 314 sq ft. Note: diameter is given, so radius = 10, not 20." },
+      { q: "You spray 50 gal/acre. Label calls for 3 lbs/100 gallons. How many lbs for 50 gallons?", options: ["A. 1.5", "B. 3", "C. 6"], answer: "A", explanation: "3 lbs per 100 gal = 1.5 lbs per 50 gal. Simple ratio: 3 × (50/100) = 1.5 lbs. Math questions appear on the exam!" },
+    ]
+  }
+];
+
+const signalWordTable = [
+  { word: "DANGER-POISON ☠️", category: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", inhale: "< 0.2 mg/L", description: "Highly toxic — a few drops to 1 teaspoon lethal" },
+  { word: "DANGER ⚠️", category: "I", oral: "< 50 mg/kg", dermal: "< 200 mg/kg", inhale: "< 0.2 mg/L", description: "Severe eye/skin irritation or corrosion (without skull & crossbones)" },
+  { word: "WARNING 🟡", category: "II", oral: "50–500 mg/kg", dermal: "200–2000 mg/kg", inhale: "0.2–2 mg/L", description: "Moderately toxic — 1 teaspoon to 2 tablespoons lethal" },
+  { word: "CAUTION 🟢", category: "III/IV", oral: "> 500 mg/kg", dermal: "> 2000 mg/kg", inhale: "> 2 mg/L", description: "Low toxicity — 1 oz to 1 pint or more lethal" },
+];
+
+function StudyGuide() {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const [quizMode, setQuizMode] = useState(false);
+  const [currentQ, setCurrentQ] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [score, setScore] = useState(0);
+  const [quizComplete, setQuizComplete] = useState(false);
+  const [quizAnswers, setQuizAnswers] = useState([]);
+  const [activeChapterQuiz, setActiveChapterQuiz] = useState(null);
+
+  const startQuiz = (chapterId) => {
+    const ch = chapters.find(c => c.id === chapterId) || { questions: chapters.flatMap(c => c.questions) };
+    setActiveChapterQuiz(ch);
+    setCurrentQ(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setScore(0);
+    setQuizComplete(false);
+    setQuizAnswers([]);
+    setQuizMode(true);
+  };
+
+  const startFullQuiz = () => {
+    const allQ = chapters.flatMap(c => c.questions.map(q => ({ ...q, chapter: c.title })));
+    setActiveChapterQuiz({ title: "Full Exam Practice", questions: allQ });
+    setCurrentQ(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setScore(0);
+    setQuizComplete(false);
+    setQuizAnswers([]);
+    setQuizMode(true);
+  };
+
+  const handleAnswer = (option) => {
+    if (selectedAnswer) return;
+    const correct = option[0] === activeChapterQuiz.questions[currentQ].answer;
+    setSelectedAnswer(option);
+    setShowExplanation(true);
+    if (correct) setScore(s => s + 1);
+    setQuizAnswers(prev => [...prev, { correct, q: currentQ }]);
+  };
+
+  const nextQuestion = () => {
+    if (currentQ + 1 >= activeChapterQuiz.questions.length) {
+      setQuizComplete(true);
+    } else {
+      setCurrentQ(q => q + 1);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+    }
+  };
+
+  const pct = quizComplete ? Math.round((score / activeChapterQuiz.questions.length) * 100) : 0;
+  const passColor = pct >= 70 ? "#22c55e" : "#ef4444";
+
+  if (quizMode && activeChapterQuiz) {
+    const questions = activeChapterQuiz.questions;
+    if (quizComplete) {
+      return (
+        <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif", display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
+          <div style={{ maxWidth: 540, width: "100%", textAlign: "center" }}>
+            <div style={{ fontSize: "4rem", marginBottom: "1rem" }}>{pct >= 70 ? "🎓" : "📚"}</div>
+            <h2 style={{ fontSize: "1.8rem", color: "#a5d6a7", marginBottom: "0.5rem" }}>Quiz Complete</h2>
+            <p style={{ color: "#81c784", marginBottom: "2rem", fontSize: "1rem" }}>{activeChapterQuiz.title}</p>
+            <div style={{ background: "#1a2e1a", borderRadius: 16, padding: "2rem", marginBottom: "2rem", border: `2px solid ${passColor}` }}>
+              <div style={{ fontSize: "3.5rem", fontWeight: "bold", color: passColor }}>{pct}%</div>
+              <div style={{ color: "#a5d6a7", fontSize: "1.1rem", marginTop: "0.5rem" }}>{score} of {questions.length} correct</div>
+              <div style={{ marginTop: "1rem", color: pct >= 70 ? "#86efac" : "#fca5a5", fontSize: "0.95rem" }}>
+                {pct >= 70 ? "✓ Passing score — keep it up!" : "✗ Below 70% — review weak areas and retry"}
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+              <button onClick={() => { setQuizMode(false); }} style={{ background: "#2d5a27", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>← Back to Guide</button>
+              <button onClick={() => startQuiz(activeChapterQuiz.id)} style={{ background: "#166534", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>Retry Quiz</button>
+              <button onClick={startFullQuiz} style={{ background: "#14532d", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.75rem 1.5rem", cursor: "pointer", fontSize: "0.95rem" }}>Full Practice Exam</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const q = questions[currentQ];
+    const progress = ((currentQ) / questions.length) * 100;
+    return (
+      <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif", padding: "1.5rem" }}>
+        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+            <button onClick={() => setQuizMode(false)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", cursor: "pointer", fontSize: "0.85rem" }}>← Exit</button>
+            <span style={{ color: "#81c784", fontSize: "0.9rem" }}>{currentQ + 1} / {questions.length}</span>
+            <span style={{ color: "#4ade80", fontSize: "0.9rem", fontWeight: "bold" }}>Score: {score}</span>
+          </div>
+          <div style={{ height: 6, background: "#1a2e1a", borderRadius: 3, marginBottom: "1.5rem" }}>
+            <div style={{ height: "100%", width: `${progress}%`, background: "#4ade80", borderRadius: 3, transition: "width 0.3s" }} />
+          </div>
+          {q.chapter && <div style={{ color: "#6ee7b7", fontSize: "0.8rem", marginBottom: "0.75rem", letterSpacing: "0.05em", textTransform: "uppercase" }}>{q.chapter}</div>}
+          <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.5rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
+            <p style={{ fontSize: "1.05rem", lineHeight: 1.6, margin: 0, color: "#e8f5e9" }}>{q.q}</p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.5rem" }}>
+            {q.options.map((opt, i) => {
+              const isSelected = selectedAnswer === opt;
+              const isCorrect = opt[0] === q.answer;
+              let bg = "#1a2e1a";
+              let border = "1px solid #2d5a27";
+              if (selectedAnswer) {
+                if (isCorrect) { bg = "#14532d"; border = "2px solid #4ade80"; }
+                else if (isSelected) { bg = "#450a0a"; border = "2px solid #f87171"; }
+              }
+              return (
+                <button key={i} onClick={() => handleAnswer(opt)}
+                  style={{ background: bg, border, borderRadius: 8, padding: "1rem 1.25rem", textAlign: "left", color: "#e8f5e9", cursor: selectedAnswer ? "default" : "pointer", fontSize: "0.95rem", lineHeight: 1.5, transition: "all 0.2s" }}>
+                  {selectedAnswer && isCorrect && <span style={{ color: "#4ade80", marginRight: 8 }}>✓</span>}
+                  {selectedAnswer && isSelected && !isCorrect && <span style={{ color: "#f87171", marginRight: 8 }}>✗</span>}
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+          {showExplanation && (
+            <div style={{ background: "#0f2e1f", border: "1px solid #4ade80", borderRadius: 10, padding: "1rem 1.25rem", marginBottom: "1.5rem" }}>
+              <div style={{ color: "#4ade80", fontWeight: "bold", marginBottom: "0.5rem", fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Explanation</div>
+              <p style={{ margin: 0, color: "#d1fae5", fontSize: "0.95rem", lineHeight: 1.6 }}>{q.explanation}</p>
+            </div>
+          )}
+          {showExplanation && (
+            <button onClick={nextQuestion} style={{ width: "100%", background: "#166534", color: "#e8f5e9", border: "none", borderRadius: 8, padding: "1rem", fontSize: "1rem", cursor: "pointer", fontFamily: "inherit" }}>
+              {currentQ + 1 >= questions.length ? "See Results →" : "Next Question →"}
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0f1a0f", color: "#e8f5e9", fontFamily: "'Georgia', serif" }}>
+      {/* Header */}
+      <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1e3a1e", padding: "1.25rem 1.5rem" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap", justifyContent: "space-between" }}>
+            <div>
+              <div style={{ fontSize: "0.75rem", color: "#4ade80", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.25rem" }}>EPA Core Manual · 2014 Edition</div>
+              <h1 style={{ margin: 0, fontSize: "1.4rem", color: "#a5d6a7" }}>Pesticide Applicator Certification</h1>
+              <div style={{ color: "#6ee7b7", fontSize: "0.85rem", marginTop: "0.25rem" }}>Complete Exam Prep Guide — 11 Chapters · 94 Practice Questions</div>
+            </div>
+            <button onClick={startFullQuiz} style={{ background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.6rem 1.2rem", cursor: "pointer", fontSize: "0.9rem", fontFamily: "inherit", whiteSpace: "nowrap" }}>
+              📝 Full Practice Exam
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Nav */}
+      <div style={{ background: "#0a1a0a", borderBottom: "1px solid #1a3a1a", padding: "0 1.5rem" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", gap: "0", overflowX: "auto" }}>
+          {["overview", "signal-words", "chapters"].map(tab => (
+            <button key={tab} onClick={() => { setActiveTab(tab); setSelectedChapter(null); }}
+              style={{ background: activeTab === tab ? "#1a3a1a" : "transparent", color: activeTab === tab ? "#4ade80" : "#81c784", border: "none", borderBottom: activeTab === tab ? "2px solid #4ade80" : "2px solid transparent", padding: "0.75rem 1.25rem", cursor: "pointer", fontSize: "0.9rem", whiteSpace: "nowrap", fontFamily: "inherit" }}>
+              {tab === "overview" ? "📌 Quick Reference" : tab === "signal-words" ? "⚠️ Signal Words" : "📚 Chapters"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "1.5rem" }}>
+
+        {/* OVERVIEW TAB */}
+        {activeTab === "overview" && (
+          <div>
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🎯 Exam Strategy — What You Must Know Cold</h2>
+              {[
+                ["The label IS the law", "Under FIFRA, the pesticide label has the full force of federal law. You CANNOT use a pesticide in a manner inconsistent with its labeling."],
+                ["States can be MORE restrictive", "Federal law is the floor. States, tribes, and territories can impose stricter requirements — never less strict."],
+                ["Lower LD50 = MORE toxic", "LD50 of 5 mg/kg is far more dangerous than 500 mg/kg. Less is deadlier — think of it as 'the dose it takes to kill half.'"],
+                ["Dermal is the #1 route of exposure", "About 97% of body exposure during spraying comes through the skin — not inhalation. Protect your skin first."],
+                ["PPE first — ALWAYS", "In any emergency (spill, leaking container, fire), put on PPE before taking any other action."],
+                ["Certified applicators can apply AND supervise RUPs", "They can also allow others to apply under their direct supervision."],
+                ["Buy only what you need", "Inventory management prevents storage hazards, disposal costs, and security risks."],
+                ["Cholinesterase inhibitors = OPs and Carbamates", "Pyrethroids and phenoxy herbicides do NOT inhibit cholinesterase. This distinction is often tested."],
+                ["Sandy soil + low organic matter = most vulnerable to leaching", "Clay + high organic matter = most resistant. High adsorption keeps pesticides in soil."],
+                ["Apply insecticides at night to protect bees", "Bees are not foraging; some residues break down before morning. Avoid bloom-time applications."],
+              ].map(([title, detail], i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.75rem", paddingBottom: "0.75rem", borderBottom: i < 9 ? "1px solid #2d5a27" : "none" }}>
+                  <div style={{ color: "#4ade80", fontWeight: "bold", minWidth: 24, fontSize: "1rem" }}>{i + 1}.</div>
+                  <div>
+                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.95rem", marginBottom: "0.25rem" }}>{title}</div>
+                    <div style={{ color: "#81c784", fontSize: "0.88rem", lineHeight: 1.5 }}>{detail}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🔢 Math Formulas You Need</h2>
+              {[
+                ["Rectangle Area", "Length × Width", "100 ft × 50 ft = 5,000 sq ft"],
+                ["Triangle Area", "½ × Base × Height", "½ × 60 × 30 = 900 sq ft"],
+                ["Circle Area", "π × radius²   (π ≈ 3.14)", "Diameter = 20 ft → radius = 10 ft → 3.14 × 100 = 314 sq ft"],
+                ["Application Rate", "(Amount applied ÷ Area treated)", "50 gal sprayed on 2 acres = 25 gal/acre"],
+                ["Pounds per tank", "Label rate × (tank size ÷ 100)", "3 lbs/100 gal × (50 gal ÷ 100) = 1.5 lbs"],
+              ].map(([formula, calc, example], i) => (
+                <div key={i} style={{ background: "#0f2e1f", borderRadius: 8, padding: "0.75rem 1rem", marginBottom: "0.5rem", border: "1px solid #1a4a2a" }}>
+                  <div style={{ color: "#4ade80", fontSize: "0.85rem", fontWeight: "bold", marginBottom: "0.3rem" }}>{formula}</div>
+                  <div style={{ color: "#d1fae5", fontFamily: "monospace", fontSize: "0.95rem", marginBottom: "0.25rem" }}>{calc}</div>
+                  <div style={{ color: "#6ee7b7", fontSize: "0.82rem" }}>Example: {example}</div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🏃 Study Plan — 7 Days to Exam Ready</h2>
+              {[
+                ["Day 1", "Chapters 1–2", "Pest management & IPM, Federal law (FIFRA), signal words"],
+                ["Day 2", "Chapter 3", "Pesticide labeling — read every label element; know signal word categories"],
+                ["Day 3", "Chapters 4–5", "Formulations (abbreviations + advantages/disadvantages), Hazards & first aid"],
+                ["Day 4", "Chapters 6–7", "PPE (respirator types, filter selection), Environmental movement"],
+                ["Day 5", "Chapters 8–9", "Storage/transport/security, Emergency response procedures"],
+                ["Day 6", "Chapters 10–11", "Application planning, equipment calibration, math problems"],
+                ["Day 7", "FULL REVIEW", "Take the full practice exam above — score under 80%? Review weak chapters"],
+              ].map(([day, chapters, focus], i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.6rem", alignItems: "flex-start" }}>
+                  <div style={{ background: "#14532d", color: "#4ade80", borderRadius: 6, padding: "0.2rem 0.5rem", fontSize: "0.78rem", fontWeight: "bold", whiteSpace: "nowrap", minWidth: 50, textAlign: "center" }}>{day}</div>
+                  <div>
+                    <div style={{ color: "#a5d6a7", fontSize: "0.88rem", fontWeight: "bold" }}>{chapters}</div>
+                    <div style={{ color: "#6ee7b7", fontSize: "0.82rem" }}>{focus}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* SIGNAL WORDS TAB */}
+        {activeTab === "signal-words" && (
+          <div>
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1.5rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>⚠️ Signal Word Reference — Toxicity Categories</h2>
+              <p style={{ color: "#81c784", fontSize: "0.88rem", marginBottom: "1.25rem", lineHeight: 1.6 }}>Signal words reflect <strong style={{ color: "#a5d6a7" }}>ACUTE toxicity only</strong> — they do NOT indicate chronic effects. A lower LD50 number = MORE toxic.</p>
+              {signalWordTable.map((row, i) => (
+                <div key={i} style={{ background: i === 0 ? "#3b0f0f" : i === 1 ? "#3b2a0f" : i === 2 ? "#2a3b0f" : "#0f2e0f", borderRadius: 10, padding: "1rem 1.25rem", marginBottom: "0.75rem", border: `1px solid ${i === 0 ? "#7f1d1d" : i === 1 ? "#713f12" : i === 2 ? "#365314" : "#14532d"}` }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem", flexWrap: "wrap", gap: "0.5rem" }}>
+                    <div style={{ fontWeight: "bold", fontSize: "1rem", color: i === 0 ? "#fca5a5" : i === 1 ? "#fde68a" : i === 2 ? "#bef264" : "#86efac" }}>{row.word}</div>
+                    <div style={{ background: "rgba(0,0,0,0.3)", borderRadius: 4, padding: "0.2rem 0.5rem", fontSize: "0.78rem", color: "#d1d5db" }}>Category {row.category}</div>
+                  </div>
+                  <div style={{ color: "#d1fae5", fontSize: "0.85rem", marginBottom: "0.5rem" }}>{row.description}</div>
+                  <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.8rem", color: "#9ca3af", flexWrap: "wrap" }}>
+                    <span>Oral LD50: <span style={{ color: "#e8f5e9" }}>{row.oral}</span></span>
+                    <span>Dermal LD50: <span style={{ color: "#e8f5e9" }}>{row.dermal}</span></span>
+                    <span>Inhalation LC50: <span style={{ color: "#e8f5e9" }}>{row.inhale}</span></span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", border: "1px solid #2d5a27" }}>
+              <h2 style={{ margin: "0 0 1rem 0", color: "#a5d6a7", fontSize: "1.1rem" }}>🧠 Memory Tricks</h2>
+              {[
+                ["DPW-C mnemonic", "Danger-Poison → Danger → Warning → Caution = most to least toxic. Think 'Deadly, Perilous, Watch out, Careful.'"],
+                ["LD50 flip rule", "Lower number = deadlier. LD50 of 1 mg/kg means just 1mg per kg of body weight kills 50% of test animals — tiny dose, huge danger."],
+                ["The 3 D's of spills", "Don: PPE first. Defend: stop the source. Dike: contain the spill."],
+                ["Sandy soil = sieve", "Think of sandy soil as a kitchen sieve — water and dissolved pesticides pass right through to groundwater."],
+                ["EC degrades equipment", "Emulsifiable Concentrates use petroleum solvents — they Eat rubber Cartridges (gaskets, hoses, pump parts)."],
+              ].map(([title, tip], i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", marginBottom: "0.75rem", paddingBottom: "0.75rem", borderBottom: i < 4 ? "1px solid #2d5a27" : "none" }}>
+                  <div style={{ color: "#4ade80", fontSize: "1.1rem", minWidth: 20 }}>💡</div>
+                  <div>
+                    <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.9rem", marginBottom: "0.2rem" }}>{title}</div>
+                    <div style={{ color: "#81c784", fontSize: "0.85rem", lineHeight: 1.5 }}>{tip}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CHAPTERS TAB */}
+        {activeTab === "chapters" && !selectedChapter && (
+          <div>
+            <p style={{ color: "#81c784", marginBottom: "1.25rem", fontSize: "0.9rem" }}>Select a chapter to review key topics, must-know concepts, and practice questions.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "0.75rem" }}>
+              {chapters.map(ch => (
+                <div key={ch.id} onClick={() => setSelectedChapter(ch.id)}
+                  style={{ background: "#1a2e1a", borderRadius: 10, padding: "1rem 1.25rem", border: "1px solid #2d5a27", cursor: "pointer", transition: "border-color 0.2s" }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = "#4ade80"}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = "#2d5a27"}>
+                  <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>{ch.emoji}</div>
+                  <div style={{ color: "#6ee7b7", fontSize: "0.75rem", marginBottom: "0.25rem" }}>Chapter {ch.id}</div>
+                  <div style={{ color: "#a5d6a7", fontWeight: "bold", fontSize: "0.95rem", marginBottom: "0.5rem" }}>{ch.title}</div>
+                  <div style={{ color: "#81c784", fontSize: "0.8rem" }}>{ch.questions.length} practice questions · {ch.keyTopics.length} key topics</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CHAPTER DETAIL */}
+        {activeTab === "chapters" && selectedChapter && (() => {
+          const ch = chapters.find(c => c.id === selectedChapter);
+          return (
+            <div>
+              <button onClick={() => setSelectedChapter(null)} style={{ background: "transparent", color: "#81c784", border: "1px solid #2d5a27", borderRadius: 6, padding: "0.4rem 0.8rem", cursor: "pointer", marginBottom: "1.25rem", fontSize: "0.85rem" }}>← All Chapters</button>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>
+                <div style={{ fontSize: "2rem" }}>{ch.emoji}</div>
+                <div>
+                  <div style={{ color: "#6ee7b7", fontSize: "0.75rem" }}>Chapter {ch.id}</div>
+                  <h2 style={{ margin: 0, color: "#a5d6a7", fontSize: "1.3rem" }}>{ch.title}</h2>
+                </div>
+                <button onClick={() => startQuiz(ch.id)} style={{ marginLeft: "auto", background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 8, padding: "0.5rem 1rem", cursor: "pointer", fontSize: "0.88rem", fontFamily: "inherit" }}>
+                  📝 Take Quiz ({ch.questions.length}Q)
+                </button>
+              </div>
+
+              <div style={{ background: "#1a2e1a", borderRadius: 12, padding: "1.25rem", marginBottom: "1rem", border: "1px solid #2d5a27" }}>
+                <h3 style={{ margin: "0 0 0.75rem 0", color: "#4ade80", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>📋 Key Topics</h3>
+                {ch.keyTopics.map((t, i) => (
+                  <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.4rem" }}>
+                    <div style={{ color: "#4ade80", fontSize: "0.8rem", minWidth: 16 }}>▸</div>
+                    <div style={{ color: "#d1fae5", fontSize: "0.88rem" }}>{t}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ background: "#0f2e1f", borderRadius: 12, padding: "1.25rem", marginBottom: "1rem", border: "1px solid #14532d" }}>
+                <h3 style={{ margin: "0 0 0.75rem 0", color: "#4ade80", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>⭐ Must-Know Concepts</h3>
+                {ch.mustKnow.map((m, i) => (
+                  <div key={i} style={{ display: "flex", gap: "0.75rem", marginBottom: "0.5rem", paddingBottom: "0.5rem", borderBottom: i < ch.mustKnow.length - 1 ? "1px solid #1a4a2a" : "none" }}>
+                    <div style={{ color: "#fbbf24", fontSize: "0.9rem", minWidth: 16 }}>★</div>
+                    <div style={{ color: "#a5d6a7", fontSize: "0.88rem", lineHeight: 1.5 }}>{m}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+                <button onClick={() => startQuiz(ch.id)} style={{ background: "#166534", color: "#e8f5e9", border: "1px solid #4ade80", borderRadius: 10, padding: "0.9rem 2rem", cursor: "pointer", fontSize: "1rem", fontFamily: "inherit" }}>
+                  Start Chapter {ch.id} Quiz ({ch.questions.length} questions) →
+                </button>
+              </div>
+            </div>
+          );
+        })()}
+      </div>
+    </div>
+  );
+}
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<StudyGuide />);
+  </script>
+</body>
+</html>
